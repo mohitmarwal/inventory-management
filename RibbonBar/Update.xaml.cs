@@ -84,14 +84,19 @@ namespace RibbonWin
                     procurer.Text = row.ItemArray[6].ToString();
                     vehicleno.Text = row.ItemArray[7].ToString();
                     goodtype.SelectedIndex = goodtype.Items.IndexOf(row.ItemArray[8].ToString());
-                    Quan.Text = row.ItemArray[9].ToString();
-                    bagtype.SelectedIndex = bagtype.Items.IndexOf(row.ItemArray[10].ToString());
-                    quintalrate.Text = row.ItemArray[11].ToString();
-                    comi.Text = row.ItemArray[12].ToString();
-                    stdcharges.Text = row.ItemArray[13].ToString();
-                    othercharges.Text = row.ItemArray[14].ToString();
-                    TotalAmt.Text = row.ItemArray[15].ToString();
-                    paymentmethod.SelectedIndex = paymentmethod.Items.IndexOf(row.ItemArray[16].ToString());
+                    Plant.SelectedIndex = Plant.Items.IndexOf(row.ItemArray[9].ToString());
+                    Quan.Text = row.ItemArray[10].ToString();
+                    bagtype.SelectedIndex = bagtype.Items.IndexOf(row.ItemArray[11].ToString());
+                    Numberbags.Text = row.ItemArray[12].ToString();
+                    quintalrate.Text = row.ItemArray[13].ToString();
+                    comi.Text = row.ItemArray[14].ToString();
+                    stdcharges.Text = row.ItemArray[15].ToString();
+                    othercharges.Text = row.ItemArray[16].ToString();
+                    TotalAmt.Text = row.ItemArray[17].ToString();
+                    paymentmethod.SelectedIndex = paymentmethod.Items.IndexOf(row.ItemArray[18].ToString());
+                    paystatus.Text = row.ItemArray[19].ToString();
+                    payreceived.Text = row.ItemArray[20].ToString();
+                    remark.Text = row.ItemArray[21].ToString();
 
 
             }
@@ -272,7 +277,7 @@ namespace RibbonWin
           String PaymentMethod = paymentmethod.Text;
           String TotalAmount = ""+ (Int16.Parse(RatePerQuintal)* Int16.Parse(Quantity)) + Int16.Parse(Commission) + Int16.Parse(StandarCharges) + Int16.Parse(OtherCharges);
 
-            string query2 = "INSERT INTO `inventory` (`PartnerName`, `MobileNumber`, `EmailId`, `Date`, `Time`, `DealerSign`, `ProcurerSign`, `Transportation`, `GoodType`, `Quantity`, `BagType`, `RatePerQuintal`, `Comission`, `StandardCharges`, `OtherCharges`, `TotalAmount`, `PaymentMethod`) VALUES ('" + PartnerName + "', '" + MobileNumber + "', '" + EmailId + "', '" + Date + "', '" + Time + "', '" + DealerSign + "', '" + ProcurerSign + "', '" + Transportation + "', '" + GoodType + "', '" + Quantity + "', '" + BagTpye + "', '" + RatePerQuintal + "', '" + Commission + "', '" + StandarCharges + "', '" + OtherCharges + "', '" + TotalAmount + "', '" + PaymentMethod + "')";
+            string query2 = "UPDATE `inventory` set PartnerName='" + Partnername.Text + "', MobileNumber='" + mobilenumber.Text + "', EmailId='" + email.Text + "',  Date='" + date.Text + "', Time='" + time.Text + "', DealerSign='" + dealer.Text + "', ProcurerSign='" + procurer.Text + "', Transportation='" + vehicleno.Text + "', GoodType='" + goodtype.Text + "', PlantName='" + Plant.Text + "', Quantity='" + Quan.Text + "', BagType='" + bagtype.Text + "', NoBags='" + Numberbags.Text + "', RatePerQuintal='" + quintalrate.Text + "', Comission='" + comi.Text + "', StandardCharges='" + stdcharges.Text + "', OtherCharges='" + othercharges.Text + "', TotalAmount='" + TotalAmt.Text + "', PaymentMethod='" + paymentmethod.Text + "', PaymentStatus='" + paystatus.Text + "', HandOver='" + payreceived.Text + "', Remarks='" + remark.Text + "' WHERE Entry_No=" + entryno;
             //open connection
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
