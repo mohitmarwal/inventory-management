@@ -22,11 +22,27 @@ namespace RibbonWin
     /// </summary>
     public partial class MainWindow : RibbonWindow
     {
+        EmployeeInfo EmployeFrom;
         public MainWindow()
         {
             InitializeComponent();
-            EmployeeInfo EmployeFrom = new EmployeeInfo();
-            UIPanel.Children.Add(EmployeFrom);
+            
+        }
+
+        private void OnMouseLeftButtonDown(object sender, RoutedEventArgs e)
+        {
+            if (EmployeFrom == null)
+            {
+                EmployeFrom = new EmployeeInfo();
+                UIPanel.Children.Add(EmployeFrom);
+            }
+            else
+            {
+                UIPanel.Children.Remove(EmployeFrom);
+                EmployeFrom = null;
+                EmployeFrom = new EmployeeInfo();
+                UIPanel.Children.Add(EmployeFrom);
+            }
         }
     }
 }
