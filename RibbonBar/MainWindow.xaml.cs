@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,8 @@ namespace RibbonWin
     public partial class MainWindow : RibbonWindow
     {
         EmployeeInfo EmployeFrom;
+        TableView view; 
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -31,6 +34,9 @@ namespace RibbonWin
 
         private void OnMouseLeftButtonDown(object sender, RoutedEventArgs e)
         {
+            UIPanel.Children.Remove(view);
+            view = null;
+        
             if (EmployeFrom == null)
             {
                 EmployeFrom = new EmployeeInfo();
@@ -44,5 +50,31 @@ namespace RibbonWin
                 UIPanel.Children.Add(EmployeFrom);
             }
         }
+
+        private void RibbonApplicationMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+            UIPanel.Children.Remove(EmployeFrom);
+            UIPanel.Children.Remove(view);
+            EmployeFrom = null;
+            view = null;
+            view = new TableView();
+            UIPanel.Children.Add(view);
+            
+        }
+
+        private void Update_Click(object sender, RoutedEventArgs e)
+        {
+            InputDialogSample dialog = new InputDialogSample();
+            dialog.ShowDialog();
+            UIPanel.Children.Remove(EmployeFrom);
+            UIPanel.Children.Remove(view);
+            EmployeFrom = null;
+            view = null;
+            Update up= new Update();
+            UIPanel.Children.Add(up);
+        }
+
+
     }
 }

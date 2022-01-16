@@ -33,9 +33,9 @@
                 <RibbonGroup x:Name="ClipboardGroup" Header="General">
                     <RibbonApplicationMenuItem ImageSource="Images\add.png" Header="Add"  Click="OnMouseLeftButtonDown" KeyTip="V" >
                     </RibbonApplicationMenuItem>
-                    <RibbonApplicationMenuItem ImageSource="Images\redo.png" Header="Edit" KeyTip="V">
+                    <RibbonApplicationMenuItem ImageSource="Images\redo.png"  Name="update" Header="Update" Click="Update_Click" KeyTip="V">
                     </RibbonApplicationMenuItem>
-                    <RibbonApplicationMenuItem ImageSource="Images\copy.png" Header="View" KeyTip="V">
+                    <RibbonApplicationMenuItem ImageSource="Images\copy.png" Click="RibbonApplicationMenuItem_Click" Header="View" KeyTip="V">
                     </RibbonApplicationMenuItem>
 
                 </RibbonGroup>

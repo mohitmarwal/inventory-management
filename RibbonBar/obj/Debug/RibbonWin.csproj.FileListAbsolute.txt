@@ -172,6 +172,10 @@ C:\Users\mohit\Downloads\RibbonWin\RibbonBar\bin\Debug\K4os.Compression.LZ4.xml
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\bin\Debug\K4os.Compression.LZ4.Streams.xml
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\bin\Debug\K4os.Hash.xxHash.xml
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\bin\Debug\MySql.Data.xml
-C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\Window1.g.cs
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\RibbonWin_MarkupCompile.lref
+C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\UserControl1.g.cs
+C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\UserControl1.baml
+C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\Update.baml
+C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\Update.g.cs
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\Window1.baml
+C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\Window1.g.cs

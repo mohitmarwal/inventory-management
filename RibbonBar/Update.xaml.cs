@@ -21,10 +21,10 @@ namespace RibbonWin
     /// <summary>
     /// Interaction logic for EmployeeInfo.xaml
     /// </summary>
-    public partial class EmployeeInfo : UserControl
+    public partial class Update : UserControl
     {
 
-
+        public static string entryno;
         string connetionString;
         string server = "localhost";
         string database = "test";
@@ -32,7 +32,7 @@ namespace RibbonWin
         string password = "";
         MySql.Data.MySqlClient.MySqlConnection connection;
         string connectionString;
-        public EmployeeInfo()
+        public Update()
         {
             InitializeComponent();
             Fillbag();
@@ -43,9 +43,62 @@ namespace RibbonWin
             FillPaymentMethod();
             date.Text = DateTime.Now.ToString("yyyy-mm-dd");
             time.Text = DateTime.Now.TimeOfDay.ToString("hh\\:mm\\:ss");
+            UdateForm();
 
         }
-        private void Fillbag()
+        private void UdateForm()
+        {
+            String DealerSign = dealer.Text;
+            String ProcurerSign = procurer.Text;
+            String Transportation = vehicleno.Text;
+            String GoodType = goodtype.Text;
+            String Quantity = Quan.Text;
+            String BagTpye = bagtype.Text;
+            String RatePerQuintal = quintalrate.Text;
+            String Commission = comi.Text;
+            String StandarCharges = stdcharges.Text;
+            String OtherCharges = othercharges.Text;
+            String PaymentMethod = paymentmethod.Text;
+            connectionString = "SERVER=" + server + ";" + "DATABASE=" +
+             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+
+
+            connection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
+            connection.Open();
+            MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand("SELECT * FROM inventory WHERE Entry_no="+ entryno, connection);
+
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataTable table = new DataTable("myTable");
+            da.Fill(table);
+
+            foreach (DataRow row in table.Rows)
+            {
+               
+                   
+                    Partnername.SelectedIndex = Partnername.Items.IndexOf(row.ItemArray[0].ToString());
+                    mobilenumber.Text = row.ItemArray[1].ToString();
+                    email.Text = row.ItemArray[2].ToString();
+                    date.Text = row.ItemArray[3].ToString();
+                    time.Text = row.ItemArray[4].ToString();
+                    dealer.Text = row.ItemArray[5].ToString();
+                    procurer.Text = row.ItemArray[6].ToString();
+                    vehicleno.Text = row.ItemArray[7].ToString();
+                    goodtype.SelectedIndex = goodtype.Items.IndexOf(row.ItemArray[8].ToString());
+                    Quan.Text = row.ItemArray[9].ToString();
+                    bagtype.SelectedIndex = bagtype.Items.IndexOf(row.ItemArray[10].ToString());
+                    quintalrate.Text = row.ItemArray[11].ToString();
+                    comi.Text = row.ItemArray[12].ToString();
+                    stdcharges.Text = row.ItemArray[13].ToString();
+                    othercharges.Text = row.ItemArray[14].ToString();
+                    TotalAmt.Text = row.ItemArray[15].ToString();
+                    paymentmethod.SelectedIndex = paymentmethod.Items.IndexOf(row.ItemArray[16].ToString());
+
+
+            }
+          
+            connection.Close();
+        }
+            private void Fillbag()
         {
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
              database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";

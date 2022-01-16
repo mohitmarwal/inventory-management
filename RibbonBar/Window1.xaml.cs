@@ -17,11 +17,22 @@ namespace RibbonWin
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class InputDialogSample : Window
     {
-        public Window1()
+        public InputDialogSample()
         {
             InitializeComponent();
+        }
+
+        private void btnDialogOk_Click(object sender, RoutedEventArgs e)
+        {
+            Update.entryno = txtAnswer.Text;
+            this.Close();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
