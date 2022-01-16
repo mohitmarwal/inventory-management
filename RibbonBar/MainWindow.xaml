@@ -43,8 +43,22 @@
             </RibbonTab>
             
             <!-- Ribbon Tab #2: Launch -->
-            <RibbonTab Header="Admin" KeyTip="I">
+            <RibbonTab Header="Admin" KeyTip="I" >
                 <!-- Launch/Applications group-->
+                <RibbonGroup x:Name="ClipboardGroup1" Header="General">
+                <RibbonApplicationMenuItem ImageSource="Images\add.png" Header="Add Partner"  Click="OnMouseLeftButtonDown" KeyTip="V" >
+                </RibbonApplicationMenuItem>
+                <RibbonApplicationMenuItem ImageSource="Images\add.png" Header="Add Plant"  Click="OnMouseLeftButtonDown" KeyTip="V" >
+                </RibbonApplicationMenuItem>
+                <RibbonApplicationMenuItem ImageSource="Images\add.png" Header="Add Good Type"  Click="OnMouseLeftButtonDown" KeyTip="V" >
+                </RibbonApplicationMenuItem>
+                <RibbonApplicationMenuItem ImageSource="Images\add.png" Header="Add Bag Type"  Click="OnMouseLeftButtonDown" KeyTip="V" >
+                </RibbonApplicationMenuItem>
+                 <RibbonApplicationMenuItem ImageSource="Images\add.png" Header="Add Payment Method"  Click="OnMouseLeftButtonDown" KeyTip="V" >
+                 </RibbonApplicationMenuItem>
+                  <RibbonApplicationMenuItem ImageSource="Images\add.png" Header="Add Quantity Type"  Click="OnMouseLeftButtonDown" KeyTip="V" >
+                  </RibbonApplicationMenuItem>
+                </RibbonGroup>
             </RibbonTab>
         </Ribbon>
         <DockPanel Name="UIPanel" Grid.Row="1">

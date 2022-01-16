@@ -24,8 +24,10 @@ namespace RibbonWin
     public partial class MainWindow : RibbonWindow
     {
         EmployeeInfo EmployeFrom;
-        TableView view; 
-        
+        TableView view;
+        Update up;
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -35,7 +37,9 @@ namespace RibbonWin
         private void OnMouseLeftButtonDown(object sender, RoutedEventArgs e)
         {
             UIPanel.Children.Remove(view);
+            UIPanel.Children.Remove(up);
             view = null;
+            up = null;
         
             if (EmployeFrom == null)
             {
@@ -56,6 +60,8 @@ namespace RibbonWin
 
             UIPanel.Children.Remove(EmployeFrom);
             UIPanel.Children.Remove(view);
+            UIPanel.Children.Remove(up);
+            up = null;
             EmployeFrom = null;
             view = null;
             view = new TableView();
@@ -69,9 +75,11 @@ namespace RibbonWin
             dialog.ShowDialog();
             UIPanel.Children.Remove(EmployeFrom);
             UIPanel.Children.Remove(view);
+            UIPanel.Children.Remove(up);
+            up = null;
             EmployeFrom = null;
             view = null;
-            Update up= new Update();
+            up= new Update();
             UIPanel.Children.Add(up);
         }
 
