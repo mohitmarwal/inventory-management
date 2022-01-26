@@ -4,6 +4,9 @@
                       xmlns:RibbonWin="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Ribbon"
         Title="Mahesh Corp"
                WindowState="Maximized">
+    <Window.Background>
+        <ImageBrush ImageSource="images/back.jpg" Opacity="0.9"/>
+    </Window.Background>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -64,6 +67,7 @@
         <DockPanel Name="UIPanel" Grid.Row="1">
             
         </DockPanel>
+        
     </Grid>
 
 </RibbonWindow >

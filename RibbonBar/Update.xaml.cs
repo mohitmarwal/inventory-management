@@ -75,7 +75,6 @@ namespace RibbonWin
             foreach (DataRow row in table.Rows)
             {
                
-                   
                     Partnername.SelectedIndex = Partnername.Items.IndexOf(row.ItemArray[0].ToString());
                     mobilenumber.Text = row.ItemArray[1].ToString();
                     email.Text = row.ItemArray[2].ToString();
