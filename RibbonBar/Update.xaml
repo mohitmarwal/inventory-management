@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              >
-    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Height="840">
-    <Grid Height="847" Width="558">
+    <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True">
+        <Grid Height="847" Width="558">
         <!--Defined GridRow-->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -69,9 +69,12 @@
         <Label Content="Quantity" Grid.Column="0" Grid.Row="13"  Margin="5"></Label>
         <Label Content="Rate Per Quintal" Grid.Column="0" Grid.Row="14" Margin="5"></Label>
         <Label Content="Comission" Grid.Column="0" Grid.Row="15" Margin="5"></Label>
-        <Label Content="Standard Charges" Grid.Column="0" Grid.Row="16"  Margin="5"></Label>
-        <Label Content="Other charges " Grid.Column="0" Grid.Row="17"  Margin="5"></Label>
-        <Label Content="Total Amount " Grid.Column="0" Grid.Row="18" Margin="5"></Label>
+            <Label Content="FM :" Grid.Column="3" Grid.Row="15" Margin="5"></Label>
+            <Label Content="Standard Charges" Grid.Column="0" Grid.Row="16"  Margin="5"></Label>
+            <Label Content="DM" Grid.Column="3" Grid.Row="16"  Margin="5"></Label>
+            <Label Content="Other charges " Grid.Column="0" Grid.Row="17"  Margin="5"></Label>
+            <Label Content="MS " Grid.Column="3" Grid.Row="17"  Margin="5"></Label>
+            <Label Content="Total Amount " Grid.Column="0" Grid.Row="18" Margin="5"></Label>
         <Label Content="Payment Method" Grid.Column="0" Grid.Row="19"  Margin="5"></Label>
         <Label Content="Payment Status" Grid.Column="0" Grid.Row="20"  Margin="5"></Label>
         <Label Content="Payment Reeived/ Hand Over" Grid.Column="0" Grid.Row="21"  Margin="5"></Label>
@@ -91,12 +94,14 @@
         <ComboBox Name="bagtype" Grid.Row="11" Grid.Column="1" Margin="5,0,5,5"  Grid.ColumnSpan="2"/>
             <TextBox Name="Numberbags" PreviewTextInput="NumberValidationTextBox" Grid.Column="1" Grid.Row="12" Margin="5,5,10,5" Grid.ColumnSpan="2"></TextBox>
             <TextBox Name="Quan" PreviewTextInput="NumberValidationTextBox" Grid.Column="1" Grid.Row="13" Margin="5,5,10,5" Grid.ColumnSpan="2"></TextBox>
-        <ComboBox Name="quanti" Grid.Row="13"  SelectionChanged="Quanti_SelectionChanged" Grid.Column="3" Margin="5,10,5,0"/>
             <TextBox Name="quintalrate" PreviewTextInput="NumberValidationTextBox" Grid.Column="1" Grid.Row="14" Margin="5,5,10,5" Grid.ColumnSpan="2"></TextBox>
             <TextBox Name="comi" PreviewTextInput="NumberValidationTextBox" Grid.Column="1" Grid.Row="15" Margin="5,5,10,5" Grid.ColumnSpan="2"></TextBox>
-            <TextBox Name="stdcharges" PreviewTextInput="NumberValidationTextBox"  Grid.Column="1" Grid.Row="16" Margin="5,5,10,5" Grid.ColumnSpan="2"></TextBox>
+            <TextBox Name="fm"  PreviewTextInput="NumberValidationTextBox" Grid.Column="3" Grid.Row="15" Margin="49,5,10,5"/>
+            <TextBox Name="stdcharges" PreviewTextInput="NumberValidationTextBox" Grid.Column="1" Grid.Row="16" Margin="5,5,10,5" Grid.ColumnSpan="2"></TextBox>
+            <TextBox Name="dm" PreviewTextInput="NumberValidationTextBox" Grid.Column="3" Grid.Row="16" Margin="49,5,10,5"/>
             <TextBox Name="othercharges" PreviewTextInput="NumberValidationTextBox" Grid.Column="1" Grid.Row="17" Margin="5,5,10,5" Grid.ColumnSpan="2"></TextBox>
-        <TextBox Name="TotalAmt"  Grid.Column="1" Grid.Row="18" Margin="5,5,10,5" Grid.ColumnSpan="2"></TextBox>
+            <TextBox Name="ms" PreviewTextInput="NumberValidationTextBox" Grid.Column="3" Grid.Row="17" Margin="49,5,10,5"/>
+            <TextBox Name="TotalAmt"  Grid.Column="1" Grid.Row="18" Margin="5,5,10,5" Grid.ColumnSpan="2"></TextBox>
         <ComboBox Name="paymentmethod" Grid.Row="19" Grid.Column="1" Margin="5,10,5,0"  Grid.ColumnSpan="2"/>
         <TextBox Name="paystatus"  Grid.Column="1" Grid.Row="20" Margin="5,5,10,5" Grid.ColumnSpan="2"></TextBox>
         <TextBox Name="payreceived"  Grid.Column="1" Grid.Row="21" Margin="5,5,10,5" Grid.ColumnSpan="2"></TextBox>

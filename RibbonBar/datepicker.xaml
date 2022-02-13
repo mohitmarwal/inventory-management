@@ -1,0 +1,26 @@
+﻿<Window x:Class="RibbonWin.datepicker"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RibbonWin"
+        mc:Ignorable="d"
+        Title="Export Csv" Height="478.125" Width="870.313">
+    <Grid Margin="15">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="457*"/>
+            <ColumnDefinition Width="286*"/>
+        </Grid.ColumnDefinitions>
+
+
+        <Label Name="lblQuestion" Margin="119,34,261,306">Enter the Sart Date :</Label>
+        <DatePicker Height="25" SelectedDate="{Binding PropertyName, StringFormat=yyyy-MM-dd}" HorizontalAlignment="Left" Margin="255,35,0,0" Name="datePicker1" VerticalAlignment="Top" Width="115" />
+        <Label Name="lblQuestion1" Margin="119,66,272,306">Enter the End Date :</Label>
+        <DatePicker Height="25" SelectedDate="{Binding PropertyName, StringFormat=yyyy-MM-dd}" HorizontalAlignment="Left" Margin="255,66,0,0" Name="datePicker2" VerticalAlignment="Top" Width="115" />
+
+        <WrapPanel HorizontalAlignment="Right"  Width="154" Margin="0,119,141,216">
+            <Button IsCancel="True" MinWidth="60" Click="Button_Click">_Cancel</Button>
+            <Button IsDefault="True" x:Name="btnDialogOk" Click="btnDialogOk_Click" MinWidth="60" Margin="0,0,10,0" Content="_Ok" RenderTransformOrigin="-10.401,5.239"/>
+        </WrapPanel>
+    </Grid>
+</Window>

@@ -39,7 +39,6 @@ namespace RibbonWin
             Fillbag();
             FillPartner();
             FillGoods();
-            FillQuantity();
             FillPlantName();
             FillPaymentMethod();
             date.Text = DateTime.Now.ToString("yyyy-mm-dd");
@@ -75,28 +74,31 @@ namespace RibbonWin
             foreach (DataRow row in table.Rows)
             {
                
-                    Partnername.SelectedIndex = Partnername.Items.IndexOf(row.ItemArray[0].ToString());
-                    mobilenumber.Text = row.ItemArray[1].ToString();
-                    email.Text = row.ItemArray[2].ToString();
-                    date.Text = row.ItemArray[3].ToString();
-                    time.Text = row.ItemArray[4].ToString();
-                    dealer.Text = row.ItemArray[5].ToString();
-                    procurer.Text = row.ItemArray[6].ToString();
-                    vehicleno.Text = row.ItemArray[7].ToString();
-                    goodtype.SelectedIndex = goodtype.Items.IndexOf(row.ItemArray[8].ToString());
-                    Plant.SelectedIndex = Plant.Items.IndexOf(row.ItemArray[9].ToString());
-                    Quan.Text = row.ItemArray[10].ToString();
-                    bagtype.SelectedIndex = bagtype.Items.IndexOf(row.ItemArray[11].ToString());
-                    Numberbags.Text = row.ItemArray[12].ToString();
-                    quintalrate.Text = row.ItemArray[13].ToString();
-                    comi.Text = row.ItemArray[14].ToString();
-                    stdcharges.Text = row.ItemArray[15].ToString();
-                    othercharges.Text = row.ItemArray[16].ToString();
-                    TotalAmt.Text = row.ItemArray[17].ToString();
-                    paymentmethod.SelectedIndex = paymentmethod.Items.IndexOf(row.ItemArray[18].ToString());
-                    paystatus.Text = row.ItemArray[19].ToString();
-                    payreceived.Text = row.ItemArray[20].ToString();
-                    remark.Text = row.ItemArray[21].ToString();
+                    Partnername.SelectedIndex = Partnername.Items.IndexOf(row.ItemArray[1].ToString());
+                    mobilenumber.Text = row.ItemArray[2].ToString();
+                    email.Text = row.ItemArray[3].ToString();
+                    date.Text = row.ItemArray[4].ToString();
+                    time.Text = row.ItemArray[5].ToString();
+                    dealer.Text = row.ItemArray[6].ToString();
+                    procurer.Text = row.ItemArray[7].ToString();
+                    vehicleno.Text = row.ItemArray[8].ToString();
+                    goodtype.SelectedIndex = goodtype.Items.IndexOf(row.ItemArray[9].ToString());
+                    Plant.SelectedIndex = Plant.Items.IndexOf(row.ItemArray[10].ToString());
+                    Quan.Text = row.ItemArray[11].ToString();
+                    bagtype.SelectedIndex = bagtype.Items.IndexOf(row.ItemArray[12].ToString());
+                    Numberbags.Text = row.ItemArray[13].ToString();
+                    quintalrate.Text = row.ItemArray[14].ToString();
+                    comi.Text = row.ItemArray[15].ToString();
+                    stdcharges.Text = row.ItemArray[16].ToString();
+                    othercharges.Text = row.ItemArray[17].ToString();
+                    fm.Text = row.ItemArray[18].ToString();
+                    dm.Text = row.ItemArray[19].ToString();
+                    ms.Text = row.ItemArray[20].ToString();
+                    TotalAmt.Text = row.ItemArray[21].ToString();
+                    paymentmethod.SelectedIndex = paymentmethod.Items.IndexOf(row.ItemArray[22].ToString());
+                    paystatus.Text = row.ItemArray[23].ToString();
+                    payreceived.Text = row.ItemArray[24].ToString();
+                    remark.Text = row.ItemArray[25].ToString();
 
 
             }
@@ -181,31 +183,6 @@ namespace RibbonWin
             connection.Close();
         }
 
-        private void FillQuantity()
-        {
-            connectionString = "SERVER=" + server + ";" + "DATABASE=" +
-             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
-
-
-            connection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
-            connection.Open();
-            MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand("select Type From quantity", connection);
-
-            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-            DataTable table = new DataTable("myTable");
-            da.Fill(table);
-
-            foreach (DataRow row in table.Rows)
-            {
-                for (int i = 0; i < row.ItemArray.Length; i++)
-                {
-                    quanti.Items.Add(row.ItemArray[i].ToString());
-
-                }
-            }
-            quanti.SelectedIndex = 0;
-            connection.Close();
-        }
         private void FillPlantName()
         {
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
@@ -295,21 +272,6 @@ namespace RibbonWin
             connection.Close();
             MessageBox.Show("Entry Saved Sucessfully");
             this.Opacity = 0;
-        }
-
-        private void Quanti_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (Quan.Text != "")
-            {
-                if (quanti.SelectedIndex == 1)
-                {
-                    Quan.Text = "" + float.Parse(Quan.Text) / 10;
-                }
-                else
-                {
-                    Quan.Text = "" + float.Parse(Quan.Text) * 10;
-                }
-            }
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)

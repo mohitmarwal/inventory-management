@@ -38,11 +38,10 @@ namespace RibbonWin
             InitializeComponent();
             Fillbag();
             FillPartner();
-            FillGoods();
-            FillQuantity();
             FillPlantName();
+            FillGoods();
             FillPaymentMethod();
-            date.Text = DateTime.Now.ToString("yyyy-mm-dd");
+            date.Text = DateTime.Now.ToString("dd-MM-yyyy");
             time.Text = DateTime.Now.TimeOfDay.ToString("hh\\:mm\\:ss");
 
         }
@@ -124,31 +123,6 @@ namespace RibbonWin
             connection.Close();
         }
 
-        private void FillQuantity()
-        {
-            connectionString = "SERVER=" + server + ";" + "DATABASE=" +
-             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
-
-
-            connection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
-            connection.Open();
-            MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand("select Type From quantity", connection);
-
-            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-            DataTable table = new DataTable("myTable");
-            da.Fill(table);
-
-            foreach (DataRow row in table.Rows)
-            {
-                for (int i = 0; i < row.ItemArray.Length; i++)
-                {
-                    quanti.Items.Add(row.ItemArray[i].ToString());
-
-                }
-            }
-            quanti.SelectedIndex = 0;
-            connection.Close();
-        }
         private void FillPlantName()
         {
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
@@ -218,9 +192,12 @@ namespace RibbonWin
           String StandarCharges = stdcharges.Text;
           String OtherCharges = othercharges.Text;
           String PaymentMethod = paymentmethod.Text;
+          String FM = fm.Text;
+          String DM = dm.Text;
+          String MS = ms.Text;
           String TotalAmount = ""+ (Int16.Parse(RatePerQuintal)* Int16.Parse(Quantity)) + Int16.Parse(Commission) + Int16.Parse(StandarCharges) + Int16.Parse(OtherCharges);
 
-            string query2 = "INSERT INTO `inventory` (`PartnerName`, `MobileNumber`, `EmailId`, `Date`, `Time`, `DealerSign`, `ProcurerSign`, `Transportation`, `GoodType`, `PlantName` , `Quantity`, `BagType`, `NoBags` , `RatePerQuintal`, `Comission`, `StandardCharges`, `OtherCharges`, `TotalAmount`, `PaymentMethod`, `PaymentStatus`, `HandOver`, `Remarks`) VALUES ('" + PartnerName + "', '" + MobileNumber + "', '" + EmailId + "', '" + Date + "', '" + Time + "', '" + DealerSign + "', '" + ProcurerSign + "', '" + Transportation + "', '" + GoodType + "', '" +Plant.Text+ "', '" + Quantity + "', '" + BagTpye + "', '" + Numberbags.Text+ "', '" + RatePerQuintal + "', '" + Commission + "', '" + StandarCharges + "', '" + OtherCharges + "', '" + TotalAmount + "', '" + PaymentMethod + "', '" + payreceived.Text+ "', '" + paystatus.Text + "', '" + remark.Text+ "')";
+            string query2 = "INSERT INTO `inventory` (`PartnerName`, `MobileNumber`, `EmailId`, `Date`, `Time`, `DealerSign`, `ProcurerSign`, `Transportation`, `GoodType`, `PlantName` , `Quantity`, `BagType`, `NoBags` , `RatePerQuintal`, `Comission`, `StandardCharges`, `OtherCharges`, `FM`, `DM`, `MS`, `TotalAmount`, `PaymentMethod`, `PaymentStatus`, `HandOver`, `Remarks`) VALUES ('" + PartnerName + "', '" + MobileNumber + "', '" + EmailId + "', '" + Date + "', '" + Time + "', '" + DealerSign + "', '" + ProcurerSign + "', '" + Transportation + "', '" + GoodType + "', '" +Plant.Text+ "', '" + Quantity + "', '" + BagTpye + "', '" + Numberbags.Text+ "', '" + RatePerQuintal + "', '" + Commission + "', '" + StandarCharges + "', '" + OtherCharges + "', '" + FM + "', '" + DM + "', '" + MS + "', '" + TotalAmount + "', '" + PaymentMethod + "', '" + payreceived.Text+ "', '" + paystatus.Text + "', '" + remark.Text+ "')";
             //open connection
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
@@ -240,20 +217,6 @@ namespace RibbonWin
             this.Opacity = 0;
         }
 
-        private void Quanti_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (Quan.Text != "")
-            {
-                if (quanti.SelectedIndex == 1)
-                {
-                    Quan.Text = "" + float.Parse(Quan.Text) / 10;
-                }
-                else
-                {
-                    Quan.Text = "" + float.Parse(Quan.Text) * 10;
-                }
-            }
-        }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
