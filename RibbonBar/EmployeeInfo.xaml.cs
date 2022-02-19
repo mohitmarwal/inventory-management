@@ -26,7 +26,6 @@ namespace RibbonWin
     {
 
 
-        string connetionString;
         string server = "localhost";
         string database = "test";
         string uid = "root";
@@ -41,6 +40,8 @@ namespace RibbonWin
             FillPlantName();
             FillGoods();
             FillPaymentMethod();
+            Fillphone();
+            Fillemail();
             date.Text = DateTime.Now.ToString("dd-MM-yyyy");
             time.Text = DateTime.Now.TimeOfDay.ToString("hh\\:mm\\:ss");
 
@@ -64,6 +65,58 @@ namespace RibbonWin
                 for (int i = 0; i < row.ItemArray.Length; i++)
                 {
                     bagtype.Items.Add(row.ItemArray[i].ToString());
+
+                }
+            }
+            bagtype.SelectedIndex = 0;
+            connection.Close();
+        }
+
+        private void Fillemail()
+        {
+            connectionString = "SERVER=" + server + ";" + "DATABASE=" +
+             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+
+
+            connection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
+            connection.Open();
+            MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand("select Email From partner WHERE Name='" + Partnername.Text + "'", connection);
+
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataTable table = new DataTable("myTable");
+            da.Fill(table);
+
+            foreach (DataRow row in table.Rows)
+            {
+                for (int i = 0; i < row.ItemArray.Length; i++)
+                {
+                    email.Text = row.ItemArray[i].ToString();
+
+                }
+            }
+            
+            connection.Close();
+        }
+
+        private void Fillphone()
+        {
+            connectionString = "SERVER=" + server + ";" + "DATABASE=" +
+             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+
+
+            connection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
+            connection.Open();
+            MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand("select Phone From partner WHERE Name='" + Partnername.Text+ "'", connection);
+
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataTable table = new DataTable("myTable");
+            da.Fill(table);
+
+            foreach (DataRow row in table.Rows)
+            {
+                for (int i = 0; i < row.ItemArray.Length; i++)
+                {
+                    mobilenumber.Text= row.ItemArray[i].ToString();
 
                 }
             }
@@ -222,6 +275,18 @@ namespace RibbonWin
         {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void Partnername_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        async private void Onpartnerchange(object sender, SelectionChangedEventArgs e)
+        {
+            await Task.Delay(10);
+            Fillemail();
+            Fillphone();
         }
     }
 }

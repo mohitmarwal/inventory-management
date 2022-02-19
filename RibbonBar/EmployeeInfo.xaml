@@ -81,7 +81,7 @@
         <Label Content="Remarks" Grid.Column="0" Grid.Row="22"  Margin="5"></Label>
         <!--Second Column Content-->
 
-        <ComboBox Name="Partnername" Grid.Row="1" Margin="5,10,5,0" Grid.Column="1" Grid.ColumnSpan="2"/>
+            <ComboBox Name="Partnername" Grid.Row="1" Margin="5,10,5,0" Grid.Column="1" Grid.ColumnSpan="2" SelectionChanged="Onpartnerchange"/>
         <TextBox Name="mobilenumber" PreviewTextInput="NumberValidationTextBox" Grid.Column="1" Grid.Row="2" Margin="5" Grid.ColumnSpan="2"></TextBox>
         <TextBox Name="email" Grid.Column="1" Grid.Row="3" Margin="5" Grid.ColumnSpan="2"></TextBox>
         <TextBox Name="date"  Grid.Column="1" Grid.Row="4" Margin="5" Grid.ColumnSpan="2"  IsReadOnly = "True"></TextBox>

@@ -283,6 +283,7 @@ da = new MySqlDataAdapter(cmd);
             string paystatus = "";
             string payreceived = "";
             string remark = "";
+            string billno = "";
             
 
 
@@ -326,6 +327,7 @@ da = new MySqlDataAdapter(cmd);
                 paystatus = row.ItemArray[23].ToString();
                 payreceived = row.ItemArray[24].ToString();
                 remark = row.ItemArray[25].ToString();
+                billno = row.ItemArray[0].ToString();
 
 
             }
@@ -335,8 +337,10 @@ da = new MySqlDataAdapter(cmd);
             pdf.Info.Title = "My First PDF";
             PdfPage pdfPage = pdf.AddPage();
             XGraphics graph = XGraphics.FromPdfPage(pdfPage);
-            PdfSharp.Drawing.XImage logo = PdfSharp.Drawing.XImage.FromFile("c:\\logo.png");
+            PdfSharp.Drawing.XImage logo = PdfSharp.Drawing.XImage.FromFile(@"c:\logo.png");
             XFont font = new XFont("Verdana", 9, XFontStyle.Regular);
+
+            graph.DrawString("Bill No : " + billno, font, XBrushes.Black, new XPoint(450, 50));
             graph.DrawString("Partner Name : "+ Partnername, font, XBrushes.Black, new XPoint(80, 220));
             graph.DrawString("Mobile Number : " + mobilenumber, font, XBrushes.Black, new XPoint(80, 240));
             graph.DrawString("Email Id : " + email, font, XBrushes.Black, new XPoint(80, 260));

@@ -33,7 +33,7 @@ namespace RibbonWin
 
         private void btnDialogOk_Click(object sender, RoutedEventArgs e)
         {
-            string query2 = "INSERT INTO `partner` (`Name`, `Email`, `Id`, `Phone`) VALUES ('" + ptrnametxt+ "', '" + ptremailrtxt+ "', NULL, '" + prtnumbertxt + "')";
+            string query2 = "INSERT INTO `partner` (`Name`, `Email`, `Id`, `Phone`) VALUES ('" + ptrnametxt.Text+ "', '" + ptremailrtxt.Text+ "', NULL, '" + prtnumbertxt.Text + "')";
             //open connection
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
