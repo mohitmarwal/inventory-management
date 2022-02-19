@@ -99,8 +99,8 @@ namespace RibbonWin
                     ms.Text = row.ItemArray[19].ToString();
                     TotalAmt.Text = row.ItemArray[20].ToString();
                     paymentmethod.SelectedIndex = paymentmethod.Items.IndexOf(row.ItemArray[21].ToString());
-                    paystatus.SelectedIndex = paystatus.Items.IndexOf(row.ItemArray[22].ToString());
-                    status= row.ItemArray[22].ToString();
+                    paystatus.SelectedItem = (ComboBoxItem)this.paystatus.FindName(row.ItemArray[22].ToString());
+                    status = row.ItemArray[22].ToString();
                     payreceived.Text = row.ItemArray[23].ToString();
                     remark.Text = row.ItemArray[24].ToString();
                     amountpending.Text = row.ItemArray[25].ToString();

@@ -102,8 +102,8 @@
             <TextBox Name="TotalAmt"  Grid.Column="1" Grid.Row="18" Margin="5,5,10,5" Grid.ColumnSpan="2"></TextBox>
         <ComboBox Name="paymentmethod" Grid.Row="19" Grid.Column="1" Margin="5,10,5,0"  Grid.ColumnSpan="2"/>
             <ComboBox Grid.Column="1" Grid.Row="20" Margin="5,5,10,5" Grid.ColumnSpan="2" Name="paystatus" HorizontalAlignment="Left" VerticalAlignment="Top" Width="194" Height="30">
-                <ComboBoxItem Content="Pending"></ComboBoxItem>
-                <ComboBoxItem Content="Complete"></ComboBoxItem>
+                <ComboBoxItem Name="Pending" Content="Pending"></ComboBoxItem>
+                <ComboBoxItem Name="Complete" Content="Complete"></ComboBoxItem>
             </ComboBox>
             <TextBox Name="payreceived"  Grid.Column="1" Grid.Row="21" Margin="5,5,10,5" Grid.ColumnSpan="2" TextChanged="onpending"></TextBox>
         <TextBox Name="remark"  Grid.Column="1" Grid.Row="22" Margin="5,5,10,5" Grid.ColumnSpan="2"></TextBox>
