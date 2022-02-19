@@ -164,86 +164,90 @@ namespace RibbonWin
 
         private void on_export(object sender, RoutedEventArgs e)
         {
-            RibbonWin.datepicker dialog = new RibbonWin.datepicker();
-            dialog.ShowDialog();
-            String fromDate = dialog.datePicker1.SelectedDate.Value.Date.ToShortDateString();
-            String toDate = dialog.datePicker2.SelectedDate.Value.Date.ToShortDateString();
-            UIPanel.Children.Remove(EmployeFrom);
-            UIPanel.Children.Remove(view);
-            UIPanel.Children.Remove(up);
-            up = null;
-            EmployeFrom = null;
-            view = null;
-            SaveFileDialog _SD = new SaveFileDialog();
-            _SD.Filter = "csv File (*.csv)|*.csv";
-            _SD.FileName = "Untitled";
-            _SD.Title = "Save As";
-            Nullable<bool> result = _SD.ShowDialog();
-            if (result ==true)
+            try
             {
-                string connetionString;
-                string server = "localhost";
-                string database = "test";
-                string uid = "root";
-                string password = "";
-                MySql.Data.MySqlClient.MySqlConnection connection;
-                string connectionString;
-                MySqlDataAdapter da;
-                DataTable table;
-                connectionString = "SERVER=" + server + ";" + "DATABASE=" +
-                   database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
-
-
-                connection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
-                connection.Open();
-                MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand("select * From inventory where (Date BETWEEN '"+fromDate+"'AND '"+toDate+"')", connection);
-
-
-//  MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand("select * From inventory where
-//(From_date BETWEEN '2013-01-03'AND '2013-01-09'", connection);
-
-da = new MySqlDataAdapter(cmd);
-                table = new DataTable("myTable");
-                da.Fill(table);
-
-
-                StreamWriter sw = new StreamWriter(_SD.FileName, false);
-                //headers    
-                for (int i = 0; i < table.Columns.Count; i++)
+                RibbonWin.datepicker dialog = new RibbonWin.datepicker();
+                dialog.ShowDialog();
+                String fromDate = dialog.datePicker1.SelectedDate.Value.Date.ToShortDateString();
+                String toDate = dialog.datePicker2.SelectedDate.Value.Date.ToShortDateString();
+                UIPanel.Children.Remove(EmployeFrom);
+                UIPanel.Children.Remove(view);
+                UIPanel.Children.Remove(up);
+                up = null;
+                EmployeFrom = null;
+                view = null;
+                SaveFileDialog _SD = new SaveFileDialog();
+                _SD.Filter = "csv File (*.csv)|*.csv";
+                _SD.FileName = "Untitled";
+                _SD.Title = "Save As";
+                Nullable<bool> result = _SD.ShowDialog();
+                if (result == true)
                 {
-                    sw.Write(table.Columns[i]);
-                    if (i < table.Columns.Count - 1)
-                    {
-                        sw.Write(",");
-                    }
-                }
-                sw.Write(sw.NewLine);
-                foreach (DataRow dr in table.Rows)
-                {
+                    string connetionString;
+                    string server = "localhost";
+                    string database = "test";
+                    string uid = "root";
+                    string password = "";
+                    MySql.Data.MySqlClient.MySqlConnection connection;
+                    string connectionString;
+                    MySqlDataAdapter da;
+                    DataTable table;
+                    connectionString = "SERVER=" + server + ";" + "DATABASE=" +
+                       database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+
+
+                    connection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
+                    connection.Open();
+                    MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand("select * From inventory where (Date BETWEEN '" + fromDate + "'AND '" + toDate + "')", connection);
+
+
+                    //  MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand("select * From inventory where
+                    //(From_date BETWEEN '2013-01-03'AND '2013-01-09'", connection);
+
+                    da = new MySqlDataAdapter(cmd);
+                    table = new DataTable("myTable");
+                    da.Fill(table);
+
+
+                    StreamWriter sw = new StreamWriter(_SD.FileName, false);
+                    //headers    
                     for (int i = 0; i < table.Columns.Count; i++)
                     {
-                        if (!Convert.IsDBNull(dr[i]))
-                        {
-                            string value = dr[i].ToString();
-                            if (value.Contains(','))
-                            {
-                                value = String.Format("\"{0}\"", value);
-                                sw.Write(value);
-                            }
-                            else
-                            {
-                                sw.Write(dr[i].ToString());
-                            }
-                        }
+                        sw.Write(table.Columns[i]);
                         if (i < table.Columns.Count - 1)
                         {
                             sw.Write(",");
                         }
                     }
                     sw.Write(sw.NewLine);
+                    foreach (DataRow dr in table.Rows)
+                    {
+                        for (int i = 0; i < table.Columns.Count; i++)
+                        {
+                            if (!Convert.IsDBNull(dr[i]))
+                            {
+                                string value = dr[i].ToString();
+                                if (value.Contains(','))
+                                {
+                                    value = String.Format("\"{0}\"", value);
+                                    sw.Write(value);
+                                }
+                                else
+                                {
+                                    sw.Write(dr[i].ToString());
+                                }
+                            }
+                            if (i < table.Columns.Count - 1)
+                            {
+                                sw.Write(",");
+                            }
+                        }
+                        sw.Write(sw.NewLine);
+                    }
+                    sw.Close();
                 }
-                sw.Close();
             }
+            catch (Exception ex) { }
         }
 
         private void PDF_Click(object sender, RoutedEventArgs e)
@@ -306,27 +310,26 @@ da = new MySqlDataAdapter(cmd);
                 mobilenumber = row.ItemArray[2].ToString();
                 email= row.ItemArray[3].ToString();
                 date= row.ItemArray[4].ToString();
-                time = row.ItemArray[5].ToString();
-                DealerSign = row.ItemArray[6].ToString();
-                ProcurerSign = row.ItemArray[7].ToString();
-                vehicleno = row.ItemArray[8].ToString();
-                GoodType = row.ItemArray[9].ToString();
-                Plant = row.ItemArray[10].ToString();
-                Quantity = row.ItemArray[11].ToString();
-                BagTpye = row.ItemArray[12].ToString();
-                Numberbags = row.ItemArray[13].ToString();
-                RatePerQuintal = row.ItemArray[14].ToString();
-                Commission = row.ItemArray[15].ToString();
-                StandarCharges = row.ItemArray[16].ToString();
-                OtherCharges = row.ItemArray[17].ToString();
-                FM = row.ItemArray[18].ToString();
-                DM = row.ItemArray[19].ToString();
-                MS = row.ItemArray[20].ToString();
-                TotalAmt = row.ItemArray[21].ToString();
-                PaymentMethod = row.ItemArray[22].ToString();
-                paystatus = row.ItemArray[23].ToString();
-                payreceived = row.ItemArray[24].ToString();
-                remark = row.ItemArray[25].ToString();
+                DealerSign = row.ItemArray[5].ToString();
+                ProcurerSign = row.ItemArray[6].ToString();
+                vehicleno = row.ItemArray[7].ToString();
+                GoodType = row.ItemArray[8].ToString();
+                Plant = row.ItemArray[9].ToString();
+                Quantity = row.ItemArray[10].ToString();
+                BagTpye = row.ItemArray[11].ToString();
+                Numberbags = row.ItemArray[12].ToString();
+                RatePerQuintal = row.ItemArray[13].ToString();
+                Commission = row.ItemArray[14].ToString();
+                StandarCharges = row.ItemArray[15].ToString();
+                OtherCharges = row.ItemArray[16].ToString();
+                FM = row.ItemArray[17].ToString();
+                DM = row.ItemArray[18].ToString();
+                MS = row.ItemArray[19].ToString();
+                TotalAmt = row.ItemArray[20].ToString();
+                PaymentMethod = row.ItemArray[21].ToString();
+                paystatus = row.ItemArray[22].ToString();
+                payreceived = row.ItemArray[23].ToString();
+                remark = row.ItemArray[24].ToString();
                 billno = row.ItemArray[0].ToString();
 
 

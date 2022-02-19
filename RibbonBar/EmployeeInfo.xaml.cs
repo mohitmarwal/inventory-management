@@ -43,7 +43,7 @@ namespace RibbonWin
             Fillphone();
             Fillemail();
             date.Text = DateTime.Now.ToString("dd-MM-yyyy");
-            time.Text = DateTime.Now.TimeOfDay.ToString("hh\\:mm\\:ss");
+            paystatus.SelectedIndex = 0;
 
         }
         private void Fillbag()
@@ -232,8 +232,12 @@ namespace RibbonWin
           String PartnerName = Partnername.Text;
           String MobileNumber = mobilenumber.Text;
           String EmailId = email.Text;
-          String Date = date.Text;
-          String Time = time.Text;
+            String Date = "";
+            try
+            {
+                 Date = date.SelectedDate.Value.Date.ToShortDateString();
+            }
+            catch (Exception ex) { MessageBox.Show("Please enter Proper Date"); return; }
           String DealerSign = dealer.Text;
           String ProcurerSign = procurer.Text;
           String Transportation = vehicleno.Text;
@@ -248,9 +252,9 @@ namespace RibbonWin
           String FM = fm.Text;
           String DM = dm.Text;
           String MS = ms.Text;
-          String TotalAmount = ""+ (Int16.Parse(RatePerQuintal)* Int16.Parse(Quantity)) + Int16.Parse(Commission) + Int16.Parse(StandarCharges) + Int16.Parse(OtherCharges);
+          String TotalAmount = ""+ (long.Parse(RatePerQuintal)* long.Parse(Quantity)) + long.Parse(Commission) + long.Parse(StandarCharges) + long.Parse(OtherCharges);
 
-            string query2 = "INSERT INTO `inventory` (`PartnerName`, `MobileNumber`, `EmailId`, `Date`, `Time`, `DealerSign`, `ProcurerSign`, `Transportation`, `GoodType`, `PlantName` , `Quantity`, `BagType`, `NoBags` , `RatePerQuintal`, `Comission`, `StandardCharges`, `OtherCharges`, `FM`, `DM`, `MS`, `TotalAmount`, `PaymentMethod`, `PaymentStatus`, `HandOver`, `Remarks`) VALUES ('" + PartnerName + "', '" + MobileNumber + "', '" + EmailId + "', '" + Date + "', '" + Time + "', '" + DealerSign + "', '" + ProcurerSign + "', '" + Transportation + "', '" + GoodType + "', '" +Plant.Text+ "', '" + Quantity + "', '" + BagTpye + "', '" + Numberbags.Text+ "', '" + RatePerQuintal + "', '" + Commission + "', '" + StandarCharges + "', '" + OtherCharges + "', '" + FM + "', '" + DM + "', '" + MS + "', '" + TotalAmount + "', '" + PaymentMethod + "', '" + payreceived.Text+ "', '" + paystatus.Text + "', '" + remark.Text+ "')";
+            string query2 = "INSERT INTO `inventory` (`PartnerName`, `MobileNumber`, `EmailId`, `Date`, `DealerSign`, `ProcurerSign`, `Transportation`, `GoodType`, `PlantName` , `Quantity`, `BagType`, `NoBags` , `RatePerQuintal`, `Comission`, `StandardCharges`, `OtherCharges`, `FM`, `DM`, `MS`, `TotalAmount`, `PaymentMethod`, `PaymentStatus`, `HandOver`, `Remarks`, `Amount Pending`) VALUES ('" + PartnerName + "', '" + MobileNumber + "', '" + EmailId + "', '" + Date + "', '" + DealerSign + "', '" + ProcurerSign + "', '" + Transportation + "', '" + GoodType + "', '" +Plant.Text+ "', '" + Quantity + "', '" + BagTpye + "', '" + Numberbags.Text+ "', '" + RatePerQuintal + "', '" + Commission + "', '" + StandarCharges + "', '" + OtherCharges + "', '" + FM + "', '" + DM + "', '" + MS + "', '" + TotalAmount + "', '" + PaymentMethod +  "', '" + paystatus.Text + "','" + payreceived.Text + "', '" + remark.Text+ "', '" + amountpending.Text + "')";
             //open connection
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
@@ -287,6 +291,36 @@ namespace RibbonWin
             await Task.Delay(10);
             Fillemail();
             Fillphone();
+        }
+
+        private void onpending(object sender, RoutedEventArgs e)
+        {
+            try {
+                amountpending.Text = ""+(long.Parse(TotalAmt.Text) - long.Parse(payreceived.Text));
+            }catch(Exception ex){
+                string bug = ex.ToString();
+                amountpending.Text = "";
+            }
+            }
+
+        private void totalcalc(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                String Quantity = Quan.Text;
+                String BagTpye = bagtype.Text;
+                String RatePerQuintal = quintalrate.Text;
+                String Commission = comi.Text;
+                String StandarCharges = stdcharges.Text;
+                String OtherCharges = othercharges.Text;
+                String FM = fm.Text;
+                String DM = dm.Text;
+                String MS = ms.Text;
+                String TotalAmount = "" + (long.Parse(RatePerQuintal) * long.Parse(Quantity)) + long.Parse(Commission) + long.Parse(StandarCharges) + long.Parse(OtherCharges);
+            TotalAmt.Text = TotalAmount;
+            }
+            catch (Exception ex) { TotalAmt.Text = ""; }
+
         }
     }
 }

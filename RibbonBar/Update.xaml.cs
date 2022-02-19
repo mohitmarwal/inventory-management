@@ -24,7 +24,7 @@ namespace RibbonWin
     /// </summary>
     public partial class Update : UserControl
     {
-
+        public string datel;
         public static string entryno;
         string connetionString;
         string server = "localhost";
@@ -33,6 +33,7 @@ namespace RibbonWin
         string password = "";
         MySql.Data.MySqlClient.MySqlConnection connection;
         string connectionString;
+        string status = "";
         public Update()
         {
             InitializeComponent();
@@ -41,68 +42,74 @@ namespace RibbonWin
             FillGoods();
             FillPlantName();
             FillPaymentMethod();
-            date.Text = DateTime.Now.ToString("yyyy-mm-dd");
-            time.Text = DateTime.Now.TimeOfDay.ToString("hh\\:mm\\:ss");
             UdateForm();
 
         }
         private void UdateForm()
         {
-            String DealerSign = dealer.Text;
-            String ProcurerSign = procurer.Text;
-            String Transportation = vehicleno.Text;
-            String GoodType = goodtype.Text;
-            String Quantity = Quan.Text;
-            String BagTpye = bagtype.Text;
-            String RatePerQuintal = quintalrate.Text;
-            String Commission = comi.Text;
-            String StandarCharges = stdcharges.Text;
-            String OtherCharges = othercharges.Text;
-            String PaymentMethod = paymentmethod.Text;
-            connectionString = "SERVER=" + server + ";" + "DATABASE=" +
-             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
-
-
-            connection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
-            connection.Open();
-            MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand("SELECT * FROM inventory WHERE Entry_no="+ entryno, connection);
-
-            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-            DataTable table = new DataTable("myTable");
-            da.Fill(table);
-
-            foreach (DataRow row in table.Rows)
+            try
             {
-               
+
+                String DealerSign = dealer.Text;
+                String ProcurerSign = procurer.Text;
+                String Transportation = vehicleno.Text;
+                String GoodType = goodtype.Text;
+                String Quantity = Quan.Text;
+                String BagTpye = bagtype.Text;
+                String RatePerQuintal = quintalrate.Text;
+                String Commission = comi.Text;
+                String StandarCharges = stdcharges.Text;
+                String OtherCharges = othercharges.Text;
+                String PaymentMethod = paymentmethod.Text;
+                String AmountPending = "";
+                connectionString = "SERVER=" + server + ";" + "DATABASE=" +
+                 database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+
+
+                connection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
+                connection.Open();
+                MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand("SELECT * FROM inventory WHERE Entry_no=" + entryno, connection);
+
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable table = new DataTable("myTable");
+                da.Fill(table);
+
+                foreach (DataRow row in table.Rows)
+                {
+
                     Partnername.SelectedIndex = Partnername.Items.IndexOf(row.ItemArray[1].ToString());
                     mobilenumber.Text = row.ItemArray[2].ToString();
                     email.Text = row.ItemArray[3].ToString();
-                    date.Text = row.ItemArray[4].ToString();
-                    time.Text = row.ItemArray[5].ToString();
-                    dealer.Text = row.ItemArray[6].ToString();
-                    procurer.Text = row.ItemArray[7].ToString();
-                    vehicleno.Text = row.ItemArray[8].ToString();
-                    goodtype.SelectedIndex = goodtype.Items.IndexOf(row.ItemArray[9].ToString());
-                    Plant.SelectedIndex = Plant.Items.IndexOf(row.ItemArray[10].ToString());
-                    Quan.Text = row.ItemArray[11].ToString();
-                    bagtype.SelectedIndex = bagtype.Items.IndexOf(row.ItemArray[12].ToString());
-                    Numberbags.Text = row.ItemArray[13].ToString();
-                    quintalrate.Text = row.ItemArray[14].ToString();
-                    comi.Text = row.ItemArray[15].ToString();
-                    stdcharges.Text = row.ItemArray[16].ToString();
-                    othercharges.Text = row.ItemArray[17].ToString();
-                    fm.Text = row.ItemArray[18].ToString();
-                    dm.Text = row.ItemArray[19].ToString();
-                    ms.Text = row.ItemArray[20].ToString();
-                    TotalAmt.Text = row.ItemArray[21].ToString();
-                    paymentmethod.SelectedIndex = paymentmethod.Items.IndexOf(row.ItemArray[22].ToString());
-                    paystatus.Text = row.ItemArray[23].ToString();
-                    payreceived.Text = row.ItemArray[24].ToString();
-                    remark.Text = row.ItemArray[25].ToString();
+                    date.SelectedDate = DateTime.Parse((row.ItemArray[4].ToString()));
+                    datel = row.ItemArray[4].ToString();
+                    dealer.Text = row.ItemArray[5].ToString();
+                    procurer.Text = row.ItemArray[6].ToString();
+                    vehicleno.Text = row.ItemArray[7].ToString();
+                    goodtype.SelectedIndex = goodtype.Items.IndexOf(row.ItemArray[8].ToString());
+                    Plant.SelectedIndex = Plant.Items.IndexOf(row.ItemArray[9].ToString());
+                    Quan.Text = row.ItemArray[10].ToString();
+                    bagtype.SelectedIndex = bagtype.Items.IndexOf(row.ItemArray[11].ToString());
+                    Numberbags.Text = row.ItemArray[12].ToString();
+                    quintalrate.Text = row.ItemArray[13].ToString();
+                    comi.Text = row.ItemArray[14].ToString();
+                    stdcharges.Text = row.ItemArray[15].ToString();
+                    othercharges.Text = row.ItemArray[16].ToString();
+                    fm.Text = row.ItemArray[17].ToString();
+                    dm.Text = row.ItemArray[18].ToString();
+                    ms.Text = row.ItemArray[19].ToString();
+                    TotalAmt.Text = row.ItemArray[20].ToString();
+                    paymentmethod.SelectedIndex = paymentmethod.Items.IndexOf(row.ItemArray[21].ToString());
+                    paystatus.SelectedIndex = paystatus.Items.IndexOf(row.ItemArray[22].ToString());
+                    status= row.ItemArray[22].ToString();
+                    payreceived.Text = row.ItemArray[23].ToString();
+                    remark.Text = row.ItemArray[24].ToString();
+                    amountpending.Text = row.ItemArray[25].ToString();
+                    
 
-
+                }
             }
-          
+            catch(Exception ex) { }
+
             connection.Close();
         }
             private void Fillbag()
@@ -239,8 +246,16 @@ namespace RibbonWin
           String PartnerName = Partnername.Text;
           String MobileNumber = mobilenumber.Text;
           String EmailId = email.Text;
-          String Date = date.Text;
-          String Time = time.Text;
+            String Date="";
+            if (date.SelectedDate==null)
+            {
+                Date = datel;
+            }
+            else
+            {
+                Date = date.SelectedDate.Value.Date.ToShortDateString();
+            }
+           
           String DealerSign = dealer.Text;
           String ProcurerSign = procurer.Text;
           String Transportation = vehicleno.Text;
@@ -252,9 +267,13 @@ namespace RibbonWin
           String StandarCharges = stdcharges.Text;
           String OtherCharges = othercharges.Text;
           String PaymentMethod = paymentmethod.Text;
+            if (paystatus.SelectedIndex!=-1)
+            {
+                status = paystatus.Text;
+            }
           String TotalAmount = ""+ (Int16.Parse(RatePerQuintal)* Int16.Parse(Quantity)) + Int16.Parse(Commission) + Int16.Parse(StandarCharges) + Int16.Parse(OtherCharges);
 
-            string query2 = "UPDATE `inventory` set PartnerName='" + Partnername.Text + "', MobileNumber='" + mobilenumber.Text + "', EmailId='" + email.Text + "',  Date='" + date.Text + "', Time='" + time.Text + "', DealerSign='" + dealer.Text + "', ProcurerSign='" + procurer.Text + "', Transportation='" + vehicleno.Text + "', GoodType='" + goodtype.Text + "', PlantName='" + Plant.Text + "', Quantity='" + Quan.Text + "', BagType='" + bagtype.Text + "', NoBags='" + Numberbags.Text + "', RatePerQuintal='" + quintalrate.Text + "', Comission='" + comi.Text + "', StandardCharges='" + stdcharges.Text + "', OtherCharges='" + othercharges.Text + "', TotalAmount='" + TotalAmt.Text + "', PaymentMethod='" + paymentmethod.Text + "', PaymentStatus='" + paystatus.Text + "', HandOver='" + payreceived.Text + "', Remarks='" + remark.Text + "' WHERE Entry_No=" + entryno;
+            string query2 = "UPDATE `inventory` set PartnerName='" + Partnername.Text + "', MobileNumber='" + mobilenumber.Text + "', EmailId='" + email.Text + "',  Date='" + Date + "', DealerSign='" + dealer.Text + "', ProcurerSign='" + procurer.Text + "', Transportation='" + vehicleno.Text + "', GoodType='" + goodtype.Text + "', PlantName='" + Plant.Text + "', Quantity='" + Quan.Text + "', BagType='" + bagtype.Text + "', NoBags='" + Numberbags.Text + "', RatePerQuintal='" + quintalrate.Text + "', Comission='" + comi.Text + "', StandardCharges='" + stdcharges.Text + "', OtherCharges='" + othercharges.Text + "', TotalAmount='" + TotalAmt.Text + "', PaymentMethod='" + paymentmethod.Text + "', PaymentStatus='" + status + "', HandOver='" + payreceived.Text + "', Remarks='" + remark.Text + "', `Amount Pending`='" + amountpending.Text+ "' WHERE Entry_No=" + entryno;
             //open connection
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
@@ -278,6 +297,39 @@ namespace RibbonWin
         {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void totalcalc(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                String Quantity = Quan.Text;
+                String BagTpye = bagtype.Text;
+                String RatePerQuintal = quintalrate.Text;
+                String Commission = comi.Text;
+                String StandarCharges = stdcharges.Text;
+                String OtherCharges = othercharges.Text;
+                String FM = fm.Text;
+                String DM = dm.Text;
+                String MS = ms.Text;
+                String TotalAmount = "" + (long.Parse(RatePerQuintal) * long.Parse(Quantity)) + long.Parse(Commission) + long.Parse(StandarCharges) + long.Parse(OtherCharges);
+                TotalAmt.Text = TotalAmount;
+            }
+            catch (Exception ex) { TotalAmt.Text = ""; }
+
+        }
+
+        private void onpending(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                amountpending.Text = "" + (long.Parse(TotalAmt.Text) - long.Parse(payreceived.Text));
+            }
+            catch (Exception ex)
+            {
+                string bug = ex.ToString();
+                amountpending.Text = "";
+            }
         }
     }
 }
