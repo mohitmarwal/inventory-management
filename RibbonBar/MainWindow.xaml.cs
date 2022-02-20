@@ -288,6 +288,7 @@ namespace RibbonWin
             string payreceived = "";
             string remark = "";
             string billno = "";
+            string Pending = "";
             
 
 
@@ -297,7 +298,7 @@ namespace RibbonWin
 
             connection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
             connection.Open();
-            MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand("SELECT * FROM inventory WHERE Entry_no=" + entryno, connection);
+            MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand("SELECT * FROM inventory WHERE Billno=" + entryno, connection);
 
             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
             DataTable table = new DataTable("myTable");
@@ -306,32 +307,32 @@ namespace RibbonWin
             foreach (DataRow row in table.Rows)
             {
 
-                Partnername = row.ItemArray[1].ToString();
-                mobilenumber = row.ItemArray[2].ToString();
-                email= row.ItemArray[3].ToString();
-                date= row.ItemArray[4].ToString();
-                DealerSign = row.ItemArray[5].ToString();
-                ProcurerSign = row.ItemArray[6].ToString();
-                vehicleno = row.ItemArray[7].ToString();
-                GoodType = row.ItemArray[8].ToString();
-                Plant = row.ItemArray[9].ToString();
-                Quantity = row.ItemArray[10].ToString();
-                BagTpye = row.ItemArray[11].ToString();
-                Numberbags = row.ItemArray[12].ToString();
-                RatePerQuintal = row.ItemArray[13].ToString();
-                Commission = row.ItemArray[14].ToString();
-                StandarCharges = row.ItemArray[15].ToString();
-                OtherCharges = row.ItemArray[16].ToString();
-                FM = row.ItemArray[17].ToString();
-                DM = row.ItemArray[18].ToString();
-                MS = row.ItemArray[19].ToString();
-                TotalAmt = row.ItemArray[20].ToString();
-                PaymentMethod = row.ItemArray[21].ToString();
-                paystatus = row.ItemArray[22].ToString();
-                payreceived = row.ItemArray[23].ToString();
-                remark = row.ItemArray[24].ToString();
-                billno = row.ItemArray[0].ToString();
-
+                Partnername = row.ItemArray[2].ToString();
+                mobilenumber = row.ItemArray[3].ToString();
+                email= row.ItemArray[4].ToString();
+                date= row.ItemArray[5].ToString();
+                DealerSign = row.ItemArray[6].ToString();
+                ProcurerSign = row.ItemArray[7].ToString();
+                vehicleno = row.ItemArray[8].ToString();
+                GoodType = row.ItemArray[9].ToString();
+                Plant = row.ItemArray[10].ToString();
+                Quantity = row.ItemArray[11].ToString();
+                BagTpye = row.ItemArray[12].ToString();
+                Numberbags = row.ItemArray[13].ToString();
+                RatePerQuintal = row.ItemArray[14].ToString();
+                Commission = row.ItemArray[15].ToString();
+                StandarCharges = row.ItemArray[16].ToString();
+                OtherCharges = row.ItemArray[17].ToString();
+                FM = row.ItemArray[18].ToString();
+                DM = row.ItemArray[19].ToString();
+                MS = row.ItemArray[20].ToString();
+                TotalAmt = row.ItemArray[21].ToString();
+                PaymentMethod = row.ItemArray[22].ToString();
+                paystatus = row.ItemArray[23].ToString();
+                payreceived = row.ItemArray[24].ToString();
+                remark = row.ItemArray[25].ToString();
+                billno = row.ItemArray[1].ToString();
+                Pending = row.ItemArray[26].ToString();
 
             }
 
@@ -340,7 +341,7 @@ namespace RibbonWin
             pdf.Info.Title = "My First PDF";
             PdfPage pdfPage = pdf.AddPage();
             XGraphics graph = XGraphics.FromPdfPage(pdfPage);
-            PdfSharp.Drawing.XImage logo = PdfSharp.Drawing.XImage.FromFile(@"c:\logo.png");
+          //  PdfSharp.Drawing.XImage logo = PdfSharp.Drawing.XImage.FromFile(@"c:\logo.png");
             XFont font = new XFont("Verdana", 9, XFontStyle.Regular);
 
             graph.DrawString("Bill No : " + billno, font, XBrushes.Black, new XPoint(450, 50));
@@ -348,39 +349,39 @@ namespace RibbonWin
             graph.DrawString("Mobile Number : " + mobilenumber, font, XBrushes.Black, new XPoint(80, 240));
             graph.DrawString("Email Id : " + email, font, XBrushes.Black, new XPoint(80, 260));
             graph.DrawString("Date : " + date, font, XBrushes.Black, new XPoint(80, 280));
-            graph.DrawString("Time : " + time, font, XBrushes.Black, new XPoint(80, 300));
-            graph.DrawString("Dealer : " + DealerSign, font, XBrushes.Black, new XPoint(80, 320));
-            graph.DrawString("Procurer : " + ProcurerSign, font, XBrushes.Black, new XPoint(80, 340));
+            graph.DrawString("Dealer : " + DealerSign, font, XBrushes.Black, new XPoint(80, 300));
+            graph.DrawString("Procurer : " + ProcurerSign, font, XBrushes.Black, new XPoint(80, 320));
             graph.DrawString("Transportation : " + vehicleno, font, XBrushes.Black, new XPoint(350, 240));
             graph.DrawString("Good Type : " + GoodType, font, XBrushes.Black, new XPoint(350, 260));
             graph.DrawString("Plant Name : " + Plant, font, XBrushes.Black, new XPoint(350, 280));
             graph.DrawString("Bag Type : " + BagTpye, font, XBrushes.Black, new XPoint(350, 300));
 
-            graph.DrawString("Quantity : " + Quantity, font, XBrushes.Black, new XPoint(80, 430));
-            graph.DrawString("No of Bags : " + Numberbags, font, XBrushes.Black, new XPoint(80, 450));
-            graph.DrawString("Rate Per Qunintal : " + RatePerQuintal, font, XBrushes.Black, new XPoint(80, 470));
-            graph.DrawString("Commission : " + Commission, font, XBrushes.Black, new XPoint(80, 490));
-            graph.DrawString("Standard Charges : " + StandarCharges, font, XBrushes.Black, new XPoint(80, 510));
-            graph.DrawString("Subtotal : " , font, XBrushes.Black, new XPoint(80, 530));
-            graph.DrawString("FM : " + FM, font, XBrushes.Black, new XPoint(320, 430));
-            graph.DrawString("DM : " + DM, font, XBrushes.Black, new XPoint(320, 450));
-            graph.DrawString("MS : " + MS, font, XBrushes.Black, new XPoint(320, 470));
-            graph.DrawString("Other Charges : " + OtherCharges, font, XBrushes.Black, new XPoint(320, 490));
-            graph.DrawString("Total Deduction : ", font, XBrushes.Black, new XPoint(320, 510));
+            graph.DrawString("Quantity : " + Quantity, font, XBrushes.Black, new XPoint(80, 400));
+            graph.DrawString("No of Bags : " + Numberbags, font, XBrushes.Black, new XPoint(80, 420));
+            graph.DrawString("Rate Per Qunintal : " + RatePerQuintal, font, XBrushes.Black, new XPoint(80, 440));
+            graph.DrawString("Commission : " + Commission, font, XBrushes.Black, new XPoint(80, 460));
+            graph.DrawString("Standard Charges : " + StandarCharges, font, XBrushes.Black, new XPoint(80, 480));
+            graph.DrawString("Subtotal : " , font, XBrushes.Black, new XPoint(80, 500));
+            graph.DrawString("FM : " + FM, font, XBrushes.Black, new XPoint(320, 400));
+            graph.DrawString("DM : " + DM, font, XBrushes.Black, new XPoint(320, 420));
+            graph.DrawString("MS : " + MS, font, XBrushes.Black, new XPoint(320, 440));
+            graph.DrawString("Other Charges : " + OtherCharges, font, XBrushes.Black, new XPoint(320, 460));
+            graph.DrawString("Total Deduction : ", font, XBrushes.Black, new XPoint(320, 480));
 
-            graph.DrawString("Total Amount : " + TotalAmt, font, XBrushes.Black, new XPoint(80, 690));
-            graph.DrawString("Payment Method : " + PaymentMethod, font, XBrushes.Black, new XPoint(80, 710));
-            graph.DrawString("Payment Status : " + paystatus, font, XBrushes.Black, new XPoint(80, 730));
-            graph.DrawString("Handover : " + payreceived, font, XBrushes.Black, new XPoint(80, 750));
-            graph.DrawString("Remarks : " + remark, font, XBrushes.Black, new XPoint(80, 770));
+            graph.DrawString("Total Amount : " + TotalAmt, font, XBrushes.Black, new XPoint(80, 590));
+            graph.DrawString("Payment Method : " + PaymentMethod, font, XBrushes.Black, new XPoint(80, 610));
+            graph.DrawString("Payment Status : " + paystatus, font, XBrushes.Black, new XPoint(80, 630));
+            graph.DrawString("Total Received Amount : " + payreceived, font, XBrushes.Black, new XPoint(80, 650));
+            graph.DrawString("Remarks : " + remark, font, XBrushes.Black, new XPoint(80, 670));
+            graph.DrawString("Total Pending : " + Pending, font, XBrushes.Black, new XPoint(320, 590));
+            graph.DrawString("Signature/Stamp : " , font, XBrushes.Black, new XPoint(80, 740));
 
-
-
-            graph.DrawImage(logo,new XPoint(pdfPage.Width/2.6, 10));
+            // graph.DrawImage(logo,new XPoint(pdfPage.Width/2.6, 10));
             graph.DrawRectangle(XPens.Black, new XRect(new XPoint(50, 200), new XPoint(550, 350)));
-            graph.DrawRectangle(XPens.Black, new XRect(new XPoint(50, 370), new XPoint(550, 650)));
-            graph.DrawRectangle(XPens.Black, new XRect(new XPoint(50, 670), new XPoint(550, 800)));
-            graph.DrawLine(XPens.Black, new XPoint(300,370), new XPoint(300,650));
+            graph.DrawRectangle(XPens.Black, new XRect(new XPoint(50, 370), new XPoint(550, 550)));
+            graph.DrawRectangle(XPens.Black, new XRect(new XPoint(50, 570), new XPoint(550, 700)));
+            graph.DrawRectangle(XPens.Black, new XRect(new XPoint(50, 720), new XPoint(550, 800)));
+            graph.DrawLine(XPens.Black, new XPoint(300,370), new XPoint(300,550));
             SaveFileDialog _SD = new SaveFileDialog();
             _SD.Filter = "PDF File (*.pdf)|*.pdf";
             _SD.FileName = "Untitled";

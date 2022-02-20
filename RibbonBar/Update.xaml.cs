@@ -68,7 +68,7 @@ namespace RibbonWin
 
                 connection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
                 connection.Open();
-                MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand("SELECT * FROM inventory WHERE Entry_no=" + entryno, connection);
+                MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand("SELECT * FROM inventory WHERE Billno=" + entryno, connection);
 
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 DataTable table = new DataTable("myTable");
@@ -77,34 +77,34 @@ namespace RibbonWin
                 foreach (DataRow row in table.Rows)
                 {
 
-                    Partnername.SelectedIndex = Partnername.Items.IndexOf(row.ItemArray[1].ToString());
-                    mobilenumber.Text = row.ItemArray[2].ToString();
-                    email.Text = row.ItemArray[3].ToString();
-                    date.SelectedDate = DateTime.Parse((row.ItemArray[4].ToString()));
-                    datel = row.ItemArray[4].ToString();
-                    dealer.Text = row.ItemArray[5].ToString();
-                    procurer.Text = row.ItemArray[6].ToString();
-                    vehicleno.Text = row.ItemArray[7].ToString();
-                    goodtype.SelectedIndex = goodtype.Items.IndexOf(row.ItemArray[8].ToString());
-                    Plant.SelectedIndex = Plant.Items.IndexOf(row.ItemArray[9].ToString());
-                    Quan.Text = row.ItemArray[10].ToString();
-                    bagtype.SelectedIndex = bagtype.Items.IndexOf(row.ItemArray[11].ToString());
-                    Numberbags.Text = row.ItemArray[12].ToString();
-                    quintalrate.Text = row.ItemArray[13].ToString();
-                    comi.Text = row.ItemArray[14].ToString();
-                    stdcharges.Text = row.ItemArray[15].ToString();
-                    othercharges.Text = row.ItemArray[16].ToString();
-                    fm.Text = row.ItemArray[17].ToString();
-                    dm.Text = row.ItemArray[18].ToString();
-                    ms.Text = row.ItemArray[19].ToString();
-                    TotalAmt.Text = row.ItemArray[20].ToString();
-                    paymentmethod.SelectedIndex = paymentmethod.Items.IndexOf(row.ItemArray[21].ToString());
-                    paystatus.SelectedItem = (ComboBoxItem)this.paystatus.FindName(row.ItemArray[22].ToString());
-                    status = row.ItemArray[22].ToString();
-                    payreceived.Text = row.ItemArray[23].ToString();
-                    remark.Text = row.ItemArray[24].ToString();
-                    amountpending.Text = row.ItemArray[25].ToString();
-                    
+                    Partnername.SelectedIndex = Partnername.Items.IndexOf(row.ItemArray[2].ToString());
+                    mobilenumber.Text = row.ItemArray[3].ToString();
+                    email.Text = row.ItemArray[4].ToString();
+                    date.SelectedDate = DateTime.Parse((row.ItemArray[5].ToString()));
+                    datel = row.ItemArray[5].ToString();
+                    dealer.Text = row.ItemArray[6].ToString();
+                    procurer.Text = row.ItemArray[7].ToString();
+                    vehicleno.Text = row.ItemArray[8].ToString();
+                    goodtype.SelectedIndex = goodtype.Items.IndexOf(row.ItemArray[9].ToString());
+                    Plant.SelectedIndex = Plant.Items.IndexOf(row.ItemArray[10].ToString());
+                    Quan.Text = row.ItemArray[11].ToString();
+                    bagtype.SelectedIndex = bagtype.Items.IndexOf(row.ItemArray[12].ToString());
+                    Numberbags.Text = row.ItemArray[13].ToString();
+                    quintalrate.Text = row.ItemArray[14].ToString();
+                    comi.Text = row.ItemArray[15].ToString();
+                    stdcharges.Text = row.ItemArray[16].ToString();
+                    othercharges.Text = row.ItemArray[17].ToString();
+                    fm.Text = row.ItemArray[18].ToString();
+                    dm.Text = row.ItemArray[19].ToString();
+                    ms.Text = row.ItemArray[20].ToString();
+                    TotalAmt.Text = row.ItemArray[21].ToString();
+                    paymentmethod.SelectedIndex = paymentmethod.Items.IndexOf(row.ItemArray[22].ToString());
+                    paystatus.SelectedItem = (ComboBoxItem)this.paystatus.FindName(row.ItemArray[23].ToString());
+                    status = row.ItemArray[23].ToString();
+                    payreceived.Text = row.ItemArray[24].ToString();
+                    remark.Text = row.ItemArray[25].ToString();
+                    amountpending.Text = row.ItemArray[26].ToString();
+                    billno.Text = row.ItemArray[1].ToString();
 
                 }
             }
@@ -273,7 +273,7 @@ namespace RibbonWin
             }
           String TotalAmount = ""+ (Int16.Parse(RatePerQuintal)* Int16.Parse(Quantity)) + Int16.Parse(Commission) + Int16.Parse(StandarCharges) + Int16.Parse(OtherCharges);
 
-            string query2 = "UPDATE `inventory` set PartnerName='" + Partnername.Text + "', MobileNumber='" + mobilenumber.Text + "', EmailId='" + email.Text + "',  Date='" + Date + "', DealerSign='" + dealer.Text + "', ProcurerSign='" + procurer.Text + "', Transportation='" + vehicleno.Text + "', GoodType='" + goodtype.Text + "', PlantName='" + Plant.Text + "', Quantity='" + Quan.Text + "', BagType='" + bagtype.Text + "', NoBags='" + Numberbags.Text + "', RatePerQuintal='" + quintalrate.Text + "', Comission='" + comi.Text + "', StandardCharges='" + stdcharges.Text + "', OtherCharges='" + othercharges.Text + "', TotalAmount='" + TotalAmt.Text + "', PaymentMethod='" + paymentmethod.Text + "', PaymentStatus='" + status + "', HandOver='" + payreceived.Text + "', Remarks='" + remark.Text + "', `Amount Pending`='" + amountpending.Text+ "' WHERE Entry_No=" + entryno;
+            string query2 = "UPDATE `inventory` set PartnerName='" + Partnername.Text + "', MobileNumber='" + mobilenumber.Text + "', Billno='" + billno.Text + "', EmailId='" + email.Text + "',  Date='" + Date + "', DealerSign='" + dealer.Text + "', ProcurerSign='" + procurer.Text + "', Transportation='" + vehicleno.Text + "', GoodType='" + goodtype.Text + "', PlantName='" + Plant.Text + "', Quantity='" + Quan.Text + "', BagType='" + bagtype.Text + "', NoBags='" + Numberbags.Text + "', RatePerQuintal='" + quintalrate.Text + "', Comission='" + comi.Text + "', StandardCharges='" + stdcharges.Text + "', OtherCharges='" + othercharges.Text + "', TotalAmount='" + TotalAmt.Text + "', PaymentMethod='" + paymentmethod.Text + "', PaymentStatus='" + status + "', HandOver='" + payreceived.Text + "', Remarks='" + remark.Text + "', `Amount Pending`='" + amountpending.Text+ "' WHERE Entry_No=" + entryno;
             //open connection
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";

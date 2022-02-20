@@ -227,51 +227,78 @@ namespace RibbonWin
             paymentmethod.SelectedIndex = 0;
             connection.Close();
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-          String PartnerName = Partnername.Text;
-          String MobileNumber = mobilenumber.Text;
-          String EmailId = email.Text;
-            String Date = "";
-            try
-            {
-                 Date = date.SelectedDate.Value.Date.ToShortDateString();
-            }
-            catch (Exception ex) { MessageBox.Show("Please enter Proper Date"); return; }
-          String DealerSign = dealer.Text;
-          String ProcurerSign = procurer.Text;
-          String Transportation = vehicleno.Text;
-          String GoodType = goodtype.Text;
-          String Quantity = Quan.Text;
-          String BagTpye = bagtype.Text;
-          String RatePerQuintal = quintalrate.Text;
-          String Commission = comi.Text;
-          String StandarCharges = stdcharges.Text;
-          String OtherCharges = othercharges.Text;
-          String PaymentMethod = paymentmethod.Text;
-          String FM = fm.Text;
-          String DM = dm.Text;
-          String MS = ms.Text;
-          String TotalAmount = ""+ (long.Parse(RatePerQuintal)* long.Parse(Quantity)) + long.Parse(Commission) + long.Parse(StandarCharges) + long.Parse(OtherCharges);
 
-            string query2 = "INSERT INTO `inventory` (`PartnerName`, `MobileNumber`, `EmailId`, `Date`, `DealerSign`, `ProcurerSign`, `Transportation`, `GoodType`, `PlantName` , `Quantity`, `BagType`, `NoBags` , `RatePerQuintal`, `Comission`, `StandardCharges`, `OtherCharges`, `FM`, `DM`, `MS`, `TotalAmount`, `PaymentMethod`, `PaymentStatus`, `HandOver`, `Remarks`, `Amount Pending`) VALUES ('" + PartnerName + "', '" + MobileNumber + "', '" + EmailId + "', '" + Date + "', '" + DealerSign + "', '" + ProcurerSign + "', '" + Transportation + "', '" + GoodType + "', '" +Plant.Text+ "', '" + Quantity + "', '" + BagTpye + "', '" + Numberbags.Text+ "', '" + RatePerQuintal + "', '" + Commission + "', '" + StandarCharges + "', '" + OtherCharges + "', '" + FM + "', '" + DM + "', '" + MS + "', '" + TotalAmount + "', '" + PaymentMethod +  "', '" + paystatus.Text + "','" + payreceived.Text + "', '" + remark.Text+ "', '" + amountpending.Text + "')";
-            //open connection
+        private Boolean checkbill()
+        {
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
-            database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
 
 
             connection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
             connection.Open();
+            MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand("select * From inventory where Billno="+billno.Text, connection);
 
-            //create command and assign the query and connection from the constructor
-            MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand(query2, connection);
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataTable table = new DataTable("myTable");
+            da.Fill(table);
 
-
-            //Execute command
-            cmd.ExecuteNonQuery();
+            if(table.Rows.Count>=1)
+            {
+                MessageBox.Show("Bill no already exist");
+                return false;
+            }
             connection.Close();
-            MessageBox.Show("Entry Saved Sucessfully");
-            this.Opacity = 0;
+            return true;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (checkbill())
+            {
+                String PartnerName = Partnername.Text;
+                String MobileNumber = mobilenumber.Text;
+                String EmailId = email.Text;
+                String Date = "";
+                try
+                {
+                    Date = date.SelectedDate.Value.Date.ToShortDateString();
+                }
+                catch (Exception ex) { MessageBox.Show("Please enter Proper Date"); return; }
+                String DealerSign = dealer.Text;
+                String ProcurerSign = procurer.Text;
+                String Transportation = vehicleno.Text;
+                String GoodType = goodtype.Text;
+                String Quantity = Quan.Text;
+                String BagTpye = bagtype.Text;
+                String RatePerQuintal = quintalrate.Text;
+                String Commission = comi.Text;
+                String StandarCharges = stdcharges.Text;
+                String OtherCharges = othercharges.Text;
+                String PaymentMethod = paymentmethod.Text;
+                String FM = fm.Text;
+                String DM = dm.Text;
+                String MS = ms.Text;
+                String TotalAmount = "" + (long.Parse(RatePerQuintal) * long.Parse(Quantity)) + long.Parse(Commission) + long.Parse(StandarCharges) + long.Parse(OtherCharges);
+
+                string query2 = "INSERT INTO `inventory` (`Billno`, `PartnerName`, `MobileNumber`, `EmailId`, `Date`, `DealerSign`, `ProcurerSign`, `Transportation`, `GoodType`, `PlantName` , `Quantity`, `BagType`, `NoBags` , `RatePerQuintal`, `Comission`, `StandardCharges`, `OtherCharges`, `FM`, `DM`, `MS`, `TotalAmount`, `PaymentMethod`, `PaymentStatus`, `HandOver`, `Remarks`, `Amount Pending`) VALUES ('" + billno.Text + "', '" + PartnerName + "', '" + MobileNumber + "', '" + EmailId + "', '" + Date + "', '" + DealerSign + "', '" + ProcurerSign + "', '" + Transportation + "', '" + GoodType + "', '" + Plant.Text + "', '" + Quantity + "', '" + BagTpye + "', '" + Numberbags.Text + "', '" + RatePerQuintal + "', '" + Commission + "', '" + StandarCharges + "', '" + OtherCharges + "', '" + FM + "', '" + DM + "', '" + MS + "', '" + TotalAmount + "', '" + PaymentMethod + "', '" + paystatus.Text + "','" + payreceived.Text + "', '" + remark.Text + "', '" + amountpending.Text + "')";
+                //open connection
+                connectionString = "SERVER=" + server + ";" + "DATABASE=" +
+                database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+
+
+                connection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
+                connection.Open();
+
+                //create command and assign the query and connection from the constructor
+                MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand(query2, connection);
+
+
+                //Execute command
+                cmd.ExecuteNonQuery();
+                connection.Close();
+                MessageBox.Show("Entry Saved Sucessfully");
+                this.Opacity = 0;
+            }
         }
 
 
