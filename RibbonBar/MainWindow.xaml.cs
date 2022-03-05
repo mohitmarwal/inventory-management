@@ -33,12 +33,39 @@ namespace RibbonWin
         EmployeeInfo EmployeFrom;
         TableView view;
         Update up;
+        public static string admin="";
 
 
         public MainWindow()
         {
             InitializeComponent();
-            
+            admin dialog = new admin();
+            dialog.ShowDialog();
+            string connetionString;
+            string server = "localhost";
+            string database = "inventoryapp";
+            string uid = "root";
+            string password = "";
+            MySql.Data.MySqlClient.MySqlConnection connection;
+            connetionString = "SERVER=" + server + ";" + "DATABASE=" +
+ database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+
+
+            connection = new MySql.Data.MySqlClient.MySqlConnection(connetionString);
+            connection.Open();
+            MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand("SELECT * FROM password WHERE Number=1" , connection);
+
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataTable table = new DataTable("myTable");
+            da.Fill(table);
+
+            foreach (DataRow row in table.Rows)
+            {
+                if (!admin.Equals( row.ItemArray[1].ToString()))
+                {
+                    Admintab.Visibility = System.Windows.Visibility.Collapsed;
+                }
+            }
         }
 
         private void OnMouseLeftButtonDown(object sender, RoutedEventArgs e)
@@ -185,7 +212,7 @@ namespace RibbonWin
                 {
                     string connetionString;
                     string server = "localhost";
-                    string database = "test";
+                    string database = "inventoryapp";
                     string uid = "root";
                     string password = "";
                     MySql.Data.MySqlClient.MySqlConnection connection;
@@ -257,7 +284,7 @@ namespace RibbonWin
             string entryno = Update.entryno;
             string connetionString;
             string server = "localhost";
-            string database = "test";
+            string database = "inventoryapp";
             string uid = "root";
             string password = "";
             MySql.Data.MySqlClient.MySqlConnection connection;
@@ -359,14 +386,13 @@ namespace RibbonWin
             graph.DrawString("Quantity : " + Quantity, font, XBrushes.Black, new XPoint(80, 400));
             graph.DrawString("No of Bags : " + Numberbags, font, XBrushes.Black, new XPoint(80, 420));
             graph.DrawString("Rate Per Qunintal : " + RatePerQuintal, font, XBrushes.Black, new XPoint(80, 440));
-            graph.DrawString("Commission : " + Commission, font, XBrushes.Black, new XPoint(80, 460));
-            graph.DrawString("Standard Charges : " + StandarCharges, font, XBrushes.Black, new XPoint(80, 480));
-            graph.DrawString("Subtotal : " , font, XBrushes.Black, new XPoint(80, 500));
+            graph.DrawString("Subtotal : " + Commission, font, XBrushes.Black, new XPoint(80, 460));
+            graph.DrawString("Transaction charges : " + StandarCharges, font, XBrushes.Black, new XPoint(320, 480));
             graph.DrawString("FM : " + FM, font, XBrushes.Black, new XPoint(320, 400));
             graph.DrawString("DM : " + DM, font, XBrushes.Black, new XPoint(320, 420));
             graph.DrawString("MS : " + MS, font, XBrushes.Black, new XPoint(320, 440));
-            graph.DrawString("Other Charges : " + OtherCharges, font, XBrushes.Black, new XPoint(320, 460));
-            graph.DrawString("Total Deduction : ", font, XBrushes.Black, new XPoint(320, 480));
+            graph.DrawString("Quality Deduction : " + OtherCharges, font, XBrushes.Black, new XPoint(320, 460));
+            
 
             graph.DrawString("Total Amount : " + TotalAmt, font, XBrushes.Black, new XPoint(80, 590));
             graph.DrawString("Payment Method : " + PaymentMethod, font, XBrushes.Black, new XPoint(80, 610));
@@ -375,7 +401,7 @@ namespace RibbonWin
             graph.DrawString("Remarks : " + remark, font, XBrushes.Black, new XPoint(80, 670));
             graph.DrawString("Total Pending : " + Pending, font, XBrushes.Black, new XPoint(320, 590));
             graph.DrawString("Signature/Stamp : " , font, XBrushes.Black, new XPoint(80, 740));
-
+            
             // graph.DrawImage(logo,new XPoint(pdfPage.Width/2.6, 10));
             graph.DrawRectangle(XPens.Black, new XRect(new XPoint(50, 200), new XPoint(550, 350)));
             graph.DrawRectangle(XPens.Black, new XRect(new XPoint(50, 370), new XPoint(550, 550)));
@@ -393,6 +419,18 @@ namespace RibbonWin
                 pdf.Save(_SD.FileName);
                 Process.Start(_SD.FileName);
             }
+        }
+
+        private void on_pass(object sender, RoutedEventArgs e)
+        {
+            RibbonWin.changepass dialog = new RibbonWin.changepass();
+            dialog.ShowDialog();
+            UIPanel.Children.Remove(EmployeFrom);
+            UIPanel.Children.Remove(view);
+            UIPanel.Children.Remove(up);
+            up = null;
+            EmployeFrom = null;
+            view = null;
         }
     }
 }

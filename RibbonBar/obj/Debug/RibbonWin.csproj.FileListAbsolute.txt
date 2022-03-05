@@ -251,3 +251,7 @@ C:\Users\mohit\Downloads\RibbonWin\RibbonBar\bin\Debug\PdfSharp.xml
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\bin\Debug\PdfSharp.Charting.xml
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\bin\Debug\de\PdfSharp.resources.dll
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\bin\Debug\de\PdfSharp.Charting.resources.dll
+C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\admin.baml
+C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\admin.g.cs
+C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\changepass.baml
+C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\changepass.g.cs

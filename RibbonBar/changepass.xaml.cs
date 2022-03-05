@@ -15,9 +15,9 @@ using System.Windows.Shapes;
 namespace RibbonWin
 {
     /// <summary>
-    /// Interaction logic for Window2.xaml
+    /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class Window2 : Window
+    public partial class changepass : Window
     {
         string connetionString;
         string server = "localhost";
@@ -26,14 +26,14 @@ namespace RibbonWin
         string password = "";
         MySql.Data.MySqlClient.MySqlConnection connection;
         string connectionString;
-        public Window2()
+        public changepass()
         {
             InitializeComponent();
         }
 
         private void btnDialogOk_Click(object sender, RoutedEventArgs e)
         {
-            string query2 = "INSERT INTO `partner` (`Name`, `Email`, `Id`, `Phone`) VALUES ('" + ptrnametxt.Text+ "', '" + ptremailrtxt.Text+ "', NULL, '" + prtnumbertxt.Text + "')";
+            string query2 = "UPDATE `password` set Password='" + txtAnswer.Text + "'" + " WHERE Number=1";
             //open connection
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
@@ -51,6 +51,7 @@ namespace RibbonWin
             connection.Close();
             MessageBox.Show("Entry Saved Sucessfully");
             this.Close();
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

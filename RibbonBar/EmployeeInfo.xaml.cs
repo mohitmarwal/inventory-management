@@ -27,7 +27,7 @@ namespace RibbonWin
 
 
         string server = "localhost";
-        string database = "test";
+        string database = "inventoryapp";
         string uid = "root";
         string password = "";
         MySql.Data.MySqlClient.MySqlConnection connection;
@@ -44,6 +44,25 @@ namespace RibbonWin
             Fillemail();
             date.Text = DateTime.Now.ToString("dd-MM-yyyy");
             paystatus.SelectedIndex = 0;
+
+            if (paymentmethod.Text == "NEFT")
+            {
+                stdcharges.Text = "59";
+
+            }
+            else if (paymentmethod.Text == "RTGS")
+            {
+                stdcharges.Text = "59";
+            }
+            else if (paymentmethod.Text == "TRF")
+            {
+                stdcharges.Text = "59";
+            }
+            else if (paymentmethod.Text == "CASH")
+            {
+                stdcharges.Text = "" + long.Parse(TotalAmt.Text) * 0.05;
+
+            }
 
         }
         private void Fillbag()
@@ -271,16 +290,15 @@ namespace RibbonWin
                 String Quantity = Quan.Text;
                 String BagTpye = bagtype.Text;
                 String RatePerQuintal = quintalrate.Text;
-                String Commission = comi.Text;
-                String StandarCharges = stdcharges.Text;
-                String OtherCharges = othercharges.Text;
+                String Commission = "" + (double.Parse(RatePerQuintal) * double.Parse(Quantity));
+                String transactiondecution = stdcharges.Text;
                 String PaymentMethod = paymentmethod.Text;
                 String FM = fm.Text;
                 String DM = dm.Text;
                 String MS = ms.Text;
-                String TotalAmount = "" + (long.Parse(RatePerQuintal) * long.Parse(Quantity)) + long.Parse(Commission) + long.Parse(StandarCharges) + long.Parse(OtherCharges);
-
-                string query2 = "INSERT INTO `inventory` (`Billno`, `PartnerName`, `MobileNumber`, `EmailId`, `Date`, `DealerSign`, `ProcurerSign`, `Transportation`, `GoodType`, `PlantName` , `Quantity`, `BagType`, `NoBags` , `RatePerQuintal`, `Comission`, `StandardCharges`, `OtherCharges`, `FM`, `DM`, `MS`, `TotalAmount`, `PaymentMethod`, `PaymentStatus`, `HandOver`, `Remarks`, `Amount Pending`) VALUES ('" + billno.Text + "', '" + PartnerName + "', '" + MobileNumber + "', '" + EmailId + "', '" + Date + "', '" + DealerSign + "', '" + ProcurerSign + "', '" + Transportation + "', '" + GoodType + "', '" + Plant.Text + "', '" + Quantity + "', '" + BagTpye + "', '" + Numberbags.Text + "', '" + RatePerQuintal + "', '" + Commission + "', '" + StandarCharges + "', '" + OtherCharges + "', '" + FM + "', '" + DM + "', '" + MS + "', '" + TotalAmount + "', '" + PaymentMethod + "', '" + paystatus.Text + "','" + payreceived.Text + "', '" + remark.Text + "', '" + amountpending.Text + "')";
+                String stddeduction = "" + (double.Parse(othercharges.Text));
+                String TotalAmount = "" + (double.Parse(Commission) - ((double.Parse(stdcharges.Text)) + double.Parse(othercharges.Text)));
+                string query2 = "INSERT INTO `inventory` (`Billno`, `PartnerName`, `MobileNumber`, `EmailId`, `Date`, `DealerSign`, `ProcurerSign`, `Transportation`, `GoodType`, `PlantName` , `Quantity`, `BagType`, `NoBags` , `RatePerQuintal`, `Subtotal`, `TransactionCharges`, `QualityDeduction`, `FM`, `DM`, `MS`, `TotalAmount`, `PaymentMethod`, `PaymentStatus`, `HandOver`, `Remarks`, `Amount Pending`) VALUES ('" + billno.Text + "', '" + PartnerName + "', '" + MobileNumber + "', '" + EmailId + "', '" + Date + "', '" + DealerSign + "', '" + ProcurerSign + "', '" + Transportation + "', '" + GoodType + "', '" + Plant.Text + "', '" + Quantity + "', '" + BagTpye + "', '" + Numberbags.Text + "', '" + RatePerQuintal + "', '" + Commission + "', '" + transactiondecution + "', '" + stddeduction + "', '" + FM + "', '" + DM + "', '" + MS + "', '" + TotalAmount + "', '" + PaymentMethod + "', '" + paystatus.Text + "','" + payreceived.Text + "', '" + remark.Text + "', '" + amountpending.Text + "')";
                 //open connection
                 connectionString = "SERVER=" + server + ";" + "DATABASE=" +
                 database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
@@ -323,30 +341,88 @@ namespace RibbonWin
         private void onpending(object sender, RoutedEventArgs e)
         {
             try {
-                amountpending.Text = ""+(long.Parse(TotalAmt.Text) - long.Parse(payreceived.Text));
+                amountpending.Text = ""+(double.Parse(TotalAmt.Text) - double.Parse(payreceived.Text));
             }catch(Exception ex){
                 string bug = ex.ToString();
                 amountpending.Text = "";
             }
             }
 
-        private void totalcalc(object sender, TextChangedEventArgs e)
+        async private void totalcalc(object sender, TextChangedEventArgs e)
         {
+            await Task.Delay(10);
             try
             {
+                if (paymentmethod.Text == "NEFT")
+                {
+                    stdcharges.Text = "59";
+
+                }
+                else if (paymentmethod.Text == "RTGS")
+                {
+                    stdcharges.Text = "59";
+                }
+                else if (paymentmethod.Text == "TRF")
+                {
+                    stdcharges.Text = "59";
+                }
+                else if (paymentmethod.Text == "CASH")
+                {
+                    stdcharges.Text = "" + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) * 18 / 100));
+
+
+                }
+                String DealerSign = dealer.Text;
+                String ProcurerSign = procurer.Text;
+                String Transportation = vehicleno.Text;
+                String GoodType = goodtype.Text;
                 String Quantity = Quan.Text;
                 String BagTpye = bagtype.Text;
                 String RatePerQuintal = quintalrate.Text;
-                String Commission = comi.Text;
-                String StandarCharges = stdcharges.Text;
-                String OtherCharges = othercharges.Text;
+                String Commission = "" + (double.Parse(RatePerQuintal) * double.Parse(Quantity));
+                String transactiondecution = stdcharges.Text;
+                String PaymentMethod = paymentmethod.Text;
                 String FM = fm.Text;
                 String DM = dm.Text;
                 String MS = ms.Text;
-                String TotalAmount = "" + (long.Parse(RatePerQuintal) * long.Parse(Quantity)) + long.Parse(Commission) + long.Parse(StandarCharges) + long.Parse(OtherCharges);
-            TotalAmt.Text = TotalAmount;
+                String stddeduction = "" + (double.Parse(othercharges.Text));
+                String TotalAmount = "" + (double.Parse(Commission) - ((double.Parse(stdcharges.Text)) + double.Parse(othercharges.Text)));
+                TotalAmt.Text = TotalAmount;
+                //  othercharges.Text = stddeduction;
+                comi.Text = Commission;
             }
             catch (Exception ex) { TotalAmt.Text = ""; }
+
+        }
+
+        async private void onpaymentchange(object sender, SelectionChangedEventArgs e)
+        {
+            await Task.Delay(10);
+            try
+            {
+                await Task.Delay(10);
+
+                if (paymentmethod.Text == "NEFT")
+                {
+                    stdcharges.Text = "59";
+
+                }
+                else if (paymentmethod.Text == "RTGS")
+                {
+                    stdcharges.Text = "59";
+                }
+                else if (paymentmethod.Text == "TRF")
+                {
+                    stdcharges.Text = "59";
+                }
+                else if (paymentmethod.Text == "CASH")
+                {
+                    stdcharges.Text = "" + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) * 18 / 100));
+
+
+                }
+            }
+            catch (Exception ex) { };
 
         }
     }

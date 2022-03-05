@@ -22,7 +22,7 @@ namespace RibbonWin
 
         string connetionString;
         string server = "localhost";
-        string database = "test";
+        string database = "inventoryapp";
         string uid = "root";
         string password = "";
         MySql.Data.MySqlClient.MySqlConnection connection;

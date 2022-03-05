@@ -30,7 +30,7 @@
             </Ribbon.ApplicationMenu>
             
             <!-- Ribbon Tab #1: Home -->
-            <RibbonTab Header="General" KeyTip="H" >
+            <RibbonTab x:Name="ribbontab" Header="General" KeyTip="H" >
                 
                 <!-- Home  group-->
                 <RibbonGroup x:Name="ClipboardGroup" Header="General">
@@ -47,7 +47,7 @@
             </RibbonTab>
             
             <!-- Ribbon Tab #2: Launch -->
-            <RibbonTab Header="Admin" KeyTip="I" >
+            <RibbonTab x:Name="Admintab" Header="Admin" KeyTip="I" >
                 <!-- Launch/Applications group-->
                 <RibbonGroup x:Name="ClipboardGroup1" Header="Admin">
                 <RibbonApplicationMenuItem ImageSource="Images\add.png" Header="Add Partner"  Click="partner_click" KeyTip="V" >
@@ -61,6 +61,8 @@
                     <RibbonApplicationMenuItem ImageSource="Images\add.png" Header="Add Payment Method"  Click="onpaymentclick" KeyTip="V" >
                     </RibbonApplicationMenuItem>
                     <RibbonApplicationMenuItem ImageSource="Images\save.png" Header="Export Report"  Click="on_export" KeyTip="V" >
+                    </RibbonApplicationMenuItem>
+                    <RibbonApplicationMenuItem ImageSource="Images\redo.png" Header="Change Admin Password"  Click="on_pass" KeyTip="V" >
                     </RibbonApplicationMenuItem>
                 </RibbonGroup>
             </RibbonTab>

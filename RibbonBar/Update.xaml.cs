@@ -28,7 +28,7 @@ namespace RibbonWin
         public static string entryno;
         string connetionString;
         string server = "localhost";
-        string database = "test";
+        string database = "inventoryapp";
         string uid = "root";
         string password = "";
         MySql.Data.MySqlClient.MySqlConnection connection;
@@ -44,6 +44,63 @@ namespace RibbonWin
             FillPaymentMethod();
             UdateForm();
 
+        }
+         private void Fillemail()
+        {
+            connectionString = "SERVER=" + server + ";" + "DATABASE=" +
+             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+
+
+            connection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
+            connection.Open();
+            MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand("select Email From partner WHERE Name='" + Partnername.Text + "'", connection);
+
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataTable table = new DataTable("myTable");
+            da.Fill(table);
+
+            foreach (DataRow row in table.Rows)
+            {
+                for (int i = 0; i < row.ItemArray.Length; i++)
+                {
+                    email.Text = row.ItemArray[i].ToString();
+
+                }
+            }
+            
+            connection.Close();
+        }
+
+        private void Fillphone()
+        {
+            connectionString = "SERVER=" + server + ";" + "DATABASE=" +
+             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+
+
+            connection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
+            connection.Open();
+            MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand("select Phone From partner WHERE Name='" + Partnername.Text+ "'", connection);
+
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataTable table = new DataTable("myTable");
+            da.Fill(table);
+
+            foreach (DataRow row in table.Rows)
+            {
+                for (int i = 0; i < row.ItemArray.Length; i++)
+                {
+                    mobilenumber.Text= row.ItemArray[i].ToString();
+
+                }
+            }
+            bagtype.SelectedIndex = 0;
+            connection.Close();
+        }
+        async private void Onpartnerchange(object sender, SelectionChangedEventArgs e)
+        {
+            await Task.Delay(10);
+            Fillemail();
+            Fillphone();
         }
         private void UdateForm()
         {
@@ -255,25 +312,30 @@ namespace RibbonWin
             {
                 Date = date.SelectedDate.Value.Date.ToShortDateString();
             }
-           
-          String DealerSign = dealer.Text;
-          String ProcurerSign = procurer.Text;
-          String Transportation = vehicleno.Text;
-          String GoodType = goodtype.Text;
-          String Quantity = Quan.Text;
-          String BagTpye = bagtype.Text;
-          String RatePerQuintal = quintalrate.Text;
-          String Commission = comi.Text;
-          String StandarCharges = stdcharges.Text;
-          String OtherCharges = othercharges.Text;
-          String PaymentMethod = paymentmethod.Text;
+
+            String DealerSign = dealer.Text;
+            String ProcurerSign = procurer.Text;
+            String Transportation = vehicleno.Text;
+            String GoodType = goodtype.Text;
+            String Quantity = Quan.Text;
+            String BagTpye = bagtype.Text;
+            String RatePerQuintal = quintalrate.Text;
+            String Commission = "" + (double.Parse(RatePerQuintal) * double.Parse(Quantity));
+            String transactiondecution = stdcharges.Text;
+            String PaymentMethod = paymentmethod.Text;
+            String FM = fm.Text;
+            String DM = dm.Text;
+            String MS = ms.Text;
+            String stddeduction = "" + (double.Parse(othercharges.Text));
+            String TotalAmount = "" + (double.Parse(Commission) - ((double.Parse(stdcharges.Text)) + double.Parse(othercharges.Text)));
+
             if (paystatus.SelectedIndex!=-1)
             {
                 status = paystatus.Text;
             }
-          String TotalAmount = ""+ (Int16.Parse(RatePerQuintal)* Int16.Parse(Quantity)) + Int16.Parse(Commission) + Int16.Parse(StandarCharges) + Int16.Parse(OtherCharges);
 
-            string query2 = "UPDATE `inventory` set PartnerName='" + Partnername.Text + "', MobileNumber='" + mobilenumber.Text + "', Billno='" + billno.Text + "', EmailId='" + email.Text + "',  Date='" + Date + "', DealerSign='" + dealer.Text + "', ProcurerSign='" + procurer.Text + "', Transportation='" + vehicleno.Text + "', GoodType='" + goodtype.Text + "', PlantName='" + Plant.Text + "', Quantity='" + Quan.Text + "', BagType='" + bagtype.Text + "', NoBags='" + Numberbags.Text + "', RatePerQuintal='" + quintalrate.Text + "', Comission='" + comi.Text + "', StandardCharges='" + stdcharges.Text + "', OtherCharges='" + othercharges.Text + "', TotalAmount='" + TotalAmt.Text + "', PaymentMethod='" + paymentmethod.Text + "', PaymentStatus='" + status + "', HandOver='" + payreceived.Text + "', Remarks='" + remark.Text + "', `Amount Pending`='" + amountpending.Text+ "' WHERE Entry_No=" + entryno;
+
+            string query2 = "UPDATE `inventory` set PartnerName='" + Partnername.Text + "', MobileNumber='" + mobilenumber.Text + "', Billno='" + billno.Text + "', EmailId='" + email.Text + "',  Date='" + Date + "', DealerSign='" + dealer.Text + "', ProcurerSign='" + procurer.Text + "', Transportation='" + vehicleno.Text + "', GoodType='" + goodtype.Text + "', PlantName='" + Plant.Text + "', Quantity='" + Quan.Text + "', BagType='" + bagtype.Text + "', NoBags='" + Numberbags.Text + "', RatePerQuintal='" + quintalrate.Text + "', Subtotal='" + comi.Text + "', TransactionCharges='" + stdcharges.Text + "', QualityDeduction='" + othercharges.Text + "', TotalAmount='" + TotalAmt.Text + "', PaymentMethod='" + paymentmethod.Text + "', PaymentStatus='" + status + "', HandOver='" + payreceived.Text + "', Remarks='" + remark.Text + "', `Amount Pending`='" + amountpending.Text+ "' WHERE Billno=" + entryno;
             //open connection
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
@@ -299,21 +361,48 @@ namespace RibbonWin
             e.Handled = regex.IsMatch(e.Text);
         }
 
-        private void totalcalc(object sender, TextChangedEventArgs e)
+        async private void totalcalc(object sender, TextChangedEventArgs e)
         {
+            await Task.Delay(10);
             try
             {
+                if (paymentmethod.Text == "NEFT")
+                {
+                    stdcharges.Text = "59";
+
+                }
+                else if (paymentmethod.Text == "RTGS")
+                {
+                    stdcharges.Text = "59";
+                }
+                else if (paymentmethod.Text == "TRF")
+                {
+                    stdcharges.Text = "59";
+                }
+                else if (paymentmethod.Text == "CASH")
+                {
+                    stdcharges.Text = "" + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) * 18 / 100));
+
+
+                }
+                String DealerSign = dealer.Text;
+                String ProcurerSign = procurer.Text;
+                String Transportation = vehicleno.Text;
+                String GoodType = goodtype.Text;
                 String Quantity = Quan.Text;
                 String BagTpye = bagtype.Text;
                 String RatePerQuintal = quintalrate.Text;
-                String Commission = comi.Text;
-                String StandarCharges = stdcharges.Text;
-                String OtherCharges = othercharges.Text;
+                String Commission = "" + (double.Parse(RatePerQuintal) * double.Parse(Quantity));
+                String transactiondecution = stdcharges.Text;
+                String PaymentMethod = paymentmethod.Text;
                 String FM = fm.Text;
                 String DM = dm.Text;
                 String MS = ms.Text;
-                String TotalAmount = "" + (long.Parse(RatePerQuintal) * long.Parse(Quantity)) + long.Parse(Commission) + long.Parse(StandarCharges) + long.Parse(OtherCharges);
+                String stddeduction = "" + (double.Parse(othercharges.Text));
+                String TotalAmount = "" + (double.Parse(Commission) - ((double.Parse(stdcharges.Text)) + double.Parse(othercharges.Text)));
                 TotalAmt.Text = TotalAmount;
+              //  othercharges.Text = stddeduction;
+                comi.Text = Commission;
             }
             catch (Exception ex) { TotalAmt.Text = ""; }
 
@@ -323,13 +412,42 @@ namespace RibbonWin
         {
             try
             {
-                amountpending.Text = "" + (long.Parse(TotalAmt.Text) - long.Parse(payreceived.Text));
+                amountpending.Text = "" + (double.Parse(TotalAmt.Text) - double.Parse(payreceived.Text));
             }
             catch (Exception ex)
             {
                 string bug = ex.ToString();
                 amountpending.Text = "";
             }
+        }
+
+        async private void onpaymentchange(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                await Task.Delay(10);
+
+                if (paymentmethod.Text == "NEFT")
+                {
+                    stdcharges.Text = "59";
+
+                }
+                else if (paymentmethod.Text == "RTGS")
+                {
+                    stdcharges.Text = "59";
+                }
+                else if (paymentmethod.Text == "TRF")
+                {
+                    stdcharges.Text = "59";
+                }
+                else if (paymentmethod.Text == "CASH")
+                {
+                    stdcharges.Text = "" + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) * 18 / 100));
+
+
+                }
+            }
+            catch (Exception ex) { };
         }
     }
 }

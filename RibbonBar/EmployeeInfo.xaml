@@ -68,11 +68,11 @@
             <Label Content="Number OF Bag" Grid.Column="0" Grid.Row="12"  Margin="5"></Label>
             <Label Content="Quantity" Grid.Column="0" Grid.Row="13"  Margin="5"></Label>
             <Label Content="Rate Per Quintal" Grid.Column="0" Grid.Row="14" Margin="5"></Label>
-            <Label Content="Comission" Grid.Column="0" Grid.Row="15" Margin="5"></Label>
+            <Label Content="Sub Total" Grid.Column="0" Grid.Row="15" Margin="5"></Label>
             <Label Content="FM :" Grid.Column="3" Grid.Row="15" Margin="5"></Label>
-            <Label Content="Standard Charges" Grid.Column="0" Grid.Row="16"  Margin="5"></Label>
+            <Label Content="Transaction charges" Grid.Column="0" Grid.Row="16"  Margin="5"></Label>
             <Label Content="DM" Grid.Column="3" Grid.Row="16"  Margin="5"></Label>
-            <Label Content="Other charges " Grid.Column="0" Grid.Row="17"  Margin="5"></Label>
+            <Label Content="Quality Deduction " Grid.Column="0" Grid.Row="17"  Margin="5"></Label>
             <Label Content="MS " Grid.Column="3" Grid.Row="17"  Margin="5"></Label>
             <Label Content="Total Amount " Grid.Column="0" Grid.Row="18" Margin="5"></Label>
             <Label Content="Payment Method" Grid.Column="0" Grid.Row="19"  Margin="5"></Label>
@@ -95,17 +95,17 @@
             <TextBox Name="Numberbags" TextChanged="totalcalc" PreviewTextInput="NumberValidationTextBox" Grid.Column="1" Grid.Row="12" Margin="5" Grid.ColumnSpan="2"></TextBox>
             <TextBox Name="Quan" TextChanged="totalcalc" PreviewTextInput="NumberValidationTextBox" Grid.Column="1" Grid.Row="13" Margin="5" Grid.ColumnSpan="2"></TextBox>
             <TextBox Name="quintalrate" TextChanged="totalcalc" PreviewTextInput="NumberValidationTextBox" Grid.Column="1" Grid.Row="14" Margin="5" Grid.ColumnSpan="2"></TextBox>
-            <TextBox Name="comi" TextChanged="totalcalc" PreviewTextInput="NumberValidationTextBox" Grid.Column="1" Grid.Row="15" Margin="5" Grid.ColumnSpan="2"></TextBox>
+            <TextBox Name="comi"  TextChanged="totalcalc" PreviewTextInput="NumberValidationTextBox" Grid.Column="1" Grid.Row="15" Margin="5" Grid.ColumnSpan="2"></TextBox>
             <TextBox Name="fm" TextChanged="totalcalc" PreviewTextInput="NumberValidationTextBox" Grid.Column="3" Grid.Row="15" Margin="49,5,10,5"/>
             <TextBox Name="stdcharges" TextChanged="totalcalc" PreviewTextInput="NumberValidationTextBox" Grid.Column="1" Grid.Row="16" Margin="5" Grid.ColumnSpan="2"></TextBox>
             <TextBox Name="dm" TextChanged="totalcalc" PreviewTextInput="NumberValidationTextBox" Grid.Column="3" Grid.Row="16" Margin="49,5,10,5"/>
             <TextBox Name="othercharges" TextChanged="totalcalc"  PreviewTextInput="NumberValidationTextBox" Grid.Column="1" Grid.Row="17" Margin="5" Grid.ColumnSpan="2"></TextBox>
             <TextBox Name="ms" PreviewTextInput="NumberValidationTextBox" Grid.Column="3" Grid.Row="17" Margin="49,5,10,5" TextChanged="totalcalc"/>
-            <TextBox Name="TotalAmt" Grid.Column="1" Grid.Row="18" Margin="5" Grid.ColumnSpan="2" IsReadOnly = "True"></TextBox>
-            <ComboBox Name="paymentmethod" Grid.Row="19" Grid.Column="1" Margin="5,10,5,0"  Grid.ColumnSpan="2"/>
+            <TextBox Name="TotalAmt" Grid.Column="1" Grid.Row="18" Margin="5" Grid.ColumnSpan="2" ></TextBox>
+            <ComboBox Name="paymentmethod" Grid.Row="19" Grid.Column="1" Margin="5,10,5,0"   SelectionChanged="onpaymentchange" Grid.ColumnSpan="2"/>
             <ComboBox Grid.Column="1" Grid.Row="20" Margin="5,5,0,0" Grid.ColumnSpan="2" Name="paystatus" HorizontalAlignment="Left" VerticalAlignment="Top" Width="247" Height="30">
-                <ComboBoxItem Content="Pending"></ComboBoxItem>
-                <ComboBoxItem Content="Complete"></ComboBoxItem>
+                <ComboBoxItem Name="Pending" Content="Pending"></ComboBoxItem>
+                <ComboBoxItem Name="Complete" Content="Complete"></ComboBoxItem>
             </ComboBox>
             <TextBox Name="payreceived"  PreviewTextInput="NumberValidationTextBox" Grid.Column="1" Grid.Row="21" Margin="5" TextChanged="onpending" Grid.ColumnSpan="2"></TextBox>
             <TextBox Name="remark"  Grid.Column="1" Grid.Row="22" Margin="5" Grid.ColumnSpan="2"></TextBox>
