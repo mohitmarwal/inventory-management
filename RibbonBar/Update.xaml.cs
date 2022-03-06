@@ -392,16 +392,16 @@ namespace RibbonWin
                 String Quantity = Quan.Text;
                 String BagTpye = bagtype.Text;
                 String RatePerQuintal = quintalrate.Text;
-                String Commission = "" + (double.Parse(RatePerQuintal) * double.Parse(Quantity));
+                String Commission = "" + String.Format("{0:0.00}", (double.Parse(RatePerQuintal) * double.Parse(Quantity)));
                 String transactiondecution = stdcharges.Text;
                 String PaymentMethod = paymentmethod.Text;
                 String FM = fm.Text;
                 String DM = dm.Text;
                 String MS = ms.Text;
-                String stddeduction = "" + (double.Parse(othercharges.Text));
-                String TotalAmount = "" + (double.Parse(Commission) - ((double.Parse(stdcharges.Text)) + double.Parse(othercharges.Text)));
+                String stddeduction = "" + String.Format("{0:0.00}", (double.Parse(othercharges.Text)));
+                String TotalAmount = "" + String.Format("{0:0.00}", (double.Parse(Commission) - ((double.Parse(stdcharges.Text)) + double.Parse(othercharges.Text))));
                 TotalAmt.Text = TotalAmount;
-              //  othercharges.Text = stddeduction;
+                //  othercharges.Text = stddeduction;
                 comi.Text = Commission;
             }
             catch (Exception ex) { TotalAmt.Text = ""; }
@@ -442,7 +442,7 @@ namespace RibbonWin
                 }
                 else if (paymentmethod.Text == "CASH")
                 {
-                    stdcharges.Text = "" + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) * 18 / 100));
+                    stdcharges.Text = String.Format("{0:0.00}", (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) * 18 / 100))); stdcharges.Text = "" + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) * 18 / 100));
 
 
                 }

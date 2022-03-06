@@ -3,6 +3,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -249,8 +250,13 @@ namespace RibbonWin
 
         private Boolean checkbill()
         {
+            if(billno.Text.Equals(""))
+            {
+                MessageBox.Show("Please enter bill no.");
+                return false;
+            }
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
-             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+            database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
 
 
             connection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
@@ -272,58 +278,66 @@ namespace RibbonWin
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (checkbill())
+            try
             {
-                String PartnerName = Partnername.Text;
-                String MobileNumber = mobilenumber.Text;
-                String EmailId = email.Text;
-                String Date = "";
-                try
+                if (checkbill())
                 {
-                    Date = date.SelectedDate.Value.Date.ToShortDateString();
+                    String PartnerName = Partnername.Text;
+                    String MobileNumber = mobilenumber.Text;
+                    String EmailId = email.Text;
+                    String Date = "";
+                    try
+                    {
+                        Date = date.SelectedDate.Value.Date.ToShortDateString();
+                    }
+                    catch (Exception ex) { MessageBox.Show("Please enter Proper Date"); return; }
+                    String DealerSign = dealer.Text;
+                    String ProcurerSign = procurer.Text;
+                    String Transportation = vehicleno.Text;
+                    String GoodType = goodtype.Text;
+                    String Quantity = Quan.Text;
+                    String BagTpye = bagtype.Text;
+                    String RatePerQuintal = quintalrate.Text;
+                    String Commission = "" + String.Format("{0:0.00}", (double.Parse(RatePerQuintal) * double.Parse(Quantity)));
+                    String transactiondecution = stdcharges.Text;
+                    String PaymentMethod = paymentmethod.Text;
+                    String FM = fm.Text;
+                    String DM = dm.Text;
+                    String MS = ms.Text;
+                    String stddeduction = "" + String.Format("{0:0.00}", (double.Parse(othercharges.Text)));
+                    String TotalAmount = "" + String.Format("{0:0.00}", (double.Parse(Commission) - ((double.Parse(stdcharges.Text)) + double.Parse(othercharges.Text))));
+                  
+                    string query2 = "INSERT INTO `inventory` (`Billno`, `PartnerName`, `MobileNumber`, `EmailId`, `Date`, `DealerSign`, `ProcurerSign`, `Transportation`, `GoodType`, `PlantName` , `Quantity`, `BagType`, `NoBags` , `RatePerQuintal`, `Subtotal`, `TransactionCharges`, `QualityDeduction`, `FM`, `DM`, `MS`, `TotalAmount`, `PaymentMethod`, `PaymentStatus`, `HandOver`, `Remarks`, `Amount Pending`) VALUES ('" + billno.Text + "', '" + PartnerName + "', '" + MobileNumber + "', '" + EmailId + "', '" + Date + "', '" + DealerSign + "', '" + ProcurerSign + "', '" + Transportation + "', '" + GoodType + "', '" + Plant.Text + "', '" + Quantity + "', '" + BagTpye + "', '" + Numberbags.Text + "', '" + RatePerQuintal + "', '" + Commission + "', '" + transactiondecution + "', '" + stddeduction + "', '" + FM + "', '" + DM + "', '" + MS + "', '" + TotalAmount + "', '" + PaymentMethod + "', '" + paystatus.Text + "','" + payreceived.Text + "', '" + remark.Text + "', '" + amountpending.Text + "')";
+                    //open connection
+                    connectionString = "SERVER=" + server + ";" + "DATABASE=" +
+                    database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+
+
+                    connection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
+                    connection.Open();
+
+                    //create command and assign the query and connection from the constructor
+                    MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand(query2, connection);
+
+
+                    //Execute command
+                    cmd.ExecuteNonQuery();
+                    connection.Close();
+                    MessageBox.Show("Entry Saved Sucessfully");
+                    this.Opacity = 0;
                 }
-                catch (Exception ex) { MessageBox.Show("Please enter Proper Date"); return; }
-                String DealerSign = dealer.Text;
-                String ProcurerSign = procurer.Text;
-                String Transportation = vehicleno.Text;
-                String GoodType = goodtype.Text;
-                String Quantity = Quan.Text;
-                String BagTpye = bagtype.Text;
-                String RatePerQuintal = quintalrate.Text;
-                String Commission = "" + (double.Parse(RatePerQuintal) * double.Parse(Quantity));
-                String transactiondecution = stdcharges.Text;
-                String PaymentMethod = paymentmethod.Text;
-                String FM = fm.Text;
-                String DM = dm.Text;
-                String MS = ms.Text;
-                String stddeduction = "" + (double.Parse(othercharges.Text));
-                String TotalAmount = "" + (double.Parse(Commission) - ((double.Parse(stdcharges.Text)) + double.Parse(othercharges.Text)));
-                string query2 = "INSERT INTO `inventory` (`Billno`, `PartnerName`, `MobileNumber`, `EmailId`, `Date`, `DealerSign`, `ProcurerSign`, `Transportation`, `GoodType`, `PlantName` , `Quantity`, `BagType`, `NoBags` , `RatePerQuintal`, `Subtotal`, `TransactionCharges`, `QualityDeduction`, `FM`, `DM`, `MS`, `TotalAmount`, `PaymentMethod`, `PaymentStatus`, `HandOver`, `Remarks`, `Amount Pending`) VALUES ('" + billno.Text + "', '" + PartnerName + "', '" + MobileNumber + "', '" + EmailId + "', '" + Date + "', '" + DealerSign + "', '" + ProcurerSign + "', '" + Transportation + "', '" + GoodType + "', '" + Plant.Text + "', '" + Quantity + "', '" + BagTpye + "', '" + Numberbags.Text + "', '" + RatePerQuintal + "', '" + Commission + "', '" + transactiondecution + "', '" + stddeduction + "', '" + FM + "', '" + DM + "', '" + MS + "', '" + TotalAmount + "', '" + PaymentMethod + "', '" + paystatus.Text + "','" + payreceived.Text + "', '" + remark.Text + "', '" + amountpending.Text + "')";
-                //open connection
-                connectionString = "SERVER=" + server + ";" + "DATABASE=" +
-                database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
-
-
-                connection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
-                connection.Open();
-
-                //create command and assign the query and connection from the constructor
-                MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand(query2, connection);
-
-
-                //Execute command
-                cmd.ExecuteNonQuery();
-                connection.Close();
-                MessageBox.Show("Entry Saved Sucessfully");
-                this.Opacity = 0;
+            }
+            catch (Exception ex) {
+                 File.WriteAllText("Log.txt", ex.ToString());
             }
         }
 
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
-            Regex regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
+            Regex regex = new Regex("^[.][0-9]+$|^[0-9]*[.]{0,1}[0-9]*$");
+            e.Handled = !regex.IsMatch((sender as TextBox).Text.Insert((sender as TextBox).SelectionStart, e.Text));
+
         }
 
         private void Partnername_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -368,7 +382,7 @@ namespace RibbonWin
                 }
                 else if (paymentmethod.Text == "CASH")
                 {
-                    stdcharges.Text = "" + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) * 18 / 100));
+                    stdcharges.Text = String.Format("{0:0.00}", (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) * 18 / 100)));
 
 
                 }
@@ -379,14 +393,14 @@ namespace RibbonWin
                 String Quantity = Quan.Text;
                 String BagTpye = bagtype.Text;
                 String RatePerQuintal = quintalrate.Text;
-                String Commission = "" + (double.Parse(RatePerQuintal) * double.Parse(Quantity));
+                String Commission = "" + String.Format("{0:0.00}",(double.Parse(RatePerQuintal) * double.Parse(Quantity)));
                 String transactiondecution = stdcharges.Text;
                 String PaymentMethod = paymentmethod.Text;
                 String FM = fm.Text;
                 String DM = dm.Text;
                 String MS = ms.Text;
-                String stddeduction = "" + (double.Parse(othercharges.Text));
-                String TotalAmount = "" + (double.Parse(Commission) - ((double.Parse(stdcharges.Text)) + double.Parse(othercharges.Text)));
+                String stddeduction = "" + String.Format("{0:0.00}",(double.Parse(othercharges.Text)));
+                String TotalAmount = "" + String.Format("{0:0.00}",(double.Parse(Commission) - ((double.Parse(stdcharges.Text)) + double.Parse(othercharges.Text))));
                 TotalAmt.Text = TotalAmount;
                 //  othercharges.Text = stddeduction;
                 comi.Text = Commission;
@@ -417,8 +431,9 @@ namespace RibbonWin
                 }
                 else if (paymentmethod.Text == "CASH")
                 {
-                    stdcharges.Text = "" + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) * 18 / 100));
-
+                   // stdcharges.Text = "" + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) * 18 / 100));
+                    stdcharges.Text = String.Format("{0:0.00}", (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) * 18 / 100)));
+                    
 
                 }
             }

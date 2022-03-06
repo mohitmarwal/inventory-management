@@ -244,7 +244,6 @@ C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\RibbonWin.exe
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\RibbonWin.pdb
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\datepicker.g.cs
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\datepicker.baml
-C:\Users\mohit\Downloads\RibbonWin\RibbonBar\bin\Debug\Aspose.PDF.xml
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\bin\Debug\PdfSharp.Charting.dll
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\bin\Debug\PdfSharp.dll
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\bin\Debug\PdfSharp.xml
@@ -255,3 +254,7 @@ C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\admin.baml
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\admin.g.cs
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\changepass.baml
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\changepass.g.cs
+C:\Users\mohit\Downloads\RibbonWin\RibbonBar\bin\Debug\RibbonWin.exe.manifest
+C:\Users\mohit\Downloads\RibbonWin\RibbonBar\bin\Debug\RibbonWin.application
+C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\RibbonWin.exe.manifest
+C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\RibbonWin.application
