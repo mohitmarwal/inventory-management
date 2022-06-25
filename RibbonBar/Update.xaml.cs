@@ -3,6 +3,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -42,7 +43,8 @@ namespace RibbonWin
             FillGoods();
             FillPlantName();
             FillPaymentMethod();
-            UdateForm();
+            UdateFormAsync();
+            Fillbroker();
 
         }
          private void Fillemail()
@@ -102,7 +104,7 @@ namespace RibbonWin
             Fillemail();
             Fillphone();
         }
-        private void UdateForm()
+        private async Task UdateFormAsync()
         {
             try
             {
@@ -137,7 +139,11 @@ namespace RibbonWin
                     Partnername.SelectedIndex = Partnername.Items.IndexOf(row.ItemArray[2].ToString());
                     mobilenumber.Text = row.ItemArray[3].ToString();
                     email.Text = row.ItemArray[4].ToString();
+                    await Task.Delay(500);
+                    date.IsEnabled = true;
                     date.SelectedDate = DateTime.Parse((row.ItemArray[5].ToString()));
+                    date.DisplayDate = DateTime.Parse((row.ItemArray[5].ToString()));
+                    date.SelectedDateChanged += DatePicker_SelectedDateChanged;
                     datel = row.ItemArray[5].ToString();
                     dealer.Text = row.ItemArray[6].ToString();
                     procurer.Text = row.ItemArray[7].ToString();
@@ -156,20 +162,34 @@ namespace RibbonWin
                     ms.Text = row.ItemArray[20].ToString();
                     TotalAmt.Text = row.ItemArray[21].ToString();
                     paymentmethod.SelectedIndex = paymentmethod.Items.IndexOf(row.ItemArray[22].ToString());
+                    Brokername.SelectedIndex = Brokername.Items.IndexOf(row.ItemArray[31].ToString());
                     paystatus.SelectedItem = (ComboBoxItem)this.paystatus.FindName(row.ItemArray[23].ToString());
                     status = row.ItemArray[23].ToString();
                     payreceived.Text = row.ItemArray[24].ToString();
                     remark.Text = row.ItemArray[25].ToString();
                     amountpending.Text = row.ItemArray[26].ToString();
+                    Quan1.Text = row.ItemArray[27].ToString();
+                    quintalrate1.Text = row.ItemArray[28].ToString();
+                    Quan2.Text = row.ItemArray[29].ToString();
+                    quintalrate2.Text = row.ItemArray[30].ToString();
                     billno.Text = row.ItemArray[1].ToString();
 
                 }
             }
-            catch(Exception ex) { }
+            catch(Exception ex) { File.WriteAllText("Log.txt", DateTime.Now.ToString() + " : " + ex.ToString()); }
 
             connection.Close();
         }
-            private void Fillbag()
+
+        private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var picker = sender as DatePicker;
+            DateTime? date = picker.SelectedDate;
+
+           
+        }
+    
+    private void Fillbag()
         {
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
              database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
@@ -273,6 +293,35 @@ namespace RibbonWin
             connection.Close();
         }
 
+
+        private void Fillbroker()
+        {
+            connectionString = "SERVER=" + server + ";" + "DATABASE=" +
+            database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+
+
+            connection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
+            connection.Open();
+            MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand("select name From broker", connection);
+
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataTable table = new DataTable("myTable");
+            da.Fill(table);
+
+            foreach (DataRow row in table.Rows)
+            {
+                for (int i = 0; i < row.ItemArray.Length; i++)
+                {
+                    Brokername.Items.Add(row.ItemArray[i].ToString());
+
+                }
+            }
+            paymentmethod.SelectedIndex = -1;
+            paystatus.SelectedIndex = -1;
+            paystatus.SelectedItem = null;
+            connection.Close();
+        }
+
         private void FillPaymentMethod()
         {
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
@@ -300,7 +349,8 @@ namespace RibbonWin
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-          String PartnerName = Partnername.Text;
+            String Commission = ""; 
+            String PartnerName = Partnername.Text;
           String MobileNumber = mobilenumber.Text;
           String EmailId = email.Text;
             String Date="";
@@ -320,22 +370,47 @@ namespace RibbonWin
             String Quantity = Quan.Text;
             String BagTpye = bagtype.Text;
             String RatePerQuintal = quintalrate.Text;
-            String Commission = "" + (double.Parse(RatePerQuintal) * double.Parse(Quantity));
+            if (!RatePerQuintal.Equals("") && !Quantity.Equals(""))
+            {
+                if ((!quintalrate1.Text.Equals("") && !Quan1.Text.Equals("")) && (quintalrate2.Text.Equals("") && Quan2.Text.Equals("")))
+                {
+                    Commission = "" + String.Format("{0:0.00}", (double.Parse(RatePerQuintal) * double.Parse(Quantity) + (double.Parse(quintalrate1.Text) * double.Parse(Quan1.Text))));
+                    comi.Text = Commission;
+                }
+
+                if ((!quintalrate2.Text.Equals("") && !Quan2.Text.Equals("")) && (quintalrate1.Text.Equals("") && Quan1.Text.Equals("")))
+                {
+                    Commission = "" + String.Format("{0:0.00}", (double.Parse(RatePerQuintal) * double.Parse(Quantity) + (double.Parse(quintalrate2.Text) * double.Parse(Quan2.Text))));
+                    comi.Text = Commission;
+                }
+
+                if ((!quintalrate2.Text.Equals("") && !Quan2.Text.Equals("")) && (!quintalrate1.Text.Equals("") && !Quan1.Text.Equals("")))
+                {
+                    Commission = "" + String.Format("{0:0.00}", (double.Parse(RatePerQuintal) * double.Parse(Quantity) + (double.Parse(quintalrate2.Text) * double.Parse(Quan2.Text)) + (double.Parse(quintalrate1.Text) * double.Parse(Quan1.Text))));
+                    comi.Text = Commission;
+                }
+            }
             String transactiondecution = stdcharges.Text;
             String PaymentMethod = paymentmethod.Text;
             String FM = fm.Text;
             String DM = dm.Text;
             String MS = ms.Text;
-            String stddeduction = "" + (double.Parse(othercharges.Text));
-            String TotalAmount = "" + (double.Parse(Commission) - ((double.Parse(stdcharges.Text)) + double.Parse(othercharges.Text)));
-
+            if (!othercharges.Text.Equals("") && !stdcharges.Text.Equals("") && Commission.Equals(""))
+            {
+                String stddeduction = "" + String.Format("{0:0.00}", (double.Parse(othercharges.Text)));
+                String TotalAmount = "" + String.Format("{0:0.00}", (double.Parse(Commission) - ((double.Parse(stdcharges.Text)) + double.Parse(othercharges.Text))));
+                TotalAmt.Text = TotalAmount;
+                //  othercharges.Text = stddeduction;
+            
+                //String.Format("{0:0.00}", (double.Parse(Commission) - ((double.Parse(stdcharges.Text)) + double.Parse(othercharges.Text))));
+            }
             if (paystatus.SelectedIndex!=-1)
             {
                 status = paystatus.Text;
             }
 
 
-            string query2 = "UPDATE `inventory` set PartnerName='" + Partnername.Text + "', MobileNumber='" + mobilenumber.Text + "', Billno='" + billno.Text + "', EmailId='" + email.Text + "',  Date='" + Date + "', DealerSign='" + dealer.Text + "', ProcurerSign='" + procurer.Text + "', Transportation='" + vehicleno.Text + "', GoodType='" + goodtype.Text + "', PlantName='" + Plant.Text + "', Quantity='" + Quan.Text + "', BagType='" + bagtype.Text + "', NoBags='" + Numberbags.Text + "', RatePerQuintal='" + quintalrate.Text + "', Subtotal='" + comi.Text + "', TransactionCharges='" + stdcharges.Text + "', QualityDeduction='" + othercharges.Text + "', TotalAmount='" + TotalAmt.Text + "', PaymentMethod='" + paymentmethod.Text + "', PaymentStatus='" + status + "', HandOver='" + payreceived.Text + "', Remarks='" + remark.Text + "', `Amount Pending`='" + amountpending.Text+ "' WHERE Billno=" + entryno;
+            string query2 = "UPDATE `inventory` set PartnerName='" + Partnername.Text + "', MobileNumber='" + mobilenumber.Text + "', Billno='" + billno.Text + "', EmailId='" + email.Text + "',  Date='" + Date + "', DealerSign='" + dealer.Text + "', ProcurerSign='" + procurer.Text + "', Transportation='" + vehicleno.Text + "', GoodType='" + goodtype.Text + "', PlantName='" + Plant.Text + "', Quantity='" + Quan.Text + "', BagType='" + bagtype.Text + "', NoBags='" + Numberbags.Text + "', RatePerQuintal='" + quintalrate.Text + "', Subtotal='" + comi.Text + "', TransactionCharges='" + stdcharges.Text + "', QualityDeduction='" + othercharges.Text + "', TotalAmount='" + TotalAmt.Text + "', PaymentMethod='" + paymentmethod.Text + "', PaymentStatus='" + status + "', HandOver='" + payreceived.Text + "', Remarks='" + remark.Text + "', `Amount Pending`='" + amountpending.Text + "', `Quantity1`='" + Quan1.Text + "', `Rate1`='" + quintalrate1.Text + "', `Quantity2`='" + Quan2.Text + "', `Rate2`='" + quintalrate2.Text + "', `broker`='" + Brokername.Text + "' WHERE Billno=" + entryno;
             //open connection
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
@@ -357,12 +432,20 @@ namespace RibbonWin
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
-            Regex regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
+            Regex regex = new Regex("^[.][0-9]+$|^[0-9]*[.]{0,1}[0-9]*$");
+            e.Handled = !regex.IsMatch((sender as TextBox).Text.Insert((sender as TextBox).SelectionStart, e.Text));
+        }
+
+        private void NumberValidationTextBox1(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("^[0-9]*$");
+            e.Handled = !regex.IsMatch((sender as TextBox).Text.Insert((sender as TextBox).SelectionStart, e.Text));
+
         }
 
         async private void totalcalc(object sender, TextChangedEventArgs e)
         {
+            String subtotal = "";
             await Task.Delay(10);
             try
             {
@@ -377,34 +460,52 @@ namespace RibbonWin
                 }
                 else if (paymentmethod.Text == "TRF")
                 {
-                    stdcharges.Text = "59";
+                    stdcharges.Text = "0";
                 }
                 else if (paymentmethod.Text == "CASH")
                 {
-                    stdcharges.Text = "" + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) * 18 / 100));
+                    stdcharges.Text = String.Format("{0:0.00}", (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) * 18 / 100)));
 
 
                 }
-                String DealerSign = dealer.Text;
-                String ProcurerSign = procurer.Text;
-                String Transportation = vehicleno.Text;
-                String GoodType = goodtype.Text;
+
                 String Quantity = Quan.Text;
                 String BagTpye = bagtype.Text;
                 String RatePerQuintal = quintalrate.Text;
-                String Commission = "" + String.Format("{0:0.00}", (double.Parse(RatePerQuintal) * double.Parse(Quantity)));
+                if (!RatePerQuintal.Equals("") && !Quantity.Equals(""))
+                {
+                    if ((!quintalrate1.Text.Equals("") && !Quan1.Text.Equals("")) && (quintalrate2.Text.Equals("") && Quan2.Text.Equals("")))
+                    {
+                        subtotal = "" + String.Format("{0:0.00}", (double.Parse(RatePerQuintal) * double.Parse(Quantity) + (double.Parse(quintalrate1.Text) * double.Parse(Quan1.Text))));
+                        comi.Text = subtotal;
+                    }
+
+                    if ((!quintalrate2.Text.Equals("") && !Quan2.Text.Equals("")) && (quintalrate1.Text.Equals("") && Quan1.Text.Equals("")))
+                    {
+                        subtotal = "" + String.Format("{0:0.00}", (double.Parse(RatePerQuintal) * double.Parse(Quantity) + (double.Parse(quintalrate2.Text) * double.Parse(Quan2.Text))));
+                        comi.Text = subtotal;
+                    }
+
+                    if ((!quintalrate2.Text.Equals("") && !Quan2.Text.Equals("")) && (!quintalrate1.Text.Equals("") && !Quan1.Text.Equals("")))
+                    {
+                        subtotal = "" + String.Format("{0:0.00}", (double.Parse(RatePerQuintal) * double.Parse(Quantity) + (double.Parse(quintalrate2.Text) * double.Parse(Quan2.Text)) + (double.Parse(quintalrate1.Text) * double.Parse(Quan1.Text))));
+                        comi.Text = subtotal;
+                    }
+                }
                 String transactiondecution = stdcharges.Text;
                 String PaymentMethod = paymentmethod.Text;
                 String FM = fm.Text;
                 String DM = dm.Text;
                 String MS = ms.Text;
-                String stddeduction = "" + String.Format("{0:0.00}", (double.Parse(othercharges.Text)));
-                String TotalAmount = "" + String.Format("{0:0.00}", (double.Parse(Commission) - ((double.Parse(stdcharges.Text)) + double.Parse(othercharges.Text))));
-                TotalAmt.Text = TotalAmount;
-                //  othercharges.Text = stddeduction;
-                comi.Text = Commission;
+                if (!othercharges.Text.Equals("") || !stdcharges.Text.Equals("") || subtotal.Equals(""))
+                {
+                    String stddeduction = "" + String.Format("{0:0.00}", (double.Parse(othercharges.Text)));
+                    String TotalAmount = "" + String.Format("{0:0.00}", (double.Parse(subtotal) - ((double.Parse(stdcharges.Text)) + double.Parse(othercharges.Text))));
+                    TotalAmt.Text = TotalAmount;
+
+                }
             }
-            catch (Exception ex) { TotalAmt.Text = ""; }
+            catch (Exception ex) { TotalAmt.Text = ""; File.WriteAllText("Log.txt", DateTime.Now.ToString() + " : " + ex.ToString()); }
 
         }
 
@@ -438,16 +539,16 @@ namespace RibbonWin
                 }
                 else if (paymentmethod.Text == "TRF")
                 {
-                    stdcharges.Text = "59";
+                    stdcharges.Text = "0";
                 }
                 else if (paymentmethod.Text == "CASH")
                 {
-                    stdcharges.Text = String.Format("{0:0.00}", (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) * 18 / 100))); stdcharges.Text = "" + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) * 18 / 100));
+                    stdcharges.Text = String.Format("{0:0.00}", (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 ) + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 ) * 18 / 100))); stdcharges.Text = "" + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 ) + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 ) * 18 / 100));
 
 
                 }
             }
-            catch (Exception ex) { };
+            catch (Exception ex) { File.WriteAllText("Log.txt", DateTime.Now.ToString() + " : " + ex.ToString()); };
         }
     }
 }

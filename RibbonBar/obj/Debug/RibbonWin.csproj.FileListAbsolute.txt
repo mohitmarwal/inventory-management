@@ -96,15 +96,9 @@ C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\UserControl1.g.cs
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\Window1.g.cs
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\Partner.g.cs
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\App.g.cs
-C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\RibbonWin_Content.g.cs
-C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\RibbonWin_MarkupCompile.cache
-C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\RibbonWin_MarkupCompile.lref
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\bin\Debug\runtimes\win-x86\native\e_sqlite3.dll
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\bin\Debug\runtimes\win-x64\native\e_sqlite3.dll
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\bin\Debug\runtimes\win-arm\native\e_sqlite3.dll
-C:\Users\mohit\Downloads\RibbonWin\RibbonBar\bin\Debug\RibbonWin.exe.config
-C:\Users\mohit\Downloads\RibbonWin\RibbonBar\bin\Debug\RibbonWin.exe
-C:\Users\mohit\Downloads\RibbonWin\RibbonBar\bin\Debug\RibbonWin.pdb
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\bin\Debug\Microsoft.Win32.Primitives.dll
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\bin\Debug\netstandard.dll
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\bin\Debug\System.AppContext.dll
@@ -235,13 +229,9 @@ C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\plant.baml
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\payment.baml
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\UserControl1.baml
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\Partner.baml
-C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\RibbonWin.g.resources
-C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\RibbonWin.Properties.Resources.resources
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\RibbonWin.csproj.GenerateResource.cache
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\RibbonWin.csproj.CoreCompileInputs.cache
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\RibbonWin.csproj.CopyComplete
-C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\RibbonWin.exe
-C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\RibbonWin.pdb
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\datepicker.g.cs
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\datepicker.baml
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\bin\Debug\PdfSharp.Charting.dll
@@ -254,7 +244,19 @@ C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\admin.baml
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\admin.g.cs
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\changepass.baml
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\changepass.g.cs
-C:\Users\mohit\Downloads\RibbonWin\RibbonBar\bin\Debug\RibbonWin.exe.manifest
-C:\Users\mohit\Downloads\RibbonWin\RibbonBar\bin\Debug\RibbonWin.application
-C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\RibbonWin.exe.manifest
-C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\RibbonWin.application
+C:\Users\mohit\Downloads\RibbonWin\RibbonBar\bin\Debug\Inventory App.exe.config
+C:\Users\mohit\Downloads\RibbonWin\RibbonBar\bin\Debug\Inventory App.exe.manifest
+C:\Users\mohit\Downloads\RibbonWin\RibbonBar\bin\Debug\Inventory App.application
+C:\Users\mohit\Downloads\RibbonWin\RibbonBar\bin\Debug\Inventory App.exe
+C:\Users\mohit\Downloads\RibbonWin\RibbonBar\bin\Debug\Inventory App.pdb
+C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\Inventory App_Content.g.cs
+C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\Inventory App_MarkupCompile.cache
+C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\Inventory App_MarkupCompile.lref
+C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\Inventory App.g.resources
+C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\InventoryApp.Properties.Resources.resources
+C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\Inventory App.exe.manifest
+C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\Inventory App.application
+C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\Inventory App.exe
+C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\Inventory App.pdb
+C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\broker.g.cs
+C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\broker.baml

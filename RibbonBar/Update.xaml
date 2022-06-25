@@ -58,8 +58,9 @@
             <Label Content="Partner Name" Grid.Column="0" Grid.Row="1" Margin="5"></Label>
             <Label Content="Bill No" Grid.Column="3" Grid.Row="1" Margin="49,10,39,0"></Label>
             <Label Content="Mobile Number" Grid.Column="0" Grid.Row="2" Margin="5"></Label>
-            <Label Content="Email Id" Grid.Column="0" Grid.Row="3" Margin="5"></Label>
-            <Label Content="Select Date" Grid.Column="0" Grid.Row="4" Margin="5"></Label>
+            <Label Content="Email Id" Grid.Column="0" Grid.Row="3" Margin="3"></Label>
+            <Label Content="Broker Name"  Grid.Column="0" Grid.Row="4" Margin="5"></Label>
+            <Label Content="Select Date" Grid.Column="0" Grid.Row="5" Margin="5"></Label>
             <Label Content="Sign Of Dealer" Grid.Column="0" Grid.Row="6" Margin="5"></Label>
             <Label Content="Sign Of Procurer" Grid.Column="0" Grid.Row="7"  Margin="5"></Label>
             <Label Content="Vehicle Number" Grid.Column="0" Grid.Row="8" Margin="5"></Label>
@@ -67,56 +68,62 @@
             <Label Content="Plant Name" Grid.Column="0" Grid.Row="10"  Margin="5"></Label>
             <Label Content="Type Of Bag" Grid.Column="0" Grid.Row="11" Margin="5"></Label>
             <Label Content="Number OF Bag" Grid.Column="0" Grid.Row="12"  Margin="5"></Label>
-            <Label Content="Quantity" Grid.Column="0" Grid.Row="13"  Margin="5"></Label>
-            <Label Content="Rate Per Quintal" Grid.Column="0" Grid.Row="14" Margin="5"></Label>
-            <Label Content="Sub Total" Grid.Column="0" Grid.Row="15" Margin="5"></Label>
-            <Label Content="FM :" Grid.Column="3" Grid.Row="15" Margin="5"></Label>
-            <Label Content="Transaction charges" Grid.Column="0" Grid.Row="16"  Margin="5"></Label>
-            <Label Content="DM" Grid.Column="3" Grid.Row="16"  Margin="5"></Label>
-            <Label Content="Quality Deduction " Grid.Column="0" Grid.Row="17"  Margin="5"></Label>
-            <Label Content="MS " Grid.Column="3" Grid.Row="17"  Margin="5"></Label>
-            <Label Content="Total Amount " Grid.Column="0" Grid.Row="18" Margin="5"></Label>
-            <Label Content="Payment Method" Grid.Column="0" Grid.Row="19"  Margin="5"></Label>
-            <Label Content="Payment Status" Grid.Column="0" Grid.Row="20"  Margin="5"></Label>
-            <Label Content="Total Amount Received" Grid.Column="0" Grid.Row="21"  Margin="5"></Label>
-            <Label Content="Remarks" Grid.Column="0" Grid.Row="22"  Margin="5"></Label>
+            <Label Content="Quantity and  Rate" Grid.Column="0" Grid.Row="13"  Margin="5"></Label>
+            <Label Content="Quantity and Rate1" Grid.Column="0" Grid.Row="14" Margin="5"></Label>
+            <Label Content="Quantity and Rate2" Grid.Column="0" Grid.Row="15" Margin="5"></Label>
+            <Label Content="Sub Total" Grid.Column="0" Grid.Row="16" Margin="5"></Label>
+            <Label Content="FM :" Grid.Column="3" Grid.Row="16" Margin="5"></Label>
+            <Label Content="Comission" Grid.Column="0" Grid.Row="17"  Margin="5"></Label>
+            <Label Content="DM" Grid.Column="3" Grid.Row="17"  Margin="5"></Label>
+            <Label Content="Quality Deduction " Grid.Column="0" Grid.Row="18"  Margin="5"></Label>
+            <Label Content="MS " Grid.Column="3" Grid.Row="18"  Margin="5"></Label>
+            <Label Content="Total Amount " Grid.Column="0" Grid.Row="19" Margin="5"></Label>
+            <Label Content="Payment Method" Grid.Column="0" Grid.Row="20"  Margin="5"></Label>
+            <Label Content="Payment Status" Grid.Column="0" Grid.Row="21"  Margin="5"></Label>
+            <Label Content="Total Amount Paid" Grid.Column="0" Grid.Row="22"  Margin="5"></Label>
+            <Label Content="Remarks" Grid.Column="0" Grid.Row="23"  Margin="5"></Label>
             <!--Second Column Content-->
 
             <ComboBox Name="Partnername" Grid.Row="1" Margin="5,10,5,0" Grid.Column="1" Grid.ColumnSpan="2" SelectionChanged="Onpartnerchange"/>
-            <TextBox Name="mobilenumber" PreviewTextInput="NumberValidationTextBox" Grid.Column="1" Grid.Row="2" Margin="5" Grid.ColumnSpan="2"></TextBox>
-            <TextBox Name="billno" PreviewTextInput="NumberValidationTextBox" Grid.Column="3" Grid.Row="2" Margin="10,5,5,5"/>
-            <TextBox Name="email" Grid.Column="1" Grid.Row="3" Margin="5" Grid.ColumnSpan="2"></TextBox>
-            <DatePicker Grid.Column="1" Grid.Row="4" Margin="5,5,0,0" Grid.ColumnSpan="2" SelectedDate="{Binding PropertyName, StringFormat=dd-MM-yyyy}" HorizontalAlignment="Left"  Name="date" VerticalAlignment="Top" Width="247" />
+            <ComboBox Name="Brokername" Grid.Row="4" Margin="5,10,5,0" Grid.Column="1" Grid.ColumnSpan="2" SelectionChanged="Onpartnerchange"/>
+            <TextBox Name="mobilenumber" PreviewTextInput="NumberValidationTextBox1" Grid.Column="1" Grid.Row="2" Margin="5" Grid.ColumnSpan="2"></TextBox>
+            <TextBox Name="billno" PreviewTextInput="NumberValidationTextBox1" Grid.Column="3" Grid.Row="2" Margin="10,5,5,5"/>
+            <TextBox Name="email" Grid.Column="1" Grid.Row="3" Margin="3" Grid.ColumnSpan="2"></TextBox>
+            <DatePicker Grid.Column="1" Grid.Row="5" Margin="5,5,0,0" Grid.ColumnSpan="2" SelectedDate="{Binding PropertyName, StringFormat=dd-MM-yyyy}" HorizontalAlignment="Left"  Name="date" VerticalAlignment="Top" Width="266" />
             <TextBox Name="dealer"  Grid.Column="1" Grid.Row="6" Margin="5" Grid.ColumnSpan="2"></TextBox>
             <TextBox Name="procurer"  Grid.Column="1" Grid.Row="7" Margin="5" Grid.ColumnSpan="2"></TextBox>
             <TextBox Name="vehicleno"  Grid.Column="1" Grid.Row="8" Margin="5" Grid.ColumnSpan="2"></TextBox>
             <ComboBox Name="goodtype" Grid.Row="9" Grid.Column="1" Margin="5,0,5,5"  Grid.ColumnSpan="2"/>
             <ComboBox Name="Plant" Grid.Row="10" Grid.Column="1" Margin="5,0,5,5"  Grid.ColumnSpan="2"/>
             <ComboBox Name="bagtype" Grid.Row="11" Grid.Column="1" Margin="5,0,5,5"  Grid.ColumnSpan="2"/>
-            <TextBox Name="Numberbags" TextChanged="totalcalc" PreviewTextInput="NumberValidationTextBox" Grid.Column="1" Grid.Row="12" Margin="5" Grid.ColumnSpan="2"></TextBox>
-            <TextBox Name="Quan" TextChanged="totalcalc" PreviewTextInput="NumberValidationTextBox" Grid.Column="1" Grid.Row="13" Margin="5" Grid.ColumnSpan="2"></TextBox>
-            <TextBox Name="quintalrate" TextChanged="totalcalc" PreviewTextInput="NumberValidationTextBox" Grid.Column="1" Grid.Row="14" Margin="5" Grid.ColumnSpan="2"></TextBox>
-            <TextBox Name="comi"  TextChanged="totalcalc" PreviewTextInput="NumberValidationTextBox" Grid.Column="1" Grid.Row="15" Margin="5" Grid.ColumnSpan="2"></TextBox>
-            <TextBox Name="fm" TextChanged="totalcalc" PreviewTextInput="NumberValidationTextBox" Grid.Column="3" Grid.Row="15" Margin="49,5,10,5"/>
-            <TextBox Name="stdcharges" TextChanged="totalcalc" PreviewTextInput="NumberValidationTextBox" Grid.Column="1" Grid.Row="16" Margin="5" Grid.ColumnSpan="2"></TextBox>
-            <TextBox Name="dm" TextChanged="totalcalc" PreviewTextInput="NumberValidationTextBox" Grid.Column="3" Grid.Row="16" Margin="49,5,10,5"/>
-            <TextBox Name="othercharges" TextChanged="totalcalc"  PreviewTextInput="NumberValidationTextBox" Grid.Column="1" Grid.Row="17" Margin="5" Grid.ColumnSpan="2"></TextBox>
-            <TextBox Name="ms" PreviewTextInput="NumberValidationTextBox" Grid.Column="3" Grid.Row="17" Margin="49,5,10,5" TextChanged="totalcalc"/>
-            <TextBox Name="TotalAmt" Grid.Column="1" Grid.Row="18" Margin="5" Grid.ColumnSpan="2" ></TextBox>
-            <ComboBox Name="paymentmethod" Grid.Row="19" SelectionChanged="onpaymentchange" Grid.Column="1" Margin="5,10,5,0"  Grid.ColumnSpan="2"/>
-            <ComboBox Grid.Column="1" Grid.Row="20" Margin="5,5,0,0" Grid.ColumnSpan="2" Name="paystatus" HorizontalAlignment="Left" VerticalAlignment="Top" Width="247" Height="30">
+            <TextBox Name="Numberbags" TextChanged="totalcalc" PreviewTextInput="NumberValidationTextBox1" Grid.Column="1" Grid.Row="12" Margin="5" Grid.ColumnSpan="2"></TextBox>
+            <TextBox Name="Quan" TextChanged="totalcalc" PreviewTextInput="NumberValidationTextBox" Grid.Column="1" Grid.Row="13" Margin="5,5,10,5"/>
+            <TextBox Name="quintalrate" TextChanged="totalcalc" PreviewTextInput="NumberValidationTextBox1" Grid.Column="1" Grid.Row="13" Margin="131,5,7,5" Grid.ColumnSpan="2"/>
+            <TextBox Name="Quan1" TextChanged="totalcalc" PreviewTextInput="NumberValidationTextBox" Grid.Column="1" Grid.Row="14" Margin="5,5,10,5"/>
+            <TextBox Name="quintalrate1" TextChanged="totalcalc" PreviewTextInput="NumberValidationTextBox1" Grid.Column="1" Grid.Row="14" Margin="131,5,10,5" Grid.ColumnSpan="2"/>
+            <TextBox Name="Quan2" TextChanged="totalcalc" PreviewTextInput="NumberValidationTextBox" Grid.Column="1" Grid.Row="15" Margin="5,5,10,5"/>
+            <TextBox Name="quintalrate2" TextChanged="totalcalc" PreviewTextInput="NumberValidationTextBox1" Grid.Column="1" Grid.Row="15" Margin="131,5,7,5" Grid.ColumnSpan="2"/>
+            <TextBox Name="comi"  TextChanged="totalcalc"  PreviewTextInput="NumberValidationTextBox1" Grid.Column="1" Grid.Row="16" Margin="5" Grid.ColumnSpan="2"></TextBox>
+            <TextBox Name="fm"  TextChanged="totalcalc" PreviewTextInput="NumberValidationTextBox" Grid.Column="3" Grid.Row="16" Margin="49,5,10,5"/>
+            <TextBox Name="stdcharges" TextChanged="totalcalc" PreviewTextInput="NumberValidationTextBox1" Grid.Column="1" Grid.Row="17" Margin="5" Grid.ColumnSpan="2"></TextBox>
+            <TextBox Name="dm" TextChanged="totalcalc" PreviewTextInput="NumberValidationTextBox" Grid.Column="3" Grid.Row="17" Margin="49,5,10,5"/>
+            <TextBox Name="othercharges" TextChanged="totalcalc"  PreviewTextInput="NumberValidationTextBox1" Grid.Column="1" Grid.Row="18 " Margin="5" Grid.ColumnSpan="2"></TextBox>
+            <TextBox Name="ms" PreviewTextInput="NumberValidationTextBox" Grid.Column="3" Grid.Row="18" Margin="49,5,10,5" TextChanged="totalcalc"/>
+            <TextBox Name="TotalAmt" Grid.Column="1" Grid.Row="19" Margin="5" Grid.ColumnSpan="2" ></TextBox>
+            <ComboBox Name="paymentmethod" Grid.Row="20" Grid.Column="1" Margin="5,10,5,0"   SelectionChanged="onpaymentchange" Grid.ColumnSpan="2"/>
+            <ComboBox Grid.Column="1" SelectedIndex="-1" Grid.Row="21" Margin="5,5,0,0" Grid.ColumnSpan="2" Name="paystatus" HorizontalAlignment="Left" VerticalAlignment="Top" Width="264" Height="30">
                 <ComboBoxItem Name="Pending" Content="Pending"></ComboBoxItem>
                 <ComboBoxItem Name="Complete" Content="Complete"></ComboBoxItem>
             </ComboBox>
-            <TextBox Name="payreceived"  PreviewTextInput="NumberValidationTextBox" Grid.Column="1" Grid.Row="21" Margin="5" TextChanged="onpending" Grid.ColumnSpan="2"></TextBox>
-            <TextBox Name="remark"  Grid.Column="1" Grid.Row="22" Margin="5" Grid.ColumnSpan="2"></TextBox>
+            <TextBox Name="payreceived"  PreviewTextInput="NumberValidationTextBox" Grid.Column="1" Grid.Row="22" Margin="5" TextChanged="onpending" Grid.ColumnSpan="2"></TextBox>
+            <TextBox Name="remark"  Grid.Column="1" Grid.Row="23" Margin="5" Grid.ColumnSpan="2"></TextBox>
             <!--Wrap Panel List of button by default hoizental-->
 
-            <WrapPanel Grid.Column="3" Margin="80,0,0,0" Grid.Row="22" HorizontalAlignment="Center" Grid.ColumnSpan="4">
-            <Button Content="Update" Width="70" Height="24" Margin="5" Click="Button_Click"/>
-        </WrapPanel>
-            <TextBox x:Name="amountpending" PreviewTextInput="NumberValidationTextBox" Grid.Column="3" Grid.Row="21" Margin="10,5"/>
-            <Label Content="Amount Pending " PreviewTextInput="NumberValidationTextBox"  Grid.Column="3" Grid.Row="20"  Margin="10,8,0,2"/>
+            <WrapPanel Grid.Column="3" Margin="80,0,0,0" Grid.Row="23" HorizontalAlignment="Center" Grid.ColumnSpan="4">
+                <Button Content="Save" Width="70" Height="24" Margin="5" Click="Button_Click"/>
+            </WrapPanel>
+            <TextBox x:Name="amountpending" PreviewTextInput="NumberValidationTextBox" Grid.Column="3" Grid.Row="22" Margin="10,5"/>
+            <Label Content="Amount Pending " PreviewTextInput="NumberValidationTextBox"  Grid.Column="3" Grid.Row="21"  Margin="26,5,-16,5"/>
             <!--DataGrid for Show the Employee Info-->
 
         <!--Third Column Content-->

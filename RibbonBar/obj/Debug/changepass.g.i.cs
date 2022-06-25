@@ -76,7 +76,7 @@ namespace RibbonWin {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/RibbonWin;component/changepass.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Inventory App;component/changepass.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\changepass.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

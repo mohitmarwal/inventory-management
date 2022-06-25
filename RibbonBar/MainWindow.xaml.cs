@@ -38,33 +38,39 @@ namespace RibbonWin
 
         public MainWindow()
         {
-            InitializeComponent();
-            admin dialog = new admin();
-            dialog.ShowDialog();
-            string connetionString;
-            string server = "localhost";
-            string database = "inventoryapp";
-            string uid = "root";
-            string password = "";
-            MySql.Data.MySqlClient.MySqlConnection connection;
-            connetionString = "SERVER=" + server + ";" + "DATABASE=" +
- database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
-
-
-            connection = new MySql.Data.MySqlClient.MySqlConnection(connetionString);
-            connection.Open();
-            MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand("SELECT * FROM password WHERE Number=1" , connection);
-
-            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-            DataTable table = new DataTable("myTable");
-            da.Fill(table);
-
-            foreach (DataRow row in table.Rows)
+            try
             {
-                if (!admin.Equals( row.ItemArray[1].ToString()))
+                InitializeComponent();
+                admin dialog = new admin();
+                dialog.ShowDialog();
+                string connetionString;
+                string server = "localhost";
+                string database = "inventoryapp";
+                string uid = "root";
+                string password = "";
+                MySql.Data.MySqlClient.MySqlConnection connection;
+                connetionString = "SERVER=" + server + ";" + "DATABASE=" +
+     database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+
+
+                connection = new MySql.Data.MySqlClient.MySqlConnection(connetionString);
+                connection.Open();
+                MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand("SELECT * FROM password WHERE Number=1", connection);
+
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable table = new DataTable("myTable");
+                da.Fill(table);
+
+                foreach (DataRow row in table.Rows)
                 {
-                    Admintab.Visibility = System.Windows.Visibility.Collapsed;
+                    if (!admin.Equals(row.ItemArray[1].ToString()))
+                    {
+                        Admintab.Visibility = System.Windows.Visibility.Collapsed;
+                    }
                 }
+            }catch(Exception ex)
+            {
+                File.WriteAllText("Log.txt", DateTime.Now.ToString() + " : " + ex.ToString());
             }
         }
 
@@ -114,6 +120,7 @@ namespace RibbonWin
             EmployeFrom = null;
             view = null;
             up= new Update();
+            if(!Update.entryno .Equals( "CancelButtonPressed"))
             UIPanel.Children.Add(up);
         }
 
@@ -156,6 +163,18 @@ namespace RibbonWin
         private void onaddbagclick(object sender, RoutedEventArgs e)
         {
             RibbonWin.bag dialog = new RibbonWin.bag();
+            dialog.ShowDialog();
+            UIPanel.Children.Remove(EmployeFrom);
+            UIPanel.Children.Remove(view);
+            UIPanel.Children.Remove(up);
+            up = null;
+            EmployeFrom = null;
+            view = null;
+        }
+
+        private void onaddbrokerclick(object sender, RoutedEventArgs e)
+        {
+            RibbonWin.broker dialog = new RibbonWin.broker();
             dialog.ShowDialog();
             UIPanel.Children.Remove(EmployeFrom);
             UIPanel.Children.Remove(view);
@@ -274,13 +293,17 @@ namespace RibbonWin
                     sw.Close();
                 }
             }
-            catch (Exception ex) { }
+            catch (Exception ex) { File.WriteAllText("Log.txt", DateTime.Now.ToString() + " : " + ex.ToString()); }
         }
 
         private void PDF_Click(object sender, RoutedEventArgs e)
         {
             InputDialogSample dialog = new InputDialogSample();
             dialog.ShowDialog();
+            if(Update.entryno.Equals("CancelButtonPressed"))
+            {
+                return ;
+            }
             string entryno = Update.entryno;
             string connetionString;
             string server = "localhost";
@@ -316,6 +339,10 @@ namespace RibbonWin
             string remark = "";
             string billno = "";
             string Pending = "";
+            string Quan1 = "";
+            string Quan2 = "";
+            string quintalrate1 = "";
+            string quintalrate2 = "";
             
 
 
@@ -360,6 +387,10 @@ namespace RibbonWin
                 remark = row.ItemArray[25].ToString();
                 billno = row.ItemArray[1].ToString();
                 Pending = row.ItemArray[26].ToString();
+                Quan1 = row.ItemArray[27].ToString();
+                quintalrate1 = row.ItemArray[28].ToString();
+                Quan2 = row.ItemArray[29].ToString();
+                quintalrate2 = row.ItemArray[30].ToString();
 
             }
 
@@ -386,8 +417,12 @@ namespace RibbonWin
             graph.DrawString("Quantity : " + Quantity, font, XBrushes.Black, new XPoint(80, 400));
             graph.DrawString("No of Bags : " + Numberbags, font, XBrushes.Black, new XPoint(80, 420));
             graph.DrawString("Rate Per Qunintal : " + RatePerQuintal, font, XBrushes.Black, new XPoint(80, 440));
-            graph.DrawString("Subtotal : " + Commission, font, XBrushes.Black, new XPoint(80, 460));
-            graph.DrawString("Transaction charges : " + StandarCharges, font, XBrushes.Black, new XPoint(320, 480));
+            graph.DrawString("Quantity1 : " + Quan1, font, XBrushes.Black, new XPoint(80, 460));
+            graph.DrawString("Rate Per Qunintal1 : " + quintalrate1, font, XBrushes.Black, new XPoint(80, 480));
+            graph.DrawString("Quantity2 : " + Quan2, font, XBrushes.Black, new XPoint(80, 500));
+            graph.DrawString("Rate Per Qunintal2 : " + quintalrate2, font, XBrushes.Black, new XPoint(80, 520));
+            graph.DrawString("Subtotal : " + Commission, font, XBrushes.Black, new XPoint(80, 540));
+            graph.DrawString("Comission : " + StandarCharges, font, XBrushes.Black, new XPoint(320, 480));
             graph.DrawString("FM : " + FM, font, XBrushes.Black, new XPoint(320, 400));
             graph.DrawString("DM : " + DM, font, XBrushes.Black, new XPoint(320, 420));
             graph.DrawString("MS : " + MS, font, XBrushes.Black, new XPoint(320, 440));

@@ -109,7 +109,7 @@ namespace RibbonWin {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/RibbonWin;component/partner.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Inventory App;component/partner.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\Partner.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

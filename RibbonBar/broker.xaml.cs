@@ -17,7 +17,7 @@ namespace RibbonWin
     /// <summary>
     /// Interaction logic for bag.xaml
     /// </summary>
-    public partial class bag : Window
+    public partial class broker : Window
     {
 
         string connetionString;
@@ -28,7 +28,7 @@ namespace RibbonWin
         MySql.Data.MySqlClient.MySqlConnection connection;
         string connectionString;
 
-        public bag()
+        public broker()
         {
             InitializeComponent();
         }
@@ -40,7 +40,7 @@ namespace RibbonWin
 
         private void btnDialogOk_Click(object sender, RoutedEventArgs e)
         {
-            string query2 = "INSERT INTO `bags` (`Type`, `id`) VALUES ('" + txtAnswer.Text + "', NULL)";
+            string query2 = "INSERT INTO `broker` (`name`, `id`) VALUES ('" + txtAnswer.Text + "', NULL)";
             //open connection
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";

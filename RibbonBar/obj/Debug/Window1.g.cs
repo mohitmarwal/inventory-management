@@ -76,7 +76,7 @@ namespace RibbonWin {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/RibbonWin;component/window1.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Inventory App;component/window1.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\Window1.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

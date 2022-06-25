@@ -60,6 +60,9 @@
                 </RibbonApplicationMenuItem>
                     <RibbonApplicationMenuItem ImageSource="Images\add.png" Header="Add Payment Method"  Click="onpaymentclick" KeyTip="V" >
                     </RibbonApplicationMenuItem>
+                   
+                    <RibbonApplicationMenuItem ImageSource="Images\add.png" Header="Add Broker"  Click="onaddbrokerclick" KeyTip="V" >
+                    </RibbonApplicationMenuItem>
                     <RibbonApplicationMenuItem ImageSource="Images\save.png" Header="Export Report"  Click="on_export" KeyTip="V" >
                     </RibbonApplicationMenuItem>
                     <RibbonApplicationMenuItem ImageSource="Images\redo.png" Header="Change Admin Password"  Click="on_pass" KeyTip="V" >
