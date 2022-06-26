@@ -139,7 +139,7 @@ namespace RibbonWin
                     Partnername.SelectedIndex = Partnername.Items.IndexOf(row.ItemArray[2].ToString());
                     mobilenumber.Text = row.ItemArray[3].ToString();
                     email.Text = row.ItemArray[4].ToString();
-                    await Task.Delay(500);
+                    await Task.Delay(150);
                     date.IsEnabled = true;
                     date.SelectedDate = DateTime.Parse((row.ItemArray[5].ToString()));
                     date.DisplayDate = DateTime.Parse((row.ItemArray[5].ToString()));
@@ -349,10 +349,13 @@ namespace RibbonWin
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            String FM = fm.Text;
+            String DM = dm.Text;
+            String MS = ms.Text;
             String Commission = ""; 
             String PartnerName = Partnername.Text;
-          String MobileNumber = mobilenumber.Text;
-          String EmailId = email.Text;
+            String MobileNumber = mobilenumber.Text;
+            String EmailId = email.Text;
             String Date="";
             if (date.SelectedDate==null)
             {
@@ -378,6 +381,12 @@ namespace RibbonWin
                     comi.Text = Commission;
                 }
 
+                if ((quintalrate1.Text.Equals("") && Quan1.Text.Equals("")) && (quintalrate2.Text.Equals("") && Quan2.Text.Equals("")))
+                {
+                    Commission = "" + String.Format("{0:0.00}", (double.Parse(RatePerQuintal) * double.Parse(Quantity)));
+                    comi.Text = Commission;
+                }
+
                 if ((!quintalrate2.Text.Equals("") && !Quan2.Text.Equals("")) && (quintalrate1.Text.Equals("") && Quan1.Text.Equals("")))
                 {
                     Commission = "" + String.Format("{0:0.00}", (double.Parse(RatePerQuintal) * double.Parse(Quantity) + (double.Parse(quintalrate2.Text) * double.Parse(Quan2.Text))));
@@ -392,9 +401,7 @@ namespace RibbonWin
             }
             String transactiondecution = stdcharges.Text;
             String PaymentMethod = paymentmethod.Text;
-            String FM = fm.Text;
-            String DM = dm.Text;
-            String MS = ms.Text;
+
             if (!othercharges.Text.Equals("") && !stdcharges.Text.Equals("") && Commission.Equals(""))
             {
                 String stddeduction = "" + String.Format("{0:0.00}", (double.Parse(othercharges.Text)));
@@ -410,7 +417,7 @@ namespace RibbonWin
             }
 
 
-            string query2 = "UPDATE `inventory` set PartnerName='" + Partnername.Text + "', MobileNumber='" + mobilenumber.Text + "', Billno='" + billno.Text + "', EmailId='" + email.Text + "',  Date='" + Date + "', DealerSign='" + dealer.Text + "', ProcurerSign='" + procurer.Text + "', Transportation='" + vehicleno.Text + "', GoodType='" + goodtype.Text + "', PlantName='" + Plant.Text + "', Quantity='" + Quan.Text + "', BagType='" + bagtype.Text + "', NoBags='" + Numberbags.Text + "', RatePerQuintal='" + quintalrate.Text + "', Subtotal='" + comi.Text + "', TransactionCharges='" + stdcharges.Text + "', QualityDeduction='" + othercharges.Text + "', TotalAmount='" + TotalAmt.Text + "', PaymentMethod='" + paymentmethod.Text + "', PaymentStatus='" + status + "', HandOver='" + payreceived.Text + "', Remarks='" + remark.Text + "', `Amount Pending`='" + amountpending.Text + "', `Quantity1`='" + Quan1.Text + "', `Rate1`='" + quintalrate1.Text + "', `Quantity2`='" + Quan2.Text + "', `Rate2`='" + quintalrate2.Text + "', `broker`='" + Brokername.Text + "' WHERE Billno=" + entryno;
+            string query2 = "UPDATE `inventory` set PartnerName='" + Partnername.Text + "', MobileNumber='" + mobilenumber.Text + "', Billno='" + billno.Text + "', EmailId='" + email.Text + "',  Date='" + Date + "', DealerSign='" + dealer.Text + "', ProcurerSign='" + procurer.Text + "', Transportation='" + vehicleno.Text + "', GoodType='" + goodtype.Text + "', PlantName='" + Plant.Text + "', Quantity='" + Quan.Text + "', BagType='" + bagtype.Text + "', NoBags='" + Numberbags.Text + "', RatePerQuintal='" + quintalrate.Text + "', Subtotal='" + comi.Text + "', TransactionCharges='" + stdcharges.Text + "', QualityDeduction='" + othercharges.Text + "', FM='" + FM + "', DM='" + DM + "', MS='" + MS + "', TotalAmount='" + TotalAmt.Text + "', PaymentMethod='" + paymentmethod.Text + "', PaymentStatus='" + status + "', HandOver='" + payreceived.Text + "', Remarks='" + remark.Text + "', `Amount Pending`='" + amountpending.Text + "', `Quantity1`='" + Quan1.Text + "', `Rate1`='" + quintalrate1.Text + "', `Quantity2`='" + Quan2.Text + "', `Rate2`='" + quintalrate2.Text + "', `broker`='" + Brokername.Text + "' WHERE Billno=" + entryno;
             //open connection
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
@@ -465,7 +472,7 @@ namespace RibbonWin
                 else if (paymentmethod.Text == "CASH")
                 {
                     stdcharges.Text = String.Format("{0:0.00}", (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) * 18 / 100)));
-
+                    stdcharges.Text = Math.Round(double.Parse(stdcharges.Text)).ToString();
 
                 }
 
@@ -477,6 +484,12 @@ namespace RibbonWin
                     if ((!quintalrate1.Text.Equals("") && !Quan1.Text.Equals("")) && (quintalrate2.Text.Equals("") && Quan2.Text.Equals("")))
                     {
                         subtotal = "" + String.Format("{0:0.00}", (double.Parse(RatePerQuintal) * double.Parse(Quantity) + (double.Parse(quintalrate1.Text) * double.Parse(Quan1.Text))));
+                        comi.Text = subtotal;
+                    }
+
+                    if ((quintalrate1.Text.Equals("") && Quan1.Text.Equals("")) && (quintalrate2.Text.Equals("") && Quan2.Text.Equals("")))
+                    {
+                        subtotal = "" + String.Format("{0:0.00}", (double.Parse(RatePerQuintal) * double.Parse(Quantity)));
                         comi.Text = subtotal;
                     }
 
@@ -544,7 +557,7 @@ namespace RibbonWin
                 else if (paymentmethod.Text == "CASH")
                 {
                     stdcharges.Text = String.Format("{0:0.00}", (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 ) + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 ) * 18 / 100))); stdcharges.Text = "" + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 ) + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 ) * 18 / 100));
-
+                     stdcharges.Text = Math.Round(double.Parse(stdcharges.Text)).ToString();
 
                 }
             }

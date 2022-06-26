@@ -97,11 +97,11 @@
             <ComboBox Name="Plant" Grid.Row="10" Grid.Column="1" Margin="5,0,5,5"  Grid.ColumnSpan="2"/>
             <ComboBox Name="bagtype" Grid.Row="11" Grid.Column="1" Margin="5,0,5,5"  Grid.ColumnSpan="2"/>
             <TextBox Name="Numberbags" TextChanged="totalcalc" PreviewTextInput="NumberValidationTextBox1" Grid.Column="1" Grid.Row="12" Margin="5" Grid.ColumnSpan="2"></TextBox>
-            <TextBox Name="Quan" TextChanged="totalcalc" PreviewTextInput="NumberValidationTextBox" Grid.Column="1" Grid.Row="13" Margin="5,5,10,5"/>
+            <TextBox Name="Quan" TextChanged="totalcalc" PreviewTextInput="NumberValidationTextBox1" Grid.Column="1" Grid.Row="13" Margin="5,5,10,5"/>
             <TextBox Name="quintalrate" TextChanged="totalcalc" PreviewTextInput="NumberValidationTextBox1" Grid.Column="1" Grid.Row="13" Margin="131,5,7,5" Grid.ColumnSpan="2"/>
-            <TextBox Name="Quan1" TextChanged="totalcalc" PreviewTextInput="NumberValidationTextBox" Grid.Column="1" Grid.Row="14" Margin="5,5,10,5"/>
+            <TextBox Name="Quan1" TextChanged="totalcalc" PreviewTextInput="NumberValidationTextBox1" Grid.Column="1" Grid.Row="14" Margin="5,5,10,5"/>
             <TextBox Name="quintalrate1" TextChanged="totalcalc" PreviewTextInput="NumberValidationTextBox1" Grid.Column="1" Grid.Row="14" Margin="131,5,10,5" Grid.ColumnSpan="2"/>
-            <TextBox Name="Quan2" TextChanged="totalcalc" PreviewTextInput="NumberValidationTextBox" Grid.Column="1" Grid.Row="15" Margin="5,5,10,5"/>
+            <TextBox Name="Quan2" TextChanged="totalcalc" PreviewTextInput="NumberValidationTextBox1" Grid.Column="1" Grid.Row="15" Margin="5,5,10,5"/>
             <TextBox Name="quintalrate2" TextChanged="totalcalc" PreviewTextInput="NumberValidationTextBox1" Grid.Column="1" Grid.Row="15" Margin="131,5,7,5" Grid.ColumnSpan="2"/>
             <TextBox Name="comi"  TextChanged="totalcalc"  PreviewTextInput="NumberValidationTextBox1" Grid.Column="1" Grid.Row="16" Margin="5" Grid.ColumnSpan="2"></TextBox>
             <TextBox Name="fm"  TextChanged="totalcalc" PreviewTextInput="NumberValidationTextBox" Grid.Column="3" Grid.Row="16" Margin="49,5,10,5"/>

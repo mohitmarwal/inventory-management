@@ -62,8 +62,8 @@ namespace RibbonWin
             }
             else if (paymentmethod.Text == "CASH")
             {
-                stdcharges.Text = String.Format("{0:0.00}", (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) * 18 / 100)));
-
+                stdcharges.Text = String.Format("{0:0.00}", (((double.Parse(comi.Text)) * 0.05 ) + (((double.Parse(comi.Text)) * 0.05 ) * 18 / 100)));
+                stdcharges.Text = Math.Ceiling(double.Parse(stdcharges.Text)).ToString();
             }
             paystatus.SelectedIndex = -1;
             paystatus.SelectedItem = null;
@@ -347,6 +347,11 @@ namespace RibbonWin
                             subtotal = "" + String.Format("{0:0.00}", (double.Parse(RatePerQuintal) * double.Parse(Quantity) + (double.Parse(quintalrate1.Text) * double.Parse(Quan1.Text))));
                             comi.Text = subtotal;
                         }
+                        if ((quintalrate1.Text.Equals("") && Quan1.Text.Equals("")) && (quintalrate2.Text.Equals("") && Quan2.Text.Equals("")))
+                        {
+                            subtotal = "" + String.Format("{0:0.00}", (double.Parse(RatePerQuintal) * double.Parse(Quantity)));
+                            comi.Text = subtotal;
+                        }
 
                         if ((!quintalrate2.Text.Equals("") && !Quan2.Text.Equals("")) && (quintalrate1.Text.Equals("") && Quan1.Text.Equals("")))
                         {
@@ -457,9 +462,13 @@ namespace RibbonWin
                 }
                 else if (paymentmethod.Text == "CASH")
                 {
-                    stdcharges.Text = String.Format("{0:0.00}", (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) * 18 / 100)));
-
-
+                    TextBox obj = sender as TextBox;
+                    string _name = obj.Name;
+                    if (!_name.Equals("stdcharges"))
+                    {
+                        stdcharges.Text = String.Format("{0:0.00}", (((double.Parse(comi.Text)) * 0.05/100) + (((double.Parse(comi.Text)) * 0.05/100) * 18 / 100)));
+                        stdcharges.Text = Math.Ceiling(double.Parse(stdcharges.Text)).ToString();
+                    }
                 }
              
                 String Quantity = Quan.Text;
@@ -473,6 +482,11 @@ namespace RibbonWin
                         comi.Text = subtotal;
                     }
 
+                    if ((quintalrate1.Text.Equals("") && Quan1.Text.Equals("")) && (quintalrate2.Text.Equals("") && Quan2.Text.Equals("")))
+                    {
+                        subtotal = "" + String.Format("{0:0.00}", (double.Parse(RatePerQuintal) * double.Parse(Quantity)));
+                        comi.Text = subtotal;
+                    }
                     if ((!quintalrate2.Text.Equals("") && !Quan2.Text.Equals("")) && (quintalrate1.Text.Equals("") && Quan1.Text.Equals("")))
                     {
                         subtotal = "" + String.Format("{0:0.00}", (double.Parse(RatePerQuintal) * double.Parse(Quantity) + (double.Parse(quintalrate2.Text) * double.Parse(Quan2.Text))));
@@ -492,10 +506,11 @@ namespace RibbonWin
                 String MS = ms.Text;
                 if (!othercharges.Text.Equals("") || !stdcharges.Text.Equals("") || subtotal.Equals(""))
                 {
-                    String stddeduction = "" + String.Format("{0:0.00}", (double.Parse(othercharges.Text)));
-                    String TotalAmount = "" + String.Format("{0:0.00}", (double.Parse(subtotal) - ((double.Parse(stdcharges.Text)) + double.Parse(othercharges.Text))));
+                    String stddeduction = "" + String.Format("{0:0.00}", Math.Ceiling((double.Parse(othercharges.Text))));
+                    String TotalAmount = "" + String.Format("{0:0.00}", Math.Ceiling((double.Parse(subtotal) - ((double.Parse(stdcharges.Text)) + double.Parse(othercharges.Text)))));
                     TotalAmt.Text = TotalAmount;
-                    
+         
+
                 }
             }
             catch (Exception ex) { TotalAmt.Text = ""; File.WriteAllText("Log.txt", DateTime.Now.ToString() + " : " + ex.ToString());  }
@@ -524,9 +539,10 @@ namespace RibbonWin
                 }
                 else if (paymentmethod.Text == "CASH")
                 {
-                   // stdcharges.Text = "" + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) * 18 / 100));
-                    stdcharges.Text = String.Format("{0:0.00}", (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05) + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05) * 18 / 100)));
-                    
+                    // stdcharges.Text = "" + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) + (((double.Parse(comi.Text) - double.Parse(othercharges.Text)) * 0.05 / 100) * 18 / 100));
+                    stdcharges.Text = String.Format("{0:0.00}", (((double.Parse(comi.Text)) * 0.05/100) + (((double.Parse(comi.Text)) * 0.05/100) * 18 / 100)));
+                    stdcharges.Text = Math.Ceiling(double.Parse(stdcharges.Text)).ToString();
+
 
                 }
             }

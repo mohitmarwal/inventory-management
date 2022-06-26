@@ -343,7 +343,8 @@ namespace RibbonWin
             string Quan2 = "";
             string quintalrate1 = "";
             string quintalrate2 = "";
-            
+            string serial= "";
+            string broker = "";
 
 
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
@@ -363,8 +364,9 @@ namespace RibbonWin
 
                 Partnername = row.ItemArray[2].ToString();
                 mobilenumber = row.ItemArray[3].ToString();
-                email= row.ItemArray[4].ToString();
-                date= row.ItemArray[5].ToString();
+                // email= row.ItemArray[4].ToString();
+                broker = row.ItemArray[31].ToString();
+                date = row.ItemArray[5].ToString();
                 DealerSign = row.ItemArray[6].ToString();
                 ProcurerSign = row.ItemArray[7].ToString();
                 vehicleno = row.ItemArray[8].ToString();
@@ -391,6 +393,7 @@ namespace RibbonWin
                 quintalrate1 = row.ItemArray[28].ToString();
                 Quan2 = row.ItemArray[29].ToString();
                 quintalrate2 = row.ItemArray[30].ToString();
+                serial = row.ItemArray[0].ToString();
 
             }
 
@@ -403,9 +406,10 @@ namespace RibbonWin
             XFont font = new XFont("Verdana", 9, XFontStyle.Regular);
 
             graph.DrawString("Bill No : " + billno, font, XBrushes.Black, new XPoint(450, 50));
+            graph.DrawString("Entry No : " + serial, font, XBrushes.Black, new XPoint(450, 65));
             graph.DrawString("Partner Name : "+ Partnername, font, XBrushes.Black, new XPoint(80, 220));
             graph.DrawString("Mobile Number : " + mobilenumber, font, XBrushes.Black, new XPoint(80, 240));
-            graph.DrawString("Email Id : " + email, font, XBrushes.Black, new XPoint(80, 260));
+            graph.DrawString("Broker  : " + broker, font, XBrushes.Black, new XPoint(80, 260));
             graph.DrawString("Date : " + date, font, XBrushes.Black, new XPoint(80, 280));
             graph.DrawString("Dealer : " + DealerSign, font, XBrushes.Black, new XPoint(80, 300));
             graph.DrawString("Procurer : " + ProcurerSign, font, XBrushes.Black, new XPoint(80, 320));
@@ -417,11 +421,28 @@ namespace RibbonWin
             graph.DrawString("Quantity : " + Quantity, font, XBrushes.Black, new XPoint(80, 400));
             graph.DrawString("No of Bags : " + Numberbags, font, XBrushes.Black, new XPoint(80, 420));
             graph.DrawString("Rate Per Qunintal : " + RatePerQuintal, font, XBrushes.Black, new XPoint(80, 440));
-            graph.DrawString("Quantity1 : " + Quan1, font, XBrushes.Black, new XPoint(80, 460));
-            graph.DrawString("Rate Per Qunintal1 : " + quintalrate1, font, XBrushes.Black, new XPoint(80, 480));
-            graph.DrawString("Quantity2 : " + Quan2, font, XBrushes.Black, new XPoint(80, 500));
-            graph.DrawString("Rate Per Qunintal2 : " + quintalrate2, font, XBrushes.Black, new XPoint(80, 520));
-            graph.DrawString("Subtotal : " + Commission, font, XBrushes.Black, new XPoint(80, 540));
+            if (!Quan1.Equals("0"))
+            {
+                graph.DrawString("Quantity1 : " + Quan1, font, XBrushes.Black, new XPoint(80, 460));
+                graph.DrawString("Rate Per Qunintal1 : " + quintalrate1, font, XBrushes.Black, new XPoint(80, 480));
+               
+            }
+            if (!Quan2.Equals("0"))
+            {
+                graph.DrawString("Quantity2 : " + Quan2, font, XBrushes.Black, new XPoint(80, 500));
+                graph.DrawString("Rate Per Qunintal2 : " + quintalrate2, font, XBrushes.Black, new XPoint(80, 520));
+                graph.DrawString("Subtotal : " + Commission, font, XBrushes.Black, new XPoint(80, 540));
+            }
+            if((Quan1.Equals("0"))&& (Quan2.Equals("0")))
+            graph.DrawString("Subtotal : " + Commission, font, XBrushes.Black, new XPoint(80, 460));
+
+            if ((Quan1.Equals("0")) && !(Quan2.Equals("0")))
+                graph.DrawString("Subtotal : " + Commission, font, XBrushes.Black, new XPoint(80, 540));
+
+
+            if (!(Quan1.Equals("0")) && (Quan2.Equals("0")))
+                graph.DrawString("Subtotal : " + Commission, font, XBrushes.Black, new XPoint(80, 500));
+
             graph.DrawString("Comission : " + StandarCharges, font, XBrushes.Black, new XPoint(320, 480));
             graph.DrawString("FM : " + FM, font, XBrushes.Black, new XPoint(320, 400));
             graph.DrawString("DM : " + DM, font, XBrushes.Black, new XPoint(320, 420));
