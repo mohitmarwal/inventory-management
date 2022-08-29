@@ -40,7 +40,7 @@ namespace RibbonWin
 
         private void btnDialogOk_Click(object sender, RoutedEventArgs e)
         {
-            string query2 = "INSERT INTO `plant` (`Name`, `id`) VALUES ('" + txtAnswer.Text + "', NULL)";
+            string query2 = "INSERT INTO `plant` (`Name`, `id`,`FM`,`DS`,`MS`,`GS`,`SS`,`Hamali`,`Bankcomm`) VALUES ('" + txtAnswer.Text+ "', '" + FM.Text + "', '" + DS.Text + "', '" + MS.Text + "', '" + GS.Text + "', '" + SS.Text + "', '" + Hamali.Text + "', '" + BankComm.Text + "', NULL)";
             //open connection
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";

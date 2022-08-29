@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RibbonWin"
         mc:Ignorable="d"
-        Title="Plant" Height="450" Width="800">
-    <Grid Margin="15">
+        Title="Plant" Height="472.857" Width="415.715">
+    <Grid Margin="15,0,-366,44" Height="389" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="762">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
@@ -17,12 +17,26 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Label Name="lblQuestion" Grid.Column="1">Enter the plant Name :</Label>
-        <TextBox Name="txtAnswer" Grid.Column="1" Grid.Row="1" MinWidth="250"></TextBox>
+        <Label Name="lblQuestion" Grid.Column="1" Margin="0,9,410,15">Enter the plant Name :</Label>
+        <TextBox Name="txtAnswer" Grid.Column="1" MinWidth="250" Width="232" Margin="0,9,385,15" HorizontalAlignment="Right"/>
 
-        <WrapPanel Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="0,15,0,0">
-            <Button IsDefault="True" Name="btnDialogOk" Click="btnDialogOk_Click" MinWidth="60" Margin="0,0,10,0">_Ok</Button>
-            <Button IsCancel="True" MinWidth="60" Click="Button_Click">_Cancel</Button>
-        </WrapPanel>
+
+        <Button IsDefault="True" x:Name="btnDialogOk" Click="btnDialogOk_Click" MinWidth="60" Margin="34,257,627,-253" Content="_Ok" Grid.Column="1" Grid.Row="2"/>
+        <Button IsCancel="True" MinWidth="60" Click="Button_Click" Content="_Cancel" Grid.Column="1" Margin="178,257,478,-253" Grid.Row="2"/>
+        <Label x:Name="ptremailr_Copy" Grid.Column="1" Margin="10,18,603,-9" Grid.Row="2" Content="FM :"/>
+        <TextBox x:Name="FM" Grid.Column="1" MinWidth="0" Margin="75,18,0,-1" Grid.Row="2" HorizontalAlignment="Left" Width="176"/>
+        <Label x:Name="ptremailr_Copy1" Grid.Column="1" Margin="0,53,603,-44" Grid.Row="2" Content="DS :" HorizontalAlignment="Right" Width="149"/>
+        <TextBox x:Name="DS" Grid.Column="1" MinWidth="0" Margin="75,53,0,-36" Grid.Row="2" HorizontalAlignment="Left" Width="176"/>
+        <Label x:Name="ptremailr_Copy2" Grid.Column="1" Margin="10,85,603,-76" Grid.Row="2" Content="MS :"/>
+        <TextBox x:Name="MS" Grid.Column="1" MinWidth="0" Margin="75,85,0,-68" Grid.Row="2" HorizontalAlignment="Left" Width="176"/>
+        <Label x:Name="ptremailr_Copy3" Grid.Column="1" Margin="10,117,603,-108" Grid.Row="2" Content="GS :"/>
+        <TextBox x:Name="GS" Grid.Column="1" MinWidth="0" Margin="75,117,0,-100" Grid.Row="2" HorizontalAlignment="Left" Width="176"/>
+        <Label x:Name="ptremailr_Copy4" Grid.Column="1" Margin="10,149,603,-140" Grid.Row="2" Content="SS :"/>
+        <TextBox x:Name="SS" Grid.Column="1" MinWidth="0" Margin="75,152,0,-135" Grid.Row="2" HorizontalAlignment="Left" Width="176"/>
+        <Label x:Name="ptremailr_Copy5" Grid.Column="1" Margin="10,176,603,-167" Grid.Row="2" Content="Hamali :"/>
+        <TextBox x:Name="Hamali" Grid.Column="1" MinWidth="0" Margin="75,184,0,-167" Grid.Row="2" HorizontalAlignment="Left" Width="176"/>
+        <Label x:Name="ptremailr_Copy6" Grid.Column="1" Margin="10,208,603,-199" Grid.Row="2" Content="Bank Commission:"/>
+        <TextBox x:Name="BankComm" Grid.Column="1" MinWidth="0" Margin="127,216,0,-199" Grid.Row="2" HorizontalAlignment="Left" Width="176"/>
+
     </Grid>
 </Window>

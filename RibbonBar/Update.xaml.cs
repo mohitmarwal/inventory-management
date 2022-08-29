@@ -173,6 +173,13 @@ namespace RibbonWin
                     Quan2.Text = row.ItemArray[29].ToString();
                     quintalrate2.Text = row.ItemArray[30].ToString();
                     billno.Text = row.ItemArray[1].ToString();
+                    br1.Text= row.ItemArray[32].ToString();
+                    br2.Text = row.ItemArray[33].ToString();
+                    br3.Text = row.ItemArray[34].ToString();
+                    bq1.Text = row.ItemArray[35].ToString();
+                    bq2.Text = row.ItemArray[36].ToString();
+                    bq3.Text = row.ItemArray[37].ToString();
+                    ss.Text = row.ItemArray[42].ToString();
 
                 }
             }
@@ -417,7 +424,7 @@ namespace RibbonWin
             }
 
 
-            string query2 = "UPDATE `inventory` set PartnerName='" + Partnername.Text + "', MobileNumber='" + mobilenumber.Text + "', Billno='" + billno.Text + "', EmailId='" + email.Text + "',  Date='" + Date + "', DealerSign='" + dealer.Text + "', ProcurerSign='" + procurer.Text + "', Transportation='" + vehicleno.Text + "', GoodType='" + goodtype.Text + "', PlantName='" + Plant.Text + "', Quantity='" + Quan.Text + "', BagType='" + bagtype.Text + "', NoBags='" + Numberbags.Text + "', RatePerQuintal='" + quintalrate.Text + "', Subtotal='" + comi.Text + "', TransactionCharges='" + stdcharges.Text + "', QualityDeduction='" + othercharges.Text + "', FM='" + FM + "', DM='" + DM + "', MS='" + MS + "', TotalAmount='" + TotalAmt.Text + "', PaymentMethod='" + paymentmethod.Text + "', PaymentStatus='" + status + "', HandOver='" + payreceived.Text + "', Remarks='" + remark.Text + "', `Amount Pending`='" + amountpending.Text + "', `Quantity1`='" + Quan1.Text + "', `Rate1`='" + quintalrate1.Text + "', `Quantity2`='" + Quan2.Text + "', `Rate2`='" + quintalrate2.Text + "', `broker`='" + Brokername.Text + "' WHERE Billno=" + entryno;
+            string query2 = "UPDATE `inventory` set PartnerName='" + Partnername.Text + "', MobileNumber='" + mobilenumber.Text + "', Billno='" + billno.Text + "', EmailId='" + email.Text + "',  Date='" + Date + "', DealerSign='" + dealer.Text + "', ProcurerSign='" + procurer.Text + "', Transportation='" + vehicleno.Text + "', GoodType='" + goodtype.Text + "', PlantName='" + Plant.Text + "', Quantity='" + Quan.Text + "', BagType='" + bagtype.Text + "', NoBags='" + Numberbags.Text + "', RatePerQuintal='" + quintalrate.Text + "', Subtotal='" + comi.Text + "', TransactionCharges='" + stdcharges.Text + "', QualityDeduction='" + othercharges.Text + "', FM='" + FM + "', DM='" + DM + "', MS='" + MS + "', TotalAmount='" + TotalAmt.Text + "', PaymentMethod='" + paymentmethod.Text + "', PaymentStatus='" + status + "', HandOver='" + payreceived.Text + "', Remarks='" + remark.Text + "', `Amount Pending`='" + amountpending.Text + "', `Quantity1`='" + Quan1.Text + "', `Rate1`='" + quintalrate1.Text + "', `Quantity2`='" + Quan2.Text + "', `Rate2`='" + quintalrate2.Text + "', `broker`='" + Brokername.Text + "', `BR1`='" + br1.Text + "', `BR2`='" + br2.Text+ "', `BR3`='" + br3.Text + "', `BQ1`='" + bq1.Text + "', `BQ2`='" + bq2.Text + "', `BQ3`='" + bq3.Text + "', `SS`='" + ss.Text + "' WHERE Billno=" + entryno;
             //open connection
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
@@ -451,7 +458,7 @@ namespace RibbonWin
         }
 
         async private void totalcalc(object sender, TextChangedEventArgs e)
-        {
+        {/*
             String subtotal = "";
             await Task.Delay(10);
             try
@@ -519,7 +526,7 @@ namespace RibbonWin
                 }
             }
             catch (Exception ex) { TotalAmt.Text = ""; File.WriteAllText("Log.txt", DateTime.Now.ToString() + " : " + ex.ToString()); }
-
+            */
         }
 
         private void onpending(object sender, TextChangedEventArgs e)
@@ -562,6 +569,11 @@ namespace RibbonWin
                 }
             }
             catch (Exception ex) { File.WriteAllText("Log.txt", DateTime.Now.ToString() + " : " + ex.ToString()); };
+        }
+
+        private void Calculate(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

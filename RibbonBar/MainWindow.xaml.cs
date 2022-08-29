@@ -488,5 +488,17 @@ namespace RibbonWin
             EmployeFrom = null;
             view = null;
         }
+
+        private void onmarginclick(object sender, RoutedEventArgs e)
+        {
+            RibbonWin.margin dialog = new RibbonWin.margin();
+            dialog.ShowDialog();
+            UIPanel.Children.Remove(EmployeFrom);
+            UIPanel.Children.Remove(view);
+            UIPanel.Children.Remove(up);
+            up = null;
+            EmployeFrom = null;
+            view = null;
+        }
     }
 }

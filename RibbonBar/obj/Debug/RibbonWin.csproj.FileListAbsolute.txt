@@ -260,3 +260,5 @@ C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\Inventory App.exe
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\Inventory App.pdb
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\broker.g.cs
 C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\broker.baml
+C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\margin.g.cs
+C:\Users\mohit\Downloads\RibbonWin\RibbonBar\obj\Debug\margin.baml

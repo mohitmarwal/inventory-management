@@ -159,6 +159,9 @@
     <Compile Include="datepicker.xaml.cs">
       <DependentUpon>datepicker.xaml</DependentUpon>
     </Compile>
+    <Compile Include="margin.xaml.cs">
+      <DependentUpon>margin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="plant.xaml.cs">
       <DependentUpon>plant.xaml</DependentUpon>
     </Compile>
@@ -199,6 +202,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="datepicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="margin.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

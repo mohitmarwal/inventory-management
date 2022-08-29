@@ -67,6 +67,8 @@
                     </RibbonApplicationMenuItem>
                     <RibbonApplicationMenuItem ImageSource="Images\redo.png" Header="Change Admin Password"  Click="on_pass" KeyTip="V" >
                     </RibbonApplicationMenuItem>
+                    <RibbonApplicationMenuItem ImageSource="Images\add.png" Header="Add Margin"  Click="onmarginclick" KeyTip="V" >
+                    </RibbonApplicationMenuItem>
                 </RibbonGroup>
             </RibbonTab>
         </Ribbon>
