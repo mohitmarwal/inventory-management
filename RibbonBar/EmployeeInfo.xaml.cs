@@ -552,8 +552,173 @@ namespace RibbonWin
 
         private void Calculate(object sender, RoutedEventArgs e)
         {
-            subtotal.Text = "" +((double.Parse(bq1.Text)) * (double.Parse(quintalrate.Text)) + (double.Parse(quintalrate1.Text)) * (double.Parse(bq2.Text)) + (double.Parse(bq3.Text)) * (double.Parse(quintalrate2.Text)));
-            shortage.Text = "" + ((((double.Parse(bq1.Text))- (double.Parse(Quan.Text)))* (double.Parse(br1.Text)))+ (((double.Parse(bq2.Text)) - (double.Parse(Quan1.Text))) * (double.Parse(br2.Text))) + (((double.Parse(bq3.Text)) - (double.Parse(Quan2.Text))) * (double.Parse(br3.Text))));
+            if (Quan.Text == "") { Quan.Text = "0"; }if (Quan1.Text == "") { Quan1.Text = "0"; }if (Quan2.Text == "") { Quan2.Text = "0"; }
+            if (quintalrate.Text == "") { quintalrate.Text = "0"; }if (quintalrate1.Text == "") { quintalrate1.Text = "0"; }if (quintalrate2.Text == "") { quintalrate2.Text = "0"; }
+            if (br1.Text == "") { br1.Text = "0"; }if (br2.Text == "") { br2.Text = "0"; }if (br3.Text == "") { br3.Text = "0"; }
+            if (bq1.Text == "") { bq1.Text = "0"; }if (bq2.Text == "") { bq2.Text = "0"; } if (bq3.Text == "") { bq3.Text = "0"; }
+            if (dm.Text == "") { dm.Text = "0"; }if (ms.Text == "") { bq2.Text = "0"; }if (fm.Text == "") { fm.Text = "0"; }if (ss.Text == "") { ss.Text = "0"; }if (gs.Text == "") { ss.Text = "0"; }
+
+            subtotal.Text = "" + Math.Round(((double.Parse(bq1.Text)) * (double.Parse(quintalrate.Text)) + (double.Parse(quintalrate1.Text)) * (double.Parse(bq2.Text)) + (double.Parse(bq3.Text)) * (double.Parse(quintalrate2.Text))), MidpointRounding.AwayFromZero);
+            shortage.Text = "" + Math.Round(((((double.Parse(bq1.Text))- (double.Parse(Quan.Text)))* (double.Parse(br1.Text)))+ (((double.Parse(bq2.Text)) - (double.Parse(Quan1.Text))) * (double.Parse(br2.Text))) + (((double.Parse(bq3.Text)) - (double.Parse(Quan2.Text))) * (double.Parse(br3.Text)))), MidpointRounding.AwayFromZero);
+            connectionString = "SERVER=" + server + ";" + "DATABASE=" +
+             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+
+            double dsmultiplier=0; double fmmultiplier=0; double gsmultiplier=0; double msmultiplier=0; double ssmultiplier=0;
+
+            connection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
+            connection.Open();
+            MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand("select Rate From ds WHERE " + dm.Text+ " between Min and Max and Plant ='"+Plant.Text+"'", connection);
+
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataTable table = new DataTable("myTable");
+            da.Fill(table);
+
+            foreach (DataRow row in table.Rows)
+            {
+                for (int i = 0; i < row.ItemArray.Length; i++)
+                {
+                    dsmultiplier = double.Parse( row.ItemArray[i].ToString());
+
+                }
+            }
+
+            connection.Close();
+
+           
+            connection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
+            connection.Open();
+            cmd = new MySql.Data.MySqlClient.MySqlCommand("select Rate From fm WHERE " + fm.Text + " between Min and Max and Plant ='" + Plant.Text + "'", connection);
+
+            da = new MySqlDataAdapter(cmd);
+             table = new DataTable("myTable");
+            da.Fill(table);
+
+            foreach (DataRow row in table.Rows)
+            {
+                for (int i = 0; i < row.ItemArray.Length; i++)
+                {
+                    fmmultiplier = double.Parse(row.ItemArray[i].ToString());
+
+                }
+            }
+
+            connection.Close();
+
+          
+            connection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
+            connection.Open();
+            cmd = new MySql.Data.MySqlClient.MySqlCommand("select Rate From gs WHERE " + gs.Text + " between Min and Max and Plant ='" + Plant.Text + "'", connection);
+            da = new MySqlDataAdapter(cmd);
+            table = new DataTable("myTable");
+            da.Fill(table);
+
+            foreach (DataRow row in table.Rows)
+            {
+                for (int i = 0; i < row.ItemArray.Length; i++)
+                {
+                    gsmultiplier = double.Parse(row.ItemArray[i].ToString());
+
+                }
+            }
+
+            connection.Close();
+
+           
+            connection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
+            connection.Open();
+            cmd = new MySql.Data.MySqlClient.MySqlCommand("select Rate From ms WHERE " + ms.Text + " between Min and Max and Plant ='" + Plant.Text + "'", connection);
+
+            da = new MySqlDataAdapter(cmd);
+            table = new DataTable("myTable");
+            da.Fill(table);
+
+            foreach (DataRow row in table.Rows)
+            {
+                for (int i = 0; i < row.ItemArray.Length; i++)
+                {
+                    msmultiplier = double.Parse(row.ItemArray[i].ToString());
+
+                }
+            }
+
+            connection.Close();
+
+            
+            connection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
+            connection.Open();
+            cmd = new MySql.Data.MySqlClient.MySqlCommand("select Rate From ms WHERE " + ss.Text + " between Min and Max and Plant ='" + Plant.Text + "'", connection);
+
+            da = new MySqlDataAdapter(cmd);
+            table = new DataTable("myTable");
+            da.Fill(table);
+
+            foreach (DataRow row in table.Rows)
+            {
+                for (int i = 0; i < row.ItemArray.Length; i++)
+                {
+                    ssmultiplier = double.Parse(row.ItemArray[i].ToString());
+
+                }
+            }
+
+            connection.Close();
+
+            double hamali=0;
+            connection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
+            connection.Open();
+            cmd = new MySql.Data.MySqlClient.MySqlCommand("select Rate From hamali WHERE Plant ='" + Plant.Text + "'" + " and Bagtype ='" +bagtype.Text +"'", connection);
+
+            da = new MySqlDataAdapter(cmd);
+            table = new DataTable("myTable");
+            da.Fill(table);
+
+            foreach (DataRow row in table.Rows)
+            {
+                for (int i = 0; i < row.ItemArray.Length; i++)
+                {
+                    hamali = double.Parse(row.ItemArray[i].ToString());
+
+                }
+            }
+
+            connection.Close();
+
+            double fmcal; double fmcal1; double fmcal2; double fmcal3;
+            double dmcal; double dmcal1; double dmcal2; double dmcal3;
+            double mscal; double mscal1; double mscal2; double mscal3;
+            double sscal; double sscal1; double sscal2; double sscal3;
+            double gscal; double gscal1; double gscal2; double gscal3;
+            double finaldedcution;
+
+            fmcal1 = Math.Round((double.Parse(br1.Text)) * (double.Parse(bq1.Text)) * (fmmultiplier / 100), MidpointRounding.AwayFromZero);
+            dmcal1 = Math.Round((double.Parse(br1.Text)) * (double.Parse(bq1.Text)) * (dsmultiplier / 100), MidpointRounding.AwayFromZero); 
+            gscal1 = Math.Round((double.Parse(br1.Text)) * (double.Parse(bq1.Text)) * (gsmultiplier / 100), MidpointRounding.AwayFromZero);
+            sscal1 = Math.Round((double.Parse(br1.Text)) * (double.Parse(bq1.Text)) * (ssmultiplier / 100), MidpointRounding.AwayFromZero); 
+            mscal1 = Math.Round((double.Parse(br1.Text)) * (double.Parse(bq1.Text)) * (msmultiplier / 100), MidpointRounding.AwayFromZero);
+
+            fmcal2 = Math.Round((double.Parse(br2.Text)) * (double.Parse(bq2.Text)) * (fmmultiplier / 100), MidpointRounding.AwayFromZero);
+            dmcal2 = Math.Round((double.Parse(br2.Text)) * (double.Parse(bq2.Text)) * (dsmultiplier / 100), MidpointRounding.AwayFromZero);
+            gscal2 = Math.Round((double.Parse(br2.Text)) * (double.Parse(bq2.Text)) * (gsmultiplier / 100), MidpointRounding.AwayFromZero);
+            sscal2 = Math.Round((double.Parse(br2.Text)) * (double.Parse(bq2.Text)) * (ssmultiplier / 100), MidpointRounding.AwayFromZero);
+            mscal2 = Math.Round((double.Parse(br2.Text)) * (double.Parse(bq2.Text)) * (msmultiplier / 100), MidpointRounding.AwayFromZero);
+
+            fmcal3 = Math.Round((double.Parse(br3.Text)) * (double.Parse(bq3.Text)) * (fmmultiplier / 100), MidpointRounding.AwayFromZero);
+            dmcal3= Math.Round((double.Parse(br3.Text))  *  (double.Parse(bq3.Text)) * (dsmultiplier / 100), MidpointRounding.AwayFromZero);
+            gscal3 = Math.Round((double.Parse(br3.Text)) * (double.Parse(bq3.Text)) * (gsmultiplier / 100), MidpointRounding.AwayFromZero);
+            sscal3 = Math.Round((double.Parse(br3.Text)) * (double.Parse(bq3.Text)) * (ssmultiplier / 100), MidpointRounding.AwayFromZero);
+            mscal3 = Math.Round((double.Parse(br3.Text)) * (double.Parse(bq3.Text)) * (msmultiplier / 100), MidpointRounding.AwayFromZero);
+
+            fmcal = fmcal1 + fmcal2 + fmcal3;
+            dmcal = dmcal1 + dmcal2 + dmcal3;
+            gscal = gscal1 + gscal2 + gscal3;
+            sscal = sscal1 + sscal2 + sscal3;
+            mscal = mscal1 + mscal2 + mscal3;
+
+           finaldedcution = fmcal + dmcal + gscal + sscal + mscal + (hamali * (double.Parse(Numberbags.Text))) ;
+
+           
+
+
         }
     }
 }

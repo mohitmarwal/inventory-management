@@ -18,40 +18,40 @@
         </Grid.RowDefinitions>
 
         <Label Name="ptrname" Grid.Column="1" Margin="0,0,667,32" Grid.RowSpan="2" Grid.Row="1">Fm :</Label>
-        <TextBox Name="ptrnametxt" Grid.Column="1" MinWidth="0" Margin="138,10,0,0" HorizontalAlignment="Left" Width="60" Grid.RowSpan="2"/>
+        <TextBox Name="fmmax" Grid.Column="1" MinWidth="0" Margin="138,10,0,0" HorizontalAlignment="Left" Width="60" Grid.RowSpan="2"/>
 
         <Label Name="ptrnumber" Grid.Column="1" Margin="0,5,667,4" Grid.Row="2">Dm :</Label>
-        <TextBox Name="prtnumbertxt" Grid.Column="1" MinWidth="0" Margin="138,10,0,7" Grid.Row="2" HorizontalAlignment="Left" Width="60"/>
+        <TextBox Name="dmmax" Grid.Column="1" MinWidth="0" Margin="138,10,0,7" Grid.Row="2" HorizontalAlignment="Left" Width="60"/>
 
         <Label Name="ptremailr" Grid.Column="1" Margin="0,36,667,-27" Grid.Row="2">Ms :</Label>
-        <TextBox Name="ptremailrtxt" Grid.Column="1" MinWidth="0" Margin="138,46,0,-29" Grid.Row="2" HorizontalAlignment="Left" Width="60"/>
-        <ComboBox Name="Plant" Grid.Column="1" MinWidth="0" Margin="279,0,0,0"  HorizontalAlignment="Left" Width="63" Height="22" VerticalAlignment="Bottom" Grid.Row="1"/>
+        <TextBox Name="msmax" Grid.Column="1" MinWidth="0" Margin="138,46,0,-29" Grid.Row="2" HorizontalAlignment="Left" Width="60"/>
+        <ComboBox Name="plantfm" Grid.Column="1" MinWidth="0" Margin="279,0,0,0"  HorizontalAlignment="Left" Width="63" Height="22" VerticalAlignment="Bottom" Grid.Row="1"/>
 
         <Button IsCancel="True" MinWidth="60" Click="Button_Click" Grid.Column="1" Margin="195,141,0,-132" Grid.Row="2" HorizontalAlignment="Left" Width="79">_Cancel</Button>
         <Button IsDefault="True" x:Name="btnDialogOk" Click="btnDialogOk_Click" MinWidth="60" Margin="93,141,0,-131" Content="_Ok" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" Width="76"/>
         <Label x:Name="ptremailr_Copy" Grid.Column="1" Margin="0,63,679,-54" Grid.Row="2" Content="Ss:"/>
         <Label x:Name="ptremailr_Copy1" Grid.Column="1" Margin="0,90,679,-81" Grid.Row="2" Content="Gs:"/>
-        <TextBox x:Name="ptrnametxt_Copy" Grid.Column="1" MinWidth="0" Margin="61,10,0,0" HorizontalAlignment="Left" Width="60" Grid.RowSpan="2" Height="20" VerticalAlignment="Top"/>
-        <TextBox x:Name="prtnumbertxt_Copy" Grid.Column="1" MinWidth="0" Margin="61,10,0,7" Grid.Row="2" HorizontalAlignment="Left" Width="60"/>
-        <TextBox x:Name="ptremailrtxt_Copy" Grid.Column="1" MinWidth="0" Margin="61,44,0,-27" Grid.Row="2" HorizontalAlignment="Left" Width="60"/>
-        <TextBox x:Name="ptremailrtxt_Copy1" Grid.Column="1" MinWidth="0" Margin="138,73,0,-56" Grid.Row="2" HorizontalAlignment="Left" Width="60"/>
-        <TextBox x:Name="ptremailrtxt_Copy2" Grid.Column="1" MinWidth="0" Margin="61,71,0,-54" Grid.Row="2" HorizontalAlignment="Left" Width="60"/>
-        <TextBox x:Name="ptremailrtxt_Copy3" Grid.Column="1" MinWidth="0" Margin="138,100,0,-83" Grid.Row="2" HorizontalAlignment="Left" Width="60"/>
-        <TextBox x:Name="ptremailrtxt_Copy4" Grid.Column="1" MinWidth="0" Margin="61,98,0,-81" Grid.Row="2" HorizontalAlignment="Left" Width="60"/>
+        <TextBox x:Name="fmmin" Grid.Column="1" MinWidth="0" Margin="61,10,0,0" HorizontalAlignment="Left" Width="60" Grid.RowSpan="2" Height="20" VerticalAlignment="Top"/>
+        <TextBox x:Name="dmmin" Grid.Column="1" MinWidth="0" Margin="61,10,0,7" Grid.Row="2" HorizontalAlignment="Left" Width="60"/>
+        <TextBox x:Name="msmin" Grid.Column="1" MinWidth="0" Margin="61,44,0,-27" Grid.Row="2" HorizontalAlignment="Left" Width="60"/>
+        <TextBox x:Name="ssmax" Grid.Column="1" MinWidth="0" Margin="138,73,0,-56" Grid.Row="2" HorizontalAlignment="Left" Width="60"/>
+        <TextBox x:Name="ssmin" Grid.Column="1" MinWidth="0" Margin="61,71,0,-54" Grid.Row="2" HorizontalAlignment="Left" Width="60"/>
+        <TextBox x:Name="gsmax" Grid.Column="1" MinWidth="0" Margin="138,100,0,-83" Grid.Row="2" HorizontalAlignment="Left" Width="60"/>
+        <TextBox x:Name="gsmin" Grid.Column="1" MinWidth="0" Margin="61,98,0,-81" Grid.Row="2" HorizontalAlignment="Left" Width="60"/>
         <Label x:Name="ptrname_Copy" Grid.Column="1" Margin="117,0,570,2" Content="  -" Height="20" VerticalAlignment="Bottom" Grid.RowSpan="2"/>
         <Label x:Name="ptrname_Copy1" Grid.Column="1" Margin="117,0,570,7" Content="  -" Height="20" VerticalAlignment="Bottom" Grid.Row="2"/>
         <Label x:Name="ptrname_Copy2" Grid.Column="1" Margin="117,0,570,-28" Content="  -" Height="20" VerticalAlignment="Bottom" Grid.Row="2"/>
         <Label x:Name="ptrname_Copy3" Grid.Column="1" Margin="117,0,570,-52" Content="  -" Height="20" VerticalAlignment="Bottom" Grid.Row="2"/>
         <Label x:Name="ptrname_Copy4" Grid.Column="1" Margin="117,0,570,-81" Content="  -" Height="20" VerticalAlignment="Bottom" Grid.Row="2"/>
-        <ComboBox x:Name="Plant1" Grid.Column="1" MinWidth="0" Margin="279,0,0,4"  HorizontalAlignment="Left" Width="63" Height="22" VerticalAlignment="Bottom" Grid.Row="2"/>
-        <ComboBox x:Name="Plant2" Grid.Column="1" MinWidth="0" Margin="279,0,0,-32"  HorizontalAlignment="Left" Width="63" Height="22" VerticalAlignment="Bottom" Grid.Row="2"/>
-        <ComboBox x:Name="Plant3" Grid.Column="1" MinWidth="0" Margin="279,0,0,-59"  HorizontalAlignment="Left" Width="63" Height="22" VerticalAlignment="Bottom" Grid.Row="2"/>
-        <ComboBox x:Name="Plant4" Grid.Column="1" MinWidth="0" Margin="279,0,0,-86"  HorizontalAlignment="Left" Width="63" Height="22" VerticalAlignment="Bottom" Grid.Row="2" RenderTransformOrigin="0.508,0.045"/>
-        <TextBox x:Name="ptrnametxt_Copy1" Grid.Column="1" MinWidth="0" Margin="214,5,0,0" HorizontalAlignment="Left" Width="60" Grid.Row="1"/>
-        <TextBox x:Name="ptrnametxt_Copy2" Grid.Column="1" MinWidth="0" Margin="214,10,0,4" HorizontalAlignment="Left" Width="60" Grid.Row="2"/>
-        <TextBox x:Name="ptrnametxt_Copy3" Grid.Column="1" MinWidth="0" Margin="214,44,0,-30" HorizontalAlignment="Left" Width="60" Grid.Row="2"/>
-        <TextBox x:Name="ptrnametxt_Copy4" Grid.Column="1" MinWidth="0" Margin="214,71,0,-57" HorizontalAlignment="Left" Width="60" Grid.Row="2"/>
-        <TextBox x:Name="ptrnametxt_Copy5" Grid.Column="1" MinWidth="0" Margin="214,100,0,-86" HorizontalAlignment="Left" Width="60" Grid.Row="2"/>
+        <ComboBox x:Name="plantdm" Grid.Column="1" MinWidth="0" Margin="279,0,0,4"  HorizontalAlignment="Left" Width="63" Height="22" VerticalAlignment="Bottom" Grid.Row="2"/>
+        <ComboBox x:Name="plantms" Grid.Column="1" MinWidth="0" Margin="279,0,0,-32"  HorizontalAlignment="Left" Width="63" Height="22" VerticalAlignment="Bottom" Grid.Row="2"/>
+        <ComboBox x:Name="plantss" Grid.Column="1" MinWidth="0" Margin="279,0,0,-59"  HorizontalAlignment="Left" Width="63" Height="22" VerticalAlignment="Bottom" Grid.Row="2"/>
+        <ComboBox x:Name="plantgs" Grid.Column="1" MinWidth="0" Margin="279,0,0,-86"  HorizontalAlignment="Left" Width="63" Height="22" VerticalAlignment="Bottom" Grid.Row="2" RenderTransformOrigin="0.508,0.045"/>
+        <TextBox x:Name="fmrate" Grid.Column="1" MinWidth="0" Margin="214,5,0,0" HorizontalAlignment="Left" Width="60" Grid.Row="1"/>
+        <TextBox x:Name="dmrate" Grid.Column="1" MinWidth="0" Margin="214,10,0,4" HorizontalAlignment="Left" Width="60" Grid.Row="2"/>
+        <TextBox x:Name="msmrate" Grid.Column="1" MinWidth="0" Margin="214,44,0,-30" HorizontalAlignment="Left" Width="60" Grid.Row="2"/>
+        <TextBox x:Name="ssrate" Grid.Column="1" MinWidth="0" Margin="214,71,0,-57" HorizontalAlignment="Left" Width="60" Grid.Row="2"/>
+        <TextBox x:Name="gsrate" Grid.Column="1" MinWidth="0" Margin="214,100,0,-86" HorizontalAlignment="Left" Width="60" Grid.Row="2"/>
 
     </Grid>
 </Window>

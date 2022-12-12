@@ -17,26 +17,20 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Label Name="lblQuestion" Grid.Column="1" Margin="0,9,410,15">Enter the plant Name :</Label>
+        <Label Name="lblQuestion" Grid.Column="1" Margin="0,9,635,15">Enter the plant Name :</Label>
         <TextBox Name="txtAnswer" Grid.Column="1" MinWidth="250" Width="232" Margin="0,9,385,15" HorizontalAlignment="Right"/>
 
 
-        <Button IsDefault="True" x:Name="btnDialogOk" Click="btnDialogOk_Click" MinWidth="60" Margin="34,257,627,-253" Content="_Ok" Grid.Column="1" Grid.Row="2"/>
-        <Button IsCancel="True" MinWidth="60" Click="Button_Click" Content="_Cancel" Grid.Column="1" Margin="178,257,478,-253" Grid.Row="2"/>
-        <Label x:Name="ptremailr_Copy" Grid.Column="1" Margin="10,18,603,-9" Grid.Row="2" Content="FM :"/>
-        <TextBox x:Name="FM" Grid.Column="1" MinWidth="0" Margin="75,18,0,-1" Grid.Row="2" HorizontalAlignment="Left" Width="176"/>
-        <Label x:Name="ptremailr_Copy1" Grid.Column="1" Margin="0,53,603,-44" Grid.Row="2" Content="DS :" HorizontalAlignment="Right" Width="149"/>
-        <TextBox x:Name="DS" Grid.Column="1" MinWidth="0" Margin="75,53,0,-36" Grid.Row="2" HorizontalAlignment="Left" Width="176"/>
-        <Label x:Name="ptremailr_Copy2" Grid.Column="1" Margin="10,85,603,-76" Grid.Row="2" Content="MS :"/>
-        <TextBox x:Name="MS" Grid.Column="1" MinWidth="0" Margin="75,85,0,-68" Grid.Row="2" HorizontalAlignment="Left" Width="176"/>
-        <Label x:Name="ptremailr_Copy3" Grid.Column="1" Margin="10,117,603,-108" Grid.Row="2" Content="GS :"/>
-        <TextBox x:Name="GS" Grid.Column="1" MinWidth="0" Margin="75,117,0,-100" Grid.Row="2" HorizontalAlignment="Left" Width="176"/>
-        <Label x:Name="ptremailr_Copy4" Grid.Column="1" Margin="10,149,603,-140" Grid.Row="2" Content="SS :"/>
-        <TextBox x:Name="SS" Grid.Column="1" MinWidth="0" Margin="75,152,0,-135" Grid.Row="2" HorizontalAlignment="Left" Width="176"/>
-        <Label x:Name="ptremailr_Copy5" Grid.Column="1" Margin="10,176,603,-167" Grid.Row="2" Content="Hamali :"/>
-        <TextBox x:Name="Hamali" Grid.Column="1" MinWidth="0" Margin="75,184,0,-167" Grid.Row="2" HorizontalAlignment="Left" Width="176"/>
-        <Label x:Name="ptremailr_Copy6" Grid.Column="1" Margin="10,208,603,-199" Grid.Row="2" Content="Bank Commission:"/>
-        <TextBox x:Name="BankComm" Grid.Column="1" MinWidth="0" Margin="127,216,0,-199" Grid.Row="2" HorizontalAlignment="Left" Width="176"/>
+        <Button IsDefault="True" x:Name="btnDialogOk" Click="btnDialogOk_Click" MinWidth="60" Margin="44,259,617,-255" Content="_Ok" Grid.Column="1" Grid.Row="2"/>
+        <Button IsCancel="True" MinWidth="60" Click="Button_Click" Content="_Cancel" Grid.Column="1" Margin="188,259,468,-255" Grid.Row="2"/>
 
+        <Label x:Name="ptremailr_Copy6" Grid.Column="1" Margin="10,0,640,10" Grid.Row="1" Content="Bank Commission:" Grid.RowSpan="2"/>
+        <TextBox x:Name="BankComm" Grid.Column="1" MinWidth="0" Margin="127,10,0,7" Grid.Row="2" HorizontalAlignment="Left" Width="250"/>
+
+        <ComboBox Grid.Column="1" SelectedIndex="-1" Grid.Row="2" Margin="127,47,0,-39" Name="ratedrop" HorizontalAlignment="Left" VerticalAlignment="Top" Width="250" Height="30">
+            <ComboBoxItem Name="Quantity" Content="Qunantity Rate"></ComboBoxItem>
+            <ComboBoxItem Name="Bill" Content="Bill Rate"></ComboBoxItem>
+        </ComboBox>
+        <Label x:Name="ptremailr_Copy" Grid.Column="1" Margin="10,49,603,-40" Grid.Row="2" Content="Rate:"/>
     </Grid>
 </Window>

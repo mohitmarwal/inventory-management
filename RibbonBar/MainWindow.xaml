@@ -69,6 +69,8 @@
                     </RibbonApplicationMenuItem>
                     <RibbonApplicationMenuItem ImageSource="Images\add.png" Header="Add Margin"  Click="onmarginclick" KeyTip="V" >
                     </RibbonApplicationMenuItem>
+                    <RibbonApplicationMenuItem ImageSource="Images\add.png" Header="Add Hamali"  Click="onhamaliclick" KeyTip="V" >
+                    </RibbonApplicationMenuItem>
                 </RibbonGroup>
             </RibbonTab>
         </Ribbon>

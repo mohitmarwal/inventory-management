@@ -139,6 +139,8 @@
             <Button Content="Calculate" Margin="49,6,23,7" Click="Calculate" Grid.Column="3" Grid.Row="23"/>
             <TextBox x:Name="shortage"  TextChanged="totalcalc" PreviewTextInput="NumberValidationTextBox" Grid.Column="4" Grid.Row="16" Margin="131,5,19,5" RenderTransformOrigin="0.311,0.148" Grid.ColumnSpan="2"/>
             <Label Content="Shortage Amount" Grid.Column="4" Grid.Row="16" Margin="10,5,0,5" HorizontalAlignment="Left" Width="121"/>
+            <Label Content="Gs" Grid.Column="3" Grid.Row="20"  Margin="5"/>
+            <TextBox x:Name="gs" PreviewTextInput="NumberValidationTextBox" Grid.Column="3" Grid.Row="20" Margin="49,5,10,5" TextChanged="totalcalc"/>
 
             <!--DataGrid for Show the Employee Info-->
 

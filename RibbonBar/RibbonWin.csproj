@@ -162,6 +162,9 @@
     <Compile Include="margin.xaml.cs">
       <DependentUpon>margin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Hamali.xaml.cs">
+      <DependentUpon>Hamali.xaml</DependentUpon>
+    </Compile>
     <Compile Include="plant.xaml.cs">
       <DependentUpon>plant.xaml</DependentUpon>
     </Compile>
@@ -206,6 +209,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="margin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Hamali.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

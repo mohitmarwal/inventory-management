@@ -66,14 +66,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Inventory App.exe" size="289248">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Inventory App.exe" size="298976">
       <assemblyIdentity name="Inventory App" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>lXe8X9/M50nutg4QcNgeHujzQ6e0Q+a241DsKhUPXq4=</dsig:DigestValue>
+        <dsig:DigestValue>AorcGbXgCjb0WXbPLaZuh3jshu+tMBY9LezwLY3tqrE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -500,5 +500,17 @@ namespace RibbonWin
             EmployeFrom = null;
             view = null;
         }
+
+        private void onhamaliclick(object sender, RoutedEventArgs e)
+        {
+            RibbonWin.hamali dialog = new RibbonWin.hamali();
+            dialog.ShowDialog();
+            UIPanel.Children.Remove(EmployeFrom);
+            UIPanel.Children.Remove(view);
+            UIPanel.Children.Remove(up);
+            up = null;
+            EmployeFrom = null;
+            view = null;
+        }
     }
 }
